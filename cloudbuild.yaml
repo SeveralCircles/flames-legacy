@@ -8,6 +8,6 @@ steps:
 # Deploy container image to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
-  args: ['run', 'deploy', 'default', '--image', 'gcr.io/turnkey-aleph-299716 /static-site', '--region', 'REGION', '--platform', 'managed']
+  args: ['run', 'deploy', 'flames', '--image', 'gcr.io/turnkey-aleph-299716 /static-site', '--region', 'REGION', '--platform', 'managed']
 images:
 - gcr.io/turnkey-aleph-299716 /static-site
