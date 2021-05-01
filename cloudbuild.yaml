@@ -1,13 +1,13 @@
 steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/turnkey-aleph-299716 /static-site', '.']
+  args: ['build', '-t', 'gcr.io/turnkey-aleph-299716/static-site', '.']
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/turnkey-aleph-299716 /static-site']
+  args: ['push', 'gcr.io/turnkey-aleph-299716/static-site']
 # Deploy container image to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
-  args: ['run', 'deploy', 'flames', '--image', 'gcr.io/turnkey-aleph-299716 /static-site', '--region', 'REGION', '--platform', 'managed']
+  args: ['run', 'deploy', 'flames', '--image', 'gcr.io/turnkey-aleph-299716/static-site', '--region', 'REGION', '--platform', 'managed']
 images:
-- gcr.io/turnkey-aleph-299716 /static-site
+- gcr.io/turnkey-aleph-299716/static-site
