@@ -6,4 +6,3 @@ module.exports = {
         get_guilddata.writeById(guild.id, data)
     }
 }
-//gaming
