@@ -1,4 +1,3 @@
 steps:
-- name: node
-  entrypoint: npm
-  args: ['test']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/turnkey-aleph-299716/static-site', '.' ]
