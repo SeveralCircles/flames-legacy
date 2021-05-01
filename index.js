@@ -1,4 +1,10 @@
 const { SlashCreator, GatewayServer} = require('slash-create');
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+  console.log('Hello world listening on port', port);
+});
 const creator = new SlashCreator({
   applicationID: '835977847599661067',
   publicKey: '37c20b075723c8360182252cdf62268628b7b9970235998ab8615c0c18dab5d2',
