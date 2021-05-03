@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@google-cloud/language": "^4.2.2",
     "discord.js": "^12.5.3",
     "discord.js-commando": "^0.12.3",
     "express": "^4.17.1",
