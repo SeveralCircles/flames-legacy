@@ -5,6 +5,27 @@ const { json } = require('body-parser');
 const analysis = require("../features/analysis")
 module.exports = {
     onMessage: async function(msg) {
+        const https = require('https')
+const options = {
+  hostname: 'https://colorful-flames.herokuapp.com',
+  port: 8080,
+  path: '/',
+  method: 'GET'
+}
+
+const req = https.request(options, res => {
+  console.log(`statusCode: ${res.statusCode}`)
+
+  res.on('data', d => {
+    process.stdout.write(d)
+  })
+})
+
+req.on('error', error => {
+  console.error(error)
+})
+
+req.end()
         try {
         let userdata = null;
         let anal = await analysis.analysis(msg.content);
