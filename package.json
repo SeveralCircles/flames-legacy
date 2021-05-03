@@ -13,7 +13,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "node .",
-    "start": "npm i && node ."
+    "start": "node ."
   },
   "repository": {
     "type": "git",
