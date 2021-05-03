@@ -12,7 +12,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node ."
+    "test": "node .",
+    "start": "node ."
   },
   "repository": {
     "type": "git",
