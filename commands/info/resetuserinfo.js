@@ -27,7 +27,7 @@ module.exports = class UserInfoCommand extends commando.Command {
             .setAuthor("Warning", msg.member.user.displayAvatarURL())
             .setTitle(msg.member.displayName + ", are you sure?")
             .setDescription("**THIS CANNOT BE UNDONE!**")
-            .addField("This will irreversably delete the following data:", "Your Flames Score, Your first seen at server, your sentiment data, and any clearances you posses.")
+            .addField("This will irreversably delete the following data:", "Your Flames Score, your first seen at server, your sentiment data, and any clearances you posses.")
             .addField("If you still wish to reset your data, please type \\userdatareset burnitdown", "Once again, this cannot be undone!")
             .setFooter("Flames", this.client.user.displayAvatarURL());
             message.edit(embed);
