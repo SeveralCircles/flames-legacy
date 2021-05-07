@@ -1,14 +1,14 @@
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
-module.exports = class UserInfoCommand extends commando.Command {
+module.exports = class Docs extends commando.Command {
 	constructor(client) {
 		super(client, {
-            name: 'userdatareset',
-            aliases: ['resetmydata'],
+            name: 'docs',
+            aliases: ['documentation'],
 			group: 'info',
-			memberName: 'userdatareset',
-			description: 'Completetly and irreversably deletes all your userdata.',
-            guildOnly: true
+			memberName: 'docs',
+			description: 'Links you to the documentation.',
+            guildOnly: false
             });  
 }
 async run(msg, args) {
