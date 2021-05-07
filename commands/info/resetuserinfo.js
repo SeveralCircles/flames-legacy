@@ -18,7 +18,7 @@ module.exports = class UserInfoCommand extends commando.Command {
             });  
 }
     async run(msg, args) {
-        let messaage = await msg.channel.send(info.wait(msg.member, this.client, "Reset User Data"))
+        let message = await msg.channel.send(info.wait(msg.member, this.client, "Reset User Data"))
         console.log(args)
         if (args != "burnitdown") {
             random = Math.random();
