@@ -28,7 +28,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         let sent = null;
         console.log((data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length);
         if ((data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length > 0.3) sent = "Positive";
-        else if ((data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length) sent = "Negative";
+        else if ((data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length < -0.3) sent = "Negative";
         else sent = "Neutral";
         let embed = new Discord.MessageEmbed()
         .setAuthor("Flames User Data", member.user.displayAvatarURL())
