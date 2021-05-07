@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const get_userdata = require("../../data/get_userdata")
 const get_guilddata = require("../../data/get_guilddata")
 const rank = require("../../features/rank")
+const info = require ("../../features/info")
 module.exports = class UserInfoCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -20,7 +21,8 @@ module.exports = class UserInfoCommand extends commando.Command {
         // try {member = msg.mentions.users.first()} catch (e) {member = msg.member}
         // if (member == undefined) member = msg.member;
         // if (member == null) member = msg.member;
-        msg.channel.startTyping();
+        // msg.channel.startTyping();
+        let message = msg.channel.send(info.wait())
         let data = get_userdata.byId(member.id);
         let guild = data.firstSeen
         let gd = get_guilddata.byId(guild);
@@ -47,8 +49,8 @@ module.exports = class UserInfoCommand extends commando.Command {
             embed.setDescription("**Joined" + msg.guild.name + " " + Math.abs(Math.round((member.joinedAt.getTime()-now.getTime()) / (1000 * 3600 * 24)))/365 + " years ago today.**");
             embed.setColor(0xfc038c);
         }
-        msg.channel.stopTyping();
-        msg.channel.send(embed);
+        // msg.channel.stopTyping();
+        message.edit(embed);
     } catch (e) {console.log(e)}
     }
 }
