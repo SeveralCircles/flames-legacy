@@ -6,6 +6,7 @@ module.exports = {
         .setTitle(member.displayName + ", please wait while your request is being proccessed.")
         .setDescription("This shouldn't take too long. If it does, your request may have encountered an error.")
         .addField("Ongoing Operation", operation)
+        .setColor("YELLOW")
         .setFooter("Flames", client.user.displayAvatarURL());
         return embed;
     }
