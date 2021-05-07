@@ -7,7 +7,7 @@ module.exports = {
         .setDescription("This shouldn't take too long. If it does, your request may have encountered an error.")
         .addField("Ongoing Operation", operation)
         .setColor("YELLOW")
-        .setFooter("Flames", client.user.displayAvatarURL());
+        .setFooter("FL-00-01", client.user.displayAvatarURL());
         return embed;
     }
 }
