@@ -19,7 +19,7 @@ module.exports = class UserInfoCommand extends commando.Command {
 }
     async run(msg, args) {
         let message = await msg.channel.send(info.wait(msg.member, this.client, "Reset User Data"))
-        console.log(args)
+        // console.log(args)
         if (args != "burnitdown") {
             random = Math.random();
             let embed = new Discord.MessageEmbed()
@@ -29,6 +29,7 @@ module.exports = class UserInfoCommand extends commando.Command {
             .setDescription("**THIS CANNOT BE UNDONE!**")
             .addField("This will irreversably delete the following data:", "Your Flames Score, your first seen at server, your sentiment data, and any clearances you posses.")
             .addField("If you still wish to reset your data, please type \\userdatareset burnitdown", "Once again, this cannot be undone!")
+            .setTimestamp()
             .setFooter("Flames", this.client.user.displayAvatarURL());
             message.edit(embed);
         } else {
@@ -40,6 +41,7 @@ module.exports = class UserInfoCommand extends commando.Command {
             .setAuthor("Operation Completed", msg.member.user.displayAvatarURL())
             .setTitle(msg.member.displayName + ", your data has been reset successfully.")
             .setDescription("Thank you for using Flames.")
+            .setTimestamp()
             .setFooter("Flames", this.client.user.displayAvatarURL());
             message.edit(embed);
         }

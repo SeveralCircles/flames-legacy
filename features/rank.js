@@ -15,12 +15,12 @@ module.exports = {
         thresholds[4] = scores[Math.round(0.8 * (length - 1))]
         thresholds[5] = scores[Math.round(0.9 * (length - 1))]
         thresholds[6] = scores[Math.round(0.95 * (length - 1))]
-        console.log(thresholds);
+        // console.log(thresholds);
     },
     sync: function() {
         this.syncScores();
         scores.sort(function(a, b){return a-b});
-        console.log(scores);
+        // console.log(scores);
         this.syncThresholds();
     },
     toNext: function(score) {
@@ -37,53 +37,53 @@ module.exports = {
     getRank: function(score) {
         this.sync();
         if (thresholds.includes(score)) score++;
-        console.log(score);
-        console.log(score > thresholds[6]);
+        // console.log(score);
+        // console.log(score > thresholds[6]);
             if (score != null){
-                console.log("i don't fucking get it");
+                // console.log("i don't fucking get it");
                 
             }
             if (score < thresholds[0]){
-                console.log("Unranked");
+                // console.log("Unranked");
                 return "Unranked";
                 
             }
             if (score > thresholds[0] && score < thresholds[1]){
-                console.log("F");
+                // console.log("F");
                 return "F";
                 
             }
             if (score > thresholds[1] && score < thresholds[2]){
-                console.log("D"); 
+                // console.log("D"); 
                 return "D";
                 
             }
             if (score > thresholds[2] && score < thresholds[3]){
-                console.log("C"); 
+                // console.log("C"); 
                 return "C";
                 
             }
             if (score > thresholds[3] && score < thresholds[4]){
-                console.log("B"); 
+                // console.log("B"); 
                 return "B";
                 
             }
             if (score > thresholds[4] && score < thresholds[5]){
-                console.log("A"); 
+                // console.log("A"); 
                 return "A";
                 
             }
             if (score > thresholds[5] && score < thresholds[6]){
-                console.log("S"); 
+                // console.log("S"); 
                 return "S";
             
             }
             if (score > thresholds[6]){
-                console.log("X"); 
+                // console.log("X"); 
                 return "X";
                 
             } else{ 
-                console.log('fuck');
+                // console.log('fuck');
                 return "Unranked";
                 
             }

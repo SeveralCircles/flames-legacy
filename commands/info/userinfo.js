@@ -42,6 +42,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         .addField("Rank", rank.getRank(data.score), true)
         .addField("To Next Rank", rank.toNext(data.score), true)
         .addField("Emotion", sent, true)
+        .setTimestamp()
         .setFooter("Flames", this.client.user.displayAvatarURL());
         if(member.hasPermission('ADMINISTRATOR')) embed.setColor(0xa103fc);
         else if (member.hasPermission('MANAGE_MESSAGES')) embed.setColor(0x00e1ff);
