@@ -4,11 +4,11 @@ var ulist = null;
 module.exports = {
     byId: function(id) {
         try {
-            console.log(id)
+            // console.log(id)
             ulist = JSON.parse(fs.readFileSync("./data/ulist.json"))
             if (!ulist.ulist.includes(id)) ulist.ulist.push(id);
             var raw = fs.readFileSync("./data/" + id + ".json")
-            console.log(raw)
+            // console.log(raw)
         } catch (e) {
             console.log(e)
             let data = JSON.stringify(defaults);
