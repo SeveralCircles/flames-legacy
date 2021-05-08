@@ -28,9 +28,10 @@ module.exports = class UserInfoCommand extends commando.Command {
         let gd = get_guilddata.byId(guild);
         let now = new Date();
         let sent = null;
-        console.log("Average:" + (data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length);
-        if ((data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length > 0.3) sent = "Positive";
-        else if ((data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length < -0) sent = "Negative";
+        let average = (data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length;
+        console.log("Average:" + average);
+        if (average > 0.1) sent = "Positive";
+        else if (average < 0) sent = "Negative";
         else sent = "Neutral";
         let embed = new Discord.MessageEmbed()
         .setAuthor("Flames User Data", member.user.displayAvatarURL())
