@@ -5,6 +5,7 @@ const { json } = require('body-parser');
 const analysis = require("../features/analysis")
 module.exports = {
     onMessage: async function(msg) {
+        if (msg.member.id === "835977847599661067") return;
         if (msg.content.toLowerCase().includes("sam")) msg.reply("sam");
         try {
         let userdata = null;
