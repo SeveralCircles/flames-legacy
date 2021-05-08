@@ -46,7 +46,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         else if (member.hasPermission('MANAGE_MESSAGES')) embed.setColor(0x00e1ff);
         if (get_userdata.byId(member.id).verified) embed.setColor("GREEN");
         if (Math.abs(Math.round((member.joinedAt.getTime()-now.getTime()) / (1000 * 3600 * 24))) % 365 === 0) {
-            embed.setDescription("**Joined" + msg.guild.name + " " + Math.abs(Math.round((member.joinedAt.getTime()-now.getTime()) / (1000 * 3600 * 24)))/365 + " years ago today.**");
+            embed.setDescription("**Joined " + msg.guild.name + " " + Math.abs(Math.round((member.joinedAt.getTime()-now.getTime()) / (1000 * 3600 * 24)))/365 + " years ago today.**");
             embed.setColor(0xfc038c);
         }
         // msg.channel.stopTyping();
