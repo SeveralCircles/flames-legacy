@@ -3,7 +3,8 @@ const Discord = require('discord.js');
 const get_userdata = require("../../data/get_userdata")
 const get_guilddata = require("../../data/get_guilddata")
 const rank = require("../../features/rank")
-const info = require ("../../features/info")
+const info = require ("../../features/info");
+const message = require('../../events/message');
 module.exports = class UserInfoCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -53,6 +54,9 @@ module.exports = class UserInfoCommand extends commando.Command {
         }
         // msg.channel.stopTyping();
         message.edit(embed);
-    } catch (e) {console.log(e)}
+    } catch (e) {
+        message.edit(info.userDataCorrupt(msg.member, this.client, e))
+        console.log(e)
+    }
     }
 }
