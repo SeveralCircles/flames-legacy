@@ -14,7 +14,7 @@ module.exports = {
         if (userdata == get_userdata.defaults) userdata.firstSeen = msg.guild.id;
         // let hybriddata = get_hybriddata.byId(msg.guild.id, msg.member.id);
         // if (hybriddata.member == null) hybriddata.member = msg.member;
-        userdata.score = userdata.score + anal;
+        userdata.score = Math.round(userdata.score + anal);
         try {
         userdata.averageSentiment.push(anal);
         } catch (e) {
