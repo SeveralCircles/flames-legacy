@@ -30,7 +30,7 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         .addField("C Rank Threshold", rank.thresholds[2], true)
         .addField("D Rank Threshold", rank.thresholds[1], true)
         .addField("F Rank Threshold", rank.thresholds[0], true)
-        .addField("Top Score", rank.scores[rank.scores.length-1])
+        // .addField("Top Score", rank.scores[rank.scores.length-1])
         .setColor("DARK_VIVID_PINK")
         .setFooter("Flames", this.client.user.displayAvatarURL());
         message.edit(embed);        
