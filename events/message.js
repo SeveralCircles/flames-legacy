@@ -22,7 +22,7 @@ module.exports = {
         }
         // get_hybriddata.writeById(msg.guild.id, msg.member.id, hybriddata);
         // console.log("(userdata.averageSentiment.reduce((a, b) => a + b, 0)) / userdata.averageSentiment.length");
-        if ((userdata.averageSentiment.reduce((a, b) => a + b, 0)) / userdata.averageSentiment.length <= -1.0) {
+        if ((userdata.averageSentiment.reduce((a, b) => a + b, 0)) / userdata.averageSentiment.length <= -500.0) {
             let embed = new Discord.MessageEmbed()
             .setAuthor("Vibe Check", msg.member.user.displayAvatarURL())
             .setTitle(msg.member.displayName + ", you do not pass the vibe check.")
