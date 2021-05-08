@@ -20,6 +20,6 @@ module.exports = {
     console.log(`Text: ${text}`);
     console.log(`Sentiment score: ${sentiment.score}`);
     console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
-    console.log("Returning: " + sentiment.score * (sentiment.magnitude * 10))
-    return (Math.round(sentiment.score * (sentiment.magnitude * 10)));
+    console.log("Returning: " + Math.round(sentiment.score * (sentiment.magnitude * 1000)))
+    return (Math.round(sentiment.score * (sentiment.magnitude * 1000)));
   }}
