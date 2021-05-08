@@ -28,7 +28,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         let gd = get_guilddata.byId(guild);
         let now = new Date();
         let sent = null;
-        console.log((data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length);
+        console.log("Average:" + (data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length);
         if ((data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length > 0.3) sent = "Positive";
         else if ((data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length < -0) sent = "Negative";
         else sent = "Neutral";
