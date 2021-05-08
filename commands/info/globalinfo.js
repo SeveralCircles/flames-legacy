@@ -18,7 +18,7 @@ module.exports = class GlobalInfoCommand extends commando.Command {
     async run(msg, args) {
         let message = await msg.channel.send(info.wait(msg.member, this.client, "Synchronize Global Ranking Information"));
         rank.sync();
-        await msg.edit(info.wait(msg.member, this.client, "Retrieve Global Ranking Information"))
+        await message.edit(info.wait(msg.member, this.client, "Retrieve Global Ranking Information"))
         let embed = new Discord.MessageEmbed()
         .setAuthor(msg.member.displayName + "'s request", msg.member.user.displayAvatarURL())
         .setTitle("Flames Global Ranking Information")
