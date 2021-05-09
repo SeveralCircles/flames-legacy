@@ -3,10 +3,12 @@ const get_userdata = require('../data/get_userdata');
 const get_hybriddata = require('../data/get_hybriddata');
 const { json } = require('body-parser');
 const analysis = require("../features/analysis")
+const get_globaldata = require("../data/get_globaldata")
 module.exports = {
     onMessage: async function(msg) {
         if (msg.member.id === "835977847599661067") return;
         if (msg.content.toLowerCase().includes("sam")) msg.reply("sam");
+        let globaldata = get_globaldata.getValues();
         try {
         let userdata = null;
         let anal = await analysis.analysis(msg.content);
@@ -15,6 +17,12 @@ module.exports = {
         // let hybriddata = get_hybriddata.byId(msg.guild.id, msg.member.id);
         // if (hybriddata.member == null) hybriddata.member = msg.member;
         userdata.score = Math.round(userdata.score + anal);
+        globaldata.score = globaldata + anal;
+        let date = new Date()
+        // Reset daily change if the last time the file was updated wasn't today.
+        if (globaldata.lastDate != date.getDay) globaldata.dailyChange = 0;
+        globaldata.dailyChange = globaldata.dailyChange + anal;
+        globaldata.lastDate = date.getDay;
         try {
         userdata.averageSentiment.push(anal);
         } catch (e) {

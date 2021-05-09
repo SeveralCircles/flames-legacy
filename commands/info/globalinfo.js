@@ -4,6 +4,7 @@ const get_userdata = require("../../data/get_userdata")
 const get_guilddata = require("../../data/get_guilddata")
 const rank = require("../../features/rank")
 const info = require ("../../features/info")
+const get_globaldata = require("../../data/get_globaldata")
 module.exports = class GlobalInfoCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -19,6 +20,8 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         let message = await msg.channel.send(info.wait(msg.member, this.client, "Synchronize Global Ranking Information"));
         rank.sync();
         await message.edit(info.wait(msg.member, this.client, "Retrieve Global Ranking Information"))
+        let gdata = get_globaldata.getValues();
+        let up = gdata.dailyChange >= 0;
         let embed = new Discord.MessageEmbed()
         .setAuthor(msg.member.displayName + "'s request", msg.member.user.displayAvatarURL())
         .setTitle("Flames Global Ranking Information")
@@ -33,6 +36,8 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         // .addField("Top Score", rank.scores[rank.scores.length-1])
         .setColor("DARK_VIVID_PINK")
         .setFooter("Flames", this.client.user.displayAvatarURL());
+        if (up) embed.addField("Global Flames Score", gdata.score + " (+" + gdata.dailyChange + ")")
+        else embed.addField("Global Flames Score", gdata.score + "(" + gdata.dailyChange + ")")
         message.edit(embed);        
     }
 }
