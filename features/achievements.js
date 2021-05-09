@@ -1,7 +1,7 @@
 const get_userdata = require("../data/get_userdata");
 const rank = require("./rank");
 const Discord = require("discord.js");
-function addDefaultInfo(embed) {
+function addDefaultInfo(embed, msg) {
     embed.setAuthor("Achievement Completed!", msg.member.user.displayAvatarURL())
     embed.setTitle("Congratulations, " + msg.member.displayName + "!")
     embed.setDescription("You completed an achievement!")
@@ -22,7 +22,7 @@ module.exports = {
             if (!data.achievements.includes("Xrank")) {
                 data.achievements.push("Xrank");
                 let embed = new Discord.MessageEmbed();
-                addDefaultInfo(embed);
+                addDefaultInfo(embed, msg);
                 embed.addField("Achievement", "Top of the World", true)
                 embed.addField("Description", "Achieve X Rank by being in the top 5% of users.", true)
                 embed.addField("Reward", "1000 Flames Points", true)
