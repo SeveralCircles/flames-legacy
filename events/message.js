@@ -39,6 +39,7 @@ module.exports = {
             msg.channel.send(embed);
         }
         get_userdata.writeById(msg.member.id, userdata);
+        console.log(globaldata);
         get_globaldata.writeValues(globaldata);
         } catch (e) {console.log(e)};
         

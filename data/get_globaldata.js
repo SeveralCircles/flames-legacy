@@ -8,7 +8,7 @@ module.exports = {
             var raw = fs.readFileSync("./data/" + "global" + ".json")
             // console.log(raw)
         } catch (e) {
-            console.log(e)
+            console.log("File not found or invalid (global.json), writing defaults.")
             let data = JSON.stringify(defaults);
             fs.writeFileSync("./data/" + "global" + ".json", data);
             return defaults;
