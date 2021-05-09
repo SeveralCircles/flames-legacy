@@ -19,10 +19,11 @@ module.exports = {
         userdata.score = Math.round(userdata.score + anal);
         globaldata.score = globaldata.score + anal;
         let date = new Date()
+        let day = await date.getDay();
         // Reset daily change if the last time the file was updated wasn't today.
-        if (globaldata.lastDate != date.getDay) globaldata.dailyChange = 0;
+        if (globaldata.lastDate != day) globaldata.dailyChange = 0;
         globaldata.dailyChange = globaldata.dailyChange + anal;
-        globaldata.lastDate = date.getDay;
+        globaldata.lastDate = day;
         try {
         userdata.averageSentiment.push(anal);
         } catch (e) {
