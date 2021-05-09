@@ -15,6 +15,7 @@ module.exports = {
         //Requires a message so that the user can be congratulated if they reach an achievement.
         const data = get_userdata.byId(msg.member.id);
         if (data.achievements == undefined) {
+            console.log("is undefined")
             data.achievements = []
         }
         //X Rank Achievement
