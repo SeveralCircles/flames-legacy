@@ -17,7 +17,7 @@ module.exports = {
         // let hybriddata = get_hybriddata.byId(msg.guild.id, msg.member.id);
         // if (hybriddata.member == null) hybriddata.member = msg.member;
         userdata.score = Math.round(userdata.score + anal);
-        globaldata.score = globaldata + anal;
+        globaldata.score = globaldata.score + anal;
         let date = new Date()
         // Reset daily change if the last time the file was updated wasn't today.
         if (globaldata.lastDate != date.getDay) globaldata.dailyChange = 0;
