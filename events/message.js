@@ -4,6 +4,7 @@ const get_hybriddata = require('../data/get_hybriddata');
 const { json } = require('body-parser');
 const analysis = require("../features/analysis")
 const get_globaldata = require("../data/get_globaldata")
+const achievements = require("../features/achievements")
 module.exports = {
     onMessage: async function(msg) {
         if (msg.member.id === "835977847599661067") return;
@@ -39,6 +40,7 @@ module.exports = {
             .setFooter("Flames");
             msg.channel.send(embed);
         }
+        achievements.checkAchievements(msg);
         get_userdata.writeById(msg.member.id, userdata);
         console.log(globaldata);
         get_globaldata.writeValues(globaldata);
