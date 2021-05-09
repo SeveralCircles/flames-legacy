@@ -11,9 +11,9 @@ function addDefaultInfo(embed, msg) {
 }
 const allAchievementsCount = 1;
 module.exports = {
-    checkAchievements: async function(msg) {
+    checkAchievements: async function(msg, data) {
         //Requires a message so that the user can be congratulated if they reach an achievement.
-        var data = get_userdata.byId(msg.member.id);
+        // var data = get_userdata.byId(msg.member.id);
         if (data.achievements == undefined) {
             console.log("is undefined")
             data.achievements = []
@@ -33,7 +33,8 @@ module.exports = {
             }
         }
         console.log(data);
-        await get_userdata.writeById(msg.member.id, data);
+        // await get_userdata.writeById(msg.member.id, data);
+        return data;
         console.log(data == get_userdata.byId(msg.member.id));
     }
 }

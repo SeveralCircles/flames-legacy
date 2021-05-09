@@ -20,7 +20,7 @@ module.exports = {
         return json;
     },
     writeById: async function(id, json) {
-        await fs.writeFileSync("./data/" + id + ".json", JSON.stringify(json));
+        fs.writeFileSync("./data/" + id + ".json", JSON.stringify(json));
     },
     defaults: defaults
 }

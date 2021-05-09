@@ -40,7 +40,7 @@ module.exports = {
             .setFooter("Flames");
             msg.channel.send(embed);
         }
-        await achievements.checkAchievements(msg);
+        await achievements.checkAchievements(msg, userdata);
         get_userdata.writeById(msg.member.id, userdata);
         console.log(globaldata);
         get_globaldata.writeValues(globaldata);
