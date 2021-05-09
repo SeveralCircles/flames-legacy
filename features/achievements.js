@@ -9,7 +9,7 @@ function addDefaultInfo(embed, msg) {
     embed.setFooter("Flames");
     embed.setTimestamp();
 }
-const allAchievementsCount = 1;
+const allAchievementsCount = 2;
 module.exports = {
     allAchievementsCount: allAchievementsCount,
     samAchievement: async function(msg, data) {

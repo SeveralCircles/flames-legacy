@@ -8,7 +8,7 @@ const achievements = require("../features/achievements")
 module.exports = {
     onMessage: async function(msg) {
         if (msg.member.id === "835977847599661067") return;
-        if (msg.content.toLowerCase().includes("sam")) achievements.samAchievement(msg, userdata);
+        // if (msg.content.toLowerCase().includes("sam")) achievements.samAchievement(msg, userdata);
         let globaldata = get_globaldata.getValues();
         try {
         let userdata = null;
