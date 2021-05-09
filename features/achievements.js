@@ -11,6 +11,7 @@ function addDefaultInfo(embed, msg) {
 }
 const allAchievementsCount = 1;
 module.exports = {
+    allAchievementsCount: allAchievementsCount,
     checkAchievements: async function(msg, data) {
         //Requires a message so that the user can be congratulated if they reach an achievement.
         // var data = get_userdata.byId(msg.member.id);

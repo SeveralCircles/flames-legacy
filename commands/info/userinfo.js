@@ -5,6 +5,7 @@ const get_guilddata = require("../../data/get_guilddata")
 const rank = require("../../features/rank")
 const info = require ("../../features/info");
 const message = require('../../events/message');
+const achievements = require("../../features/achievements")
 module.exports = class UserInfoCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -43,6 +44,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         .addField("Rank", rank.getRank(data.score), true)
         .addField("To Next Rank", rank.toNext(data.score), true)
         .addField("Emotion", sent, true)
+        .addField("Achievements Collected", data.achievements.length + "/" + achievements.allAchievementsCount + " (" + (data.achievements.length / achievements.allAchievementsCount) * 100 + "%)", true)
         .setTimestamp()
         .setFooter("Flames", this.client.user.displayAvatarURL());
         if(member.hasPermission('ADMINISTRATOR')) embed.setColor(0xa103fc);
