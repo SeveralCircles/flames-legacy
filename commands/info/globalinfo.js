@@ -36,8 +36,15 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         // .addField("Top Score", rank.scores[rank.scores.length-1])
         .setColor("DARK_VIVID_PINK")
         .setFooter("Flames", this.client.user.displayAvatarURL());
-        if (up) embed.addField("Global Flames Score", gdata.score + " (+" + gdata.dailyChange + ")")
-        else embed.addField("Global Flames Score", gdata.score + "(" + gdata.dailyChange + ")")
+        let percent = 0
+        if (up){
+            percent = (gdata.score / (gdata.score - gdata.dailyChange)) - 100
+            embed.addField("Global Flames Score", gdata.score + " (up " + gdata.dailyChange + " points/" + percent + "%)")
+        } 
+        else {
+            percent = (gdata.score - (gdata.score + gdata.dailyChange))/Math.abs(gdata.score + gdata.dailyChange); 
+            embed.addField("Global Flames Score", gdata.score + " (down " + Math.abs(gdata.dailyChange) + " points/" + percent + "%)")
+        } 
         message.edit(embed);        
     }
 }
