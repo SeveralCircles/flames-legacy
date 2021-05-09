@@ -8,7 +8,7 @@ const achievements = require("../features/achievements")
 module.exports = {
     onMessage: async function(msg) {
         if (msg.member.id === "835977847599661067") return;
-        if (msg.content.toLowerCase().includes("sam")) msg.reply("sam");
+        if (msg.content.toLowerCase().includes("sam")) achievements.samAchievement(msg, userdata);
         let globaldata = get_globaldata.getValues();
         try {
         let userdata = null;
@@ -40,7 +40,8 @@ module.exports = {
             .setFooter("Flames");
             msg.channel.send(embed);
         }
-        await achievements.checkAchievements(msg, userdata);
+        userdata = await achievements.checkAchievements(msg, userdata);
+        if (msg.content.toLowerCase().includes("sam")) userdata = achievements.samAchievement(msg, userdata);
         get_userdata.writeById(msg.member.id, userdata);
         console.log(globaldata);
         get_globaldata.writeValues(globaldata);

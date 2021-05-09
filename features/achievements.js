@@ -12,6 +12,20 @@ function addDefaultInfo(embed, msg) {
 const allAchievementsCount = 1;
 module.exports = {
     allAchievementsCount: allAchievementsCount,
+    samAchievement: async function(msg, data) {
+        if (data.achievements.includes("sam")) return data;
+        data = this.checkAchievements(msg, data)
+        let embed = new Discord.MessageEmbed();
+        addDefaultInfo(embed, msg);
+        embed.addField("Achievement", "Sam", true);
+        embed.addField("Description", "Get Sammed", true);
+        embed.addField("Reward", "300 Flames Points", true);
+        embed.addField("Progress", data.achievements.length + "/" + allAchievementsCount + " (" + (data.achievements.length / allAchievementsCount) * 100 + "%)");
+        data.score = data.score + 300;
+        data.achievements.push("sam");
+        msg.channel.send(embed);
+        return data;
+    },
     checkAchievements: async function(msg, data) {
         //Requires a message so that the user can be congratulated if they reach an achievement.
         // var data = get_userdata.byId(msg.member.id);
