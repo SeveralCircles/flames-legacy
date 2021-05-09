@@ -6,7 +6,7 @@ function addDefaultInfo(embed, msg) {
     embed.setTitle("Congratulations, " + msg.member.displayName + "!")
     embed.setDescription("You completed an achievement!")
     embed.setColor(0x00BFFF)
-    embed.setFooter("Flames", this.client.user.displayAvatarURL());
+    embed.setFooter("Flames");
     embed.setTimestamp();
 }
 const allAchievementsCount = 1;
