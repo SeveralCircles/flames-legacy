@@ -33,7 +33,7 @@ module.exports = {
             }
         }
         console.log(data);
-        get_userdata.writeById(msg.member.id, data);
+        await get_userdata.writeById(msg.member.id, data);
         console.log(data == get_userdata.byId(msg.member.id));
     }
 }

@@ -19,7 +19,7 @@ module.exports = {
         let json = JSON.parse(raw); 
         return json;
     },
-    writeById: function(id, json) {
+    writeById: async function(id, json) {
         fs.writeFileSync("./data/" + id + ".json", JSON.stringify(json));
     },
     defaults: defaults
