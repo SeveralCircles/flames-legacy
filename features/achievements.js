@@ -13,8 +13,8 @@ const allAchievementsCount = 2;
 module.exports = {
     allAchievementsCount: allAchievementsCount,
     samAchievement: async function(msg, data) {
+        console.log("data into sam: " + data);
         if (data.achievements.includes("sam")) return data;
-        data = this.checkAchievements(msg, data)
         let embed = new Discord.MessageEmbed();
         addDefaultInfo(embed, msg);
         embed.addField("Achievement", "Sam", true);
@@ -24,6 +24,7 @@ module.exports = {
         data.score = data.score + 300;
         data.achievements.push("sam");
         msg.channel.send(embed);
+        console.log("data out of sam:" + data)
         return data;
     },
     checkAchievements: async function(msg, data) {
