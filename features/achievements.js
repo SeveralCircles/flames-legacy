@@ -16,6 +16,7 @@ module.exports = {
         console.log("data into sam: " + data);
         if (data.achievements.includes("sam")) return data;
         let embed = new Discord.MessageEmbed();
+        data = await this.checkAchievements(msg, data);
         addDefaultInfo(embed, msg);
         embed.addField("Achievement", "Sam", true);
         embed.addField("Description", "Get Sammed", true);

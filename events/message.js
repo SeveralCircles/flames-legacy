@@ -41,7 +41,7 @@ module.exports = {
             msg.channel.send(embed);
         }
         userdata = await achievements.checkAchievements(msg, userdata);
-        if (msg.content.toLowerCase().includes("sam")) userdata = achievements.samAchievement(msg, userdata);
+        if (msg.content.toLowerCase().includes("sam")) userdata = await achievements.samAchievement(msg, userdata);
         get_userdata.writeById(msg.member.id, userdata);
         console.log(globaldata);
         get_globaldata.writeValues(globaldata);
