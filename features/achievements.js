@@ -13,7 +13,7 @@ const allAchievementsCount = 1;
 module.exports = {
     checkAchievements: async function(msg) {
         //Requires a message so that the user can be congratulated if they reach an achievement.
-        const data = get_userdata.byId(msg.member.id);
+        var data = get_userdata.byId(msg.member.id);
         if (data.achievements == undefined) {
             console.log("is undefined")
             data.achievements = []
