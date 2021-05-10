@@ -9,7 +9,7 @@ function addDefaultInfo(embed, msg) {
     embed.setFooter("Flames");
     embed.setTimestamp();
 }
-const allAchievementsCount = 2;
+const allAchievementsCount = 3;
 module.exports = {
     allAchievementsCount: allAchievementsCount,
     samAchievement: async function(msg, data) {
@@ -46,6 +46,21 @@ module.exports = {
                 embed.addField("Reward", "1000 Flames Points", true)
                 embed.addField("Progress", data.achievements.length + "/" + allAchievementsCount + " (" + (data.achievements.length / allAchievementsCount) * 100 + "%)")
                 msg.channel.send(embed)
+                data.score = data.score + 1000;
+            }
+        }
+
+        //Owner Achievement
+        if (msg.guild.owner.equals(msg.member)) {
+            if (!data.achievements.includes("owner")) {
+                data.achievements.push("owner");
+                let embed = new Discord.MessageEmbed();
+                addDefaultInfo(embed, msg);
+                embed.addField("Achievment", "Let me guess, your home?", true);
+                embed.addField("Description", "Become the owner of a server.", true)
+                embed.addField("Reward", "1000 Flames Points", true)
+                embed.addField("Progress", data.achievements.length + "/" + allAchievementsCount + " (" + (data.achievements.length / allAchievementsCount) * 100 + "%)");
+                msg.channel.send(embed);
                 data.score = data.score + 1000;
             }
         }
