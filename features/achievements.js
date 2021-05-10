@@ -51,7 +51,7 @@ module.exports = {
         }
 
         //Owner Achievement
-        if (msg.guild.owner.equals(msg.member)) {
+        if (msg.guild.owner == msg.member) {
             if (!data.achievements.includes("owner")) {
                 data.achievements.push("owner");
                 let embed = new Discord.MessageEmbed();
