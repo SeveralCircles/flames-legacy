@@ -38,7 +38,7 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         .setFooter("Flames", this.client.user.displayAvatarURL());
         let percent = 0
         if (up){
-            percent = (gdata.score / (gdata.score - gdata.dailyChange)) - 100
+            percent = 100 * ((gdata.score - (gdata.score - gdata.dailyChange))/Math.abs(gdata.score - gdata.dailyChange))
             embed.addField("Global Flames Score", gdata.score + " (up " + gdata.dailyChange + " points/" + percent + "%)")
         } 
         else {
