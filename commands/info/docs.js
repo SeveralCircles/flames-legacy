@@ -16,7 +16,7 @@ async run(msg, args) {
     .setAuthor("Flames Documentation", msg.member.user.displayAvatarURL())
     .setTitle(msg.member.displayName + ", click here to see the documentation.")
     .setDescription("Opens in your browser.")
-    .setURL("https://aidanveney.gitbook.io/flames/")
+    .setURL("https://docs.severalcircles.com")
     .setFooter("Flames", this.client.user.displayAvatarURL());
     msg.channel.send(embed);
 }
