@@ -3,5 +3,7 @@
     "firstSeen": "",
     "verified": false,
     "averageSentiment": [],
-    "achievements": []
+    "achievements": [],
+    "streak": 0,
+    "lastStreak": -2
 }
