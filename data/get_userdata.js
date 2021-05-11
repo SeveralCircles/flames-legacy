@@ -35,7 +35,7 @@ module.exports = {
             data2.streak = 0;
             data2.lastStreak = -2;
             data2.version = 1;
-        }
+        } else (data2 = json)
         return data2;
     }
 }
