@@ -46,8 +46,9 @@ module.exports = class HiCommand extends commando.Command {
         let data = get_userdata.byId(msg.member.id);
         let date = new Date();
         let streakBonus = 0;
-        let embed = new Discord.MessageEmbed()
+        
         let message = await msg.channel.send(info.wait(msg.member, this.client, "Daily Check-In"))
+        let embed = new Discord.MessageEmbed()
         .setAuthor("Daily Check-in", msg.member.user.displayAvatarURL())
         .setTitle("Hello, " + msg.member.displayName + "!")
         .setColor("GREEN")
