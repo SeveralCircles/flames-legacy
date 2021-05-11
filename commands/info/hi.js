@@ -59,7 +59,7 @@ module.exports = class HiCommand extends commando.Command {
             return;
         } else if (data.lastStreak == date.getDay() + 1 || (data.lastStreak == 6 && date.getDay == 0)) {
             data.streak++;
-            Math.min(streakBonus = 2^(data.streak/7, 16384));
+            Math.min(streakBonus = 2^(data.streak/7), 16384);
             if (data.streak % 7 == 0 && data.streak != 0) {
                 embed.setDescription("Congrats on your " + data.streak/7 + " week streak! Keep it up!");
             } else if (data.streak % 30 == 0 && data.streak != 0) {
