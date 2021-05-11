@@ -43,7 +43,7 @@ module.exports = class HiCommand extends commando.Command {
     }
     
     async run(msg, args) {
-        let data = get_userdata.update(get_userdata.byId(msg.member.id));
+        let data = await get_userdata.update(get_userdata.byId(msg.member.id));
         let date = new Date();
         let streakBonus = 0;
         let message = await msg.channel.send(info.wait(msg.member, this.client, "Daily Check-In"))

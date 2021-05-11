@@ -24,7 +24,7 @@ module.exports = {
         fs.writeFileSync("./data/" + id + ".json", JSON.stringify(json));
     },
     defaults: defaults,
-    update: function(id, json) {
+    update: async function(id, json) {
         let data2 = null;
         if (this.byId(id).version < 1 || this.byId(id).version == null) {
             data2 = this.defaults;
