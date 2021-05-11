@@ -58,6 +58,7 @@ module.exports = class HiCommand extends commando.Command {
             msg.reply(", come back tommorow for another bonus!")
             return;
         } else if (data.lastStreak == date.getDay() + 1 || (data.lastStreak == 6 && date.getDay == 0)) {
+            if (!data.streak) data.streak = 0;
             data.streak++;
             Math.min(streakBonus = 2^(data.streak/7), 16384);
             if (data.streak % 7 == 0 && data.streak != 0) {
