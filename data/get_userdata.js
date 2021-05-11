@@ -25,8 +25,9 @@ module.exports = {
     },
     defaults: defaults,
     update: function(id, json) {
+        let data2 = null;
         if (this.byId(id).version < 1 || this.byId(id).version == null) {
-            let data2 = this.defaults;
+            data2 = this.defaults;
             data2.firstSeen = json.firstSeen;
             data2.verified = json.verified;
             data2.score = json.score;
