@@ -54,7 +54,8 @@ module.exports = class HiCommand extends commando.Command {
         .setColor("GREEN")
         .setFooter("Flames", this.client.user.displayAvatarURL());
         if (data.lastStreak == date.getDay()) {
-            message.edit("Come back tommorow for another bonus, " + msg.member.displayName)
+            message.delete();
+            msg.reply(", come back tommorow for another bonus!")
             return;
         } else if (data.lastStreak == date.getDay() + 1 || (data.lastStreak == 6 && date.getDay == 0)) {
             data.streak++;
