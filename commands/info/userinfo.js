@@ -47,7 +47,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         .addField("To Next Rank", rank.toNext(data.score), true)
         .addField("Emotion", sent, true)
         .addField("Achievements Collected", data.achievements.length + "/" + achievements.allAchievementsCount + " (" + (data.achievements.length / achievements.allAchievementsCount) * 100 + "%)", true)
-        .addField("Global Contribution", data.score / gdata.score, true)
+        .addField("Global Contribution", (data.score / gdata.score) * 100, true)
         .setTimestamp()
         .setFooter("Flames", this.client.user.displayAvatarURL());
         if(member.hasPermission('ADMINISTRATOR')) embed.setColor(0xa103fc);
