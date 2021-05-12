@@ -5,7 +5,12 @@ const get_userdata = require("../data/get_userdata")
 module.exports = {
     scores: scores,
     thresholds: thresholds,
-    syncScores: function() {scores = [];ulist.ulist.forEach(i=>{;scores.push(get_userdata.byId(i).score);});},
+    syncScores: async function() {
+        scores = [];
+        ulist.ulist.forEach(i=>{
+            scores.push(get_userdata.byId(i).score);
+        });
+    },
     syncThresholds: function() {
         let length = scores.length
         thresholds[0] = scores[Math.round(0.4 * (length-1))]
