@@ -1,20 +1,11 @@
 const https = require('https');
 function getData(path) {
-https.get('https://severalcircles.com/flames' + path, (resp) => {
-  let data = '';
-  // A chunk of data has been received.
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
-
-  // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-    return JSON.parse(data);
-  });
-
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-});
+    const request = require('request');
+    request('severalcircles.com/flames' + path, { json: true }, (err, res, body) => {
+      if (err) { return console.log(err); }
+      console.log(body);
+      return body;
+    });
 }
 module.exports = {
     getData: getData
