@@ -36,6 +36,6 @@ module.exports = {
             data2.lastStreak = -2;
             data2.version = 1;
         } else (data2 = json)
-        this.writeById(id, data2);
+        return data2;
     }
 }

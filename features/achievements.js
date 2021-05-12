@@ -9,7 +9,7 @@ function addDefaultInfo(embed, msg) {
     embed.setFooter("Flames");
     embed.setTimestamp();
 }
-const allAchievementsCount = 6;
+const allAchievementsCount = 3;
 module.exports = {
     allAchievementsCount: allAchievementsCount,
     samAchievement: async function(msg, data) {
@@ -63,34 +63,8 @@ module.exports = {
                 msg.channel.send(embed);
                 data.score = data.score + 1000;
             }
-       }
-       // Streaks Achievements
-       if (data.streak >= 7 && !data.achievments.includes("weekstreak")) {
-        embed.addField("Achievment", "Not so Weak Streak", true);
-        embed.addField("Description", "Maintain a streak for 7 or more days.", true)
-        embed.addField("Reward", "1000 Flames Points", true)
-        embed.addField("Progress", data.achievements.length + "/" + allAchievementsCount + " (" + (data.achievements.length / allAchievementsCount) * 100 + "%)");
-        data.achievements.push("weekstreak");
-        msg.channel.send(embed);
-        data.score = data.score + 1000;
-       } if (data.streak >= 30 && !data.achievments.includes("monthstreak")) {
-        embed.addField("Achievment", "Do the Hustle!", true);
-        embed.addField("Description", "Maintain a streak for 30 or more days.", true)
-        embed.addField("Reward", "10000 Flames Points", true)
-        embed.addField("Progress", data.achievements.length + "/" + allAchievementsCount + " (" + (data.achievements.length / allAchievementsCount) * 100 + "%)");
-        data.achievements.push("monthstreak");
-        msg.channel.send(embed);
-        data.score = data.score + 10000;
-       } if (data.streak >=365 && !data.achievments.includes("yearstreak")) {
-        embed.addField("Achievment", "Flames Hero", true);
-        embed.addField("Description", "Maintain a streak for 365 or more days.", true)
-        embed.addField("Reward", "100000 Flames Points", true)
-        embed.addField("Progress", data.achievements.length + "/" + allAchievementsCount + " (" + (data.achievements.length / allAchievementsCount) * 100 + "%)");
-        data.achievements.push("yearstreak");
-        msg.channel.send(embed);
-        data.score = data.score + 100000;
-       }
-        // console.log(data);
+        }
+        console.log(data);
         // await get_userdata.writeById(msg.member.id, data);
         return data;
         // console.log(data == get_userdata.byId(msg.member.id));
