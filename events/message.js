@@ -5,9 +5,14 @@ const { json } = require('body-parser');
 const analysis = require("../features/analysis")
 const get_globaldata = require("../data/get_globaldata")
 const achievements = require("../features/achievements")
+const severalcircles = require ("../features/severalcircles")
+const successjson = {
+    "success":  true
+}
 module.exports = {
     onMessage: async function(msg) {
         if (msg.member.id === "835977847599661067") return;
+        if (!severalcircles.getData("/test/test.json") == successjson) console.log("god fucking damnit");
         // if (msg.content.toLowerCase().includes("sam")) achievements.samAchievement(msg, userdata);
         let globaldata = get_globaldata.getValues();
         try {
