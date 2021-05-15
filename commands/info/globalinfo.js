@@ -47,7 +47,6 @@ module.exports = class GlobalInfoCommand extends commando.Command {
             embed.addField("Global Flames Score", gdata.score + " (down " + Math.abs(gdata.dailyChange) + " points/" + percent + "%)")
         } 
         embed.addField("Average Flames Score", gdata.score/ulist.ulist.length, true);
-        embed.addField("Highest Flames Score", rank.scores[rank.scores.length-1]);
         embed.addField("Number of Participants", ulist.ulist.length, true);
         embed.addField("Progress towards Global Goal", gdata.score + "/1000000 (" + (Math.round((gdata.score/1000000)*100))/100 + "%)", true)
         message.edit(embed);        
