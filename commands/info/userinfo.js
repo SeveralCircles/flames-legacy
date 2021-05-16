@@ -31,6 +31,18 @@ module.exports = class UserInfoCommand extends commando.Command {
         let gd = get_guilddata.byId(guild);
         let now = new Date();
         let sent = null;
+        if (args[0] == "topics") {
+            let embed = new Discord.MessageEmbed()
+            .setAuthor("Flames User Data: Topics", member.user.displayAvatarURL())
+            .setTitle(member.displayName)
+            .setTimestamp()
+            .setFooter("Flames", this.client.user.displayAvatarURL());
+            data.entities.forEach( element => {
+                embed.addField(element[0], element[1], true);
+            });
+            message.edit(embed);
+            return;
+        }
         let average = (data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length;
         let gdata = get_globaldata.getValues();
         console.log("Average:" + average);

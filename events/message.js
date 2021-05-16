@@ -17,7 +17,7 @@ module.exports = {
         let globaldata = get_globaldata.getValues();
         try {
         let userdata = null;
-        let anal = await analysis.analysis(msg.content);
+        let anal = await analysis.analyzeSentiment(msg.content);
         userdata = get_userdata.byId(msg.member.id);
         if (userdata == get_userdata.defaults) userdata.firstSeen = msg.guild.id;
         // let hybriddata = get_hybriddata.byId(msg.guild.id, msg.member.id);
@@ -35,6 +35,7 @@ module.exports = {
         } catch (e) {
             userdata.averageSentiment = []
         }
+        userdata.entities = analysis.analyzeEntities(msg.content, userdata);
         // get_hybriddata.writeById(msg.guild.id, msg.member.id, hybriddata);
         // console.log("(userdata.averageSentiment.reduce((a, b) => a + b, 0)) / userdata.averageSentiment.length");
         if ((userdata.averageSentiment.reduce((a, b) => a + b, 0)) / userdata.averageSentiment.length <= -500.0) {
