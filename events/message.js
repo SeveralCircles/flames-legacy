@@ -12,7 +12,7 @@ const successjson = {
 module.exports = {
     onMessage: async function(msg) {
         if (msg.member.id === "835977847599661067") return;
-        if (!severalcircles.getData("/test/test.json") == successjson) console.log("god fucking damnit");
+        // if (!severalcircles.getData("/test/test.json") == successjson) console.log("god fucking damnit");
         // if (msg.content.toLowerCase().includes("sam")) achievements.samAchievement(msg, userdata);
         let globaldata = get_globaldata.getValues();
         try {
