@@ -18,7 +18,7 @@ module.exports = class UserInfoCommand extends commando.Command {
             guildOnly: true
             });  
 }
-    async run(msg, args) {
+    async run(msg) {
         try {
         let member = msg.member
         // try {member = msg.mentions.users.first()} catch (e) {member = msg.member}
@@ -31,7 +31,8 @@ module.exports = class UserInfoCommand extends commando.Command {
         let gd = get_guilddata.byId(guild);
         let now = new Date();
         let sent = null;
-        if (args[0] == "topics") {
+        let args = msg.content.split(" ");
+        if (args[1] == "topics") {
             let embed = new Discord.MessageEmbed()
             .setAuthor("Flames User Data: Topics", member.user.displayAvatarURL())
             .setTitle(member.displayName)
