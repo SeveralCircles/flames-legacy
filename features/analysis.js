@@ -3,6 +3,18 @@ const client = new language.LanguageServiceClient();
 const isArray = function(a) {
   return (!!a) && (a.constructor === Array);
 };
+const isPresent = function(array, key) {
+  array.forEach(element => {
+    if (element[0] == key) return true;
+  });
+  return false;
+}
+const findIndex = function(array, item) {
+  array.forEach(element, index => {
+    if (element[0] == item) return index;
+  });
+  return false;
+}
 module.exports = {
     analyzeSentiment: async function(text) {
     // Imports the Google Cloud client library
@@ -45,8 +57,8 @@ module.exports = {
       if (entity.metadata && entity.metadata.wikipedia_url) {
       console.log(` - Wikipedia URL: ${entity.metadata.wikipedia_url}`);
     }
-    if (ent.includes(entity.name)) {
-      ent[ent.findIndex(entity.name)][1] += Math.round(entity.salience * 1000); 
+    if (isPresent(entity.name)) {
+      ent[findIndex(ent, entity.name)][1] += Math.round(entity.salience * 1000); 
     }
     else ent.push([entity.name, Math.round(entity.salience*1000)]);
   });
