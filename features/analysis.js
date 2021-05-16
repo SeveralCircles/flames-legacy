@@ -4,12 +4,14 @@ const isArray = function(a) {
   return (!!a) && (a.constructor === Array);
 };
 const isPresent = function(array, key) {
+  if (!isArray(array)) array = []
   array.forEach(element => {
     if (element[0] == key) return true;
   });
   return false;
 }
 const findIndex = function(array, item) {
+  if (!isArray(array)) array = []
   array.forEach(element, index => {
     if (element[0] == item) return index;
   });
