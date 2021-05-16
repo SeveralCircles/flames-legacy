@@ -35,6 +35,7 @@ module.exports = {
 
   console.log('Entities:');
   let ent = json.entities;
+  if (!isArray(ent)) ent = [[]];
   entities.forEach(entity => {
       console.log(entity.name);
       console.log(` - Type: ${entity.type}, Salience: ${entity.salience}`);
