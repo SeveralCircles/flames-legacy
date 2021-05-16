@@ -1,5 +1,8 @@
 const language = require('@google-cloud/language');
 const client = new language.LanguageServiceClient();
+const isArray = function(a) {
+  return (!!a) && (a.constructor === Array);
+};
 module.exports = {
     analyzeSentiment: async function(text) {
     // Imports the Google Cloud client library
