@@ -6,6 +6,7 @@ const analysis = require("../features/analysis")
 const get_globaldata = require("../data/get_globaldata")
 const achievements = require("../features/achievements")
 const severalcircles = require ("../features/severalcircles")
+const records = require("../features/records");
 const successjson = {
     "success":  true
 }
@@ -15,10 +16,21 @@ module.exports = {
         // if (!severalcircles.getData("/test/test.json") == successjson) console.log("god fucking damnit");
         // if (msg.content.toLowerCase().includes("sam")) achievements.samAchievement(msg, userdata);
         let globaldata = get_globaldata.getValues();
+        let recordValues = get_globaldata.getRecordValues();
+        let date = new Date();
         try {
         let userdata = null;
         let anal = await analysis.analyzeSentiment(msg.content);
         userdata = get_userdata.byId(msg.member.id);
+        records.checkRecords(userdata).forEach(value => {
+            switch (value) {
+                case "score":
+                    if (userdata.scoreRecordCooldown > date.getMilliseconds) return;
+                    msg.channel.send(records.newRecordEmbed("Highest Flames Score (All Time)", recordValues.score, userdata.score, msg.member));
+                    userdata.scoreRecordCooldown = date.getMilliseconds() + 86400000;
+                    break;
+            }
+        });
         if (userdata == get_userdata.defaults) userdata.firstSeen = msg.guild.id;
         // let hybriddata = get_hybriddata.byId(msg.guild.id, msg.member.id);
         // if (hybriddata.member == null) hybriddata.member = msg.member;

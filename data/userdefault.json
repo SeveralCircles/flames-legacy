@@ -4,7 +4,7 @@
     "verified": false,
     "averageSentiment": [],
     "achievements": [],
-    "streak": 0,
-    "lastStreak": -2,
-    "version": 1
+    "records": [],
+    "scoreRecordCooldown": null,
+    "version": 2
 }
