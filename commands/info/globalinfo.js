@@ -17,7 +17,8 @@ module.exports = class GlobalInfoCommand extends commando.Command {
             guildOnly: true
             });  
     }
-    async run(msg, args) {
+    async run(msg) {
+        let args = msg.content.split(" ");
         let message = await msg.channel.send(info.wait(msg.member, this.client, "Synchronize Global Ranking Information"));
         rank.sync();
         await message.edit(info.wait(msg.member, this.client, "Retrieve Global Ranking Information"))
@@ -36,7 +37,7 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         .addField("F Rank Threshold", rank.thresholds[0], true)
         // .addField("Top Score", rank.scores[rank.scores.length-1])
         .setColor("DARK_VIVID_PINK")
-        .setFooter("Flames", this.client.user.displayAvatarURL());
+        .setFooter("Flames | \\ginfo records to see records.", this.client.user.displayAvatarURL());
         let percent = 0
         if (up){
             percent = 100 * ((gdata.score - (gdata.score - gdata.dailyChange))/Math.abs(gdata.score - gdata.dailyChange))
@@ -49,6 +50,6 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         embed.addField("Average Flames Score", gdata.score/ulist.ulist.length, true);
         embed.addField("Number of Participants", ulist.ulist.length, true);
         embed.addField("Progress towards Global Goal", gdata.score + "/1000000 (" + (Math.round((gdata.score/1000000)*100))/100 + "%)", true)
-        message.edit(embed);        
+        message.edit(embed);
     }
-}
+    }

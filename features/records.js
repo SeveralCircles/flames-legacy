@@ -4,7 +4,7 @@ module.exports = {
     checkRecords(userdata) {
         let records = get_globaldata.getRecordValues();
         let recordsSet = []
-        if (userdata.score > records.score) {
+        if (userdata.score > records.score[0]) {
             recordsSet.push("score")
         }
         return recordsSet;

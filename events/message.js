@@ -28,6 +28,8 @@ module.exports = {
                     if (userdata.scoreRecordCooldown > date.getMilliseconds) return;
                     msg.channel.send(records.newRecordEmbed("Highest Flames Score (All Time)", recordValues.score, userdata.score, msg.member));
                     userdata.scoreRecordCooldown = date.getMilliseconds() + 86400000;
+                    recordValues.score = [userdata.score, msg.member.displayName, date.toDateString()];
+                    if(!userdata.records.includes("score")) userdata.records.push("score");
                     break;
             }
         });
