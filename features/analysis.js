@@ -10,7 +10,7 @@ const isPresent = function(array, key) {
   });
   return false;
 }
-const findIndex = function(array, item) {
+const findIndex = function(array, key) {
   // if (!isArray(array)) array = []
   array.forEach(element, index => {
     if (array[index][0] == key) return index;
