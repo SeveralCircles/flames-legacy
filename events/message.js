@@ -35,7 +35,7 @@ module.exports = {
         } catch (e) {
             userdata.averageSentiment = []
         }
-        // userdata.entities = await analysis.analyzeEntities(msg.content, userdata);
+        userdata.entities = await analysis.analyzeEntities(msg.content, userdata);
         // get_hybriddata.writeById(msg.guild.id, msg.member.id, hybriddata);
         // console.log("(userdata.averageSentiment.reduce((a, b) => a + b, 0)) / userdata.averageSentiment.length");
         if ((userdata.averageSentiment.reduce((a, b) => a + b, 0)) / userdata.averageSentiment.length <= -500.0) {
