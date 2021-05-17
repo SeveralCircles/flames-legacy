@@ -34,13 +34,17 @@ module.exports = class UserInfoCommand extends commando.Command {
         let sent = null;
         let args = msg.content.split(" ");
         if (args[1] == "topics") {
+            let topics = []
             let embed = new Discord.MessageEmbed()
             .setAuthor("Flames User Data: Topics", member.user.displayAvatarURL())
             .setTitle(member.displayName)
             .setTimestamp()
             .setFooter("Flames", this.client.user.displayAvatarURL());
             data.entities.forEach( element => {
-                embed.addField(element, analysis.count(data.entities, element));
+                if(!topics.includes(element)){ 
+                    embed.addField(element, analysis.count(data.entities, element));
+                    topics.push(element);
+                }
             });
             message.edit(embed);
             return;
