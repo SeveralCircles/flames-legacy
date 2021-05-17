@@ -7,6 +7,7 @@ const info = require ("../../features/info");
 const message = require('../../events/message');
 const achievements = require("../../features/achievements")
 const get_globaldata = require ("../../data/get_globaldata")
+const analysis = require("../../features/analysis")
 module.exports = class UserInfoCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -39,7 +40,7 @@ module.exports = class UserInfoCommand extends commando.Command {
             .setTimestamp()
             .setFooter("Flames", this.client.user.displayAvatarURL());
             data.entities.forEach( element => {
-                embed.addField(element[0], element[1], true);
+                embed.addField(element, analysis.count(data.entities, element));
             });
             message.edit(embed);
             return;

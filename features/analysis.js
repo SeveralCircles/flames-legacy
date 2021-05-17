@@ -3,20 +3,6 @@ const client = new language.LanguageServiceClient();
 const isArray = function(a) {
   return (!!a) && (a.constructor === Array);
 };
-const isPresent = function(array, key) {
-  // if (!isArray(array)) array = []
-  array.forEach(element, index => {
-    if (array[index][0] == key) return true;
-  });
-  return false;
-}
-const findIndex = function(array, key) {
-  // if (!isArray(array)) array = []
-  array.forEach(element, index => {
-    if (array[index][0] == key) return index;
-  });
-  return false;
-}
 module.exports = {
     analyzeSentiment: async function(text) {
     // Imports the Google Cloud client library
@@ -62,9 +48,17 @@ module.exports = {
     if (isPresent(ent, entity.name)) {
       ent[findIndex(ent, entity.name)][1] += Math.round(entity.salience * 1000); 
     }
-    else ent.push([entity.name, Math.round(entity.salience*1000)]);
+    else ent.push(entity.name);
+    return ent;
   });
-  ent.sort((a, b) => a[1] - b[1]);
+  // ent.sort((a, b) => a[1] - b[1]);
   return ent;
+  },
+  count: function(array, item) {
+    let count = 0;
+    array.forEach(value, index => {
+      if(value == item) count++;
+    })
+    return count;
   }
 }
