@@ -56,7 +56,7 @@ module.exports = {
   },
   count: function(array, item) {
     let count = 0;
-    array.forEach(value, index => {
+    array.forEach(value => {
       if(value == item) count++;
     })
     return count;
