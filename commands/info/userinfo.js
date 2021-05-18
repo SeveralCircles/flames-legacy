@@ -36,10 +36,10 @@ module.exports = class UserInfoCommand extends commando.Command {
         if (args[1] == "topics") {
             let topics = []
             let embed = new Discord.MessageEmbed()
-            .setAuthor("Flames User Data: Topics", member.user.displayAvatarURL())
+            .setAuthor("Flames User Data: Topics", msg.member.user.displayAvatarURL())
             .setTitle(member.displayName)
             .setTimestamp()
-            .setFooter("Flames", this.client.user.displayAvatarURL());
+            .setFooter("Flames",    );
             data.entities.forEach( element => {
                 if(!topics.includes(element)){ 
                     embed.addField(element, analysis.count(data.entities, element));
