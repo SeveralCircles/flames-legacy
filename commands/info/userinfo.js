@@ -26,7 +26,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         // if (member == undefined) member = msg.member;
         // if (member == null) member = msg.member;
         // msg.channel.startTyping();
-        let message = await msg.channel.send(info.wait(msg.member, this.client, "Get User Data"))
+        var message = await msg.channel.send(info.wait(msg.member, this.client, "Get User Data"))
         let data = get_userdata.byId(member.id);
         let guild = data.firstSeen
         let gd = get_guilddata.byId(guild);
