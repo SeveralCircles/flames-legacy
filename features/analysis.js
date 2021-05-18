@@ -45,10 +45,10 @@ module.exports = {
       if (entity.metadata && entity.metadata.wikipedia_url) {
       console.log(` - Wikipedia URL: ${entity.metadata.wikipedia_url}`);
     }
-    if (isPresent(ent, entity.name)) {
+    // if (isPresent(ent, entity.name)) {
       ent[findIndex(ent, entity.name)][1] += Math.round(entity.salience * 1000); 
-    }
-    else ent.push(entity.name);
+    // }
+    ent.push(entity.name);
     return ent;
   });
   // ent.sort((a, b) => a[1] - b[1]);
