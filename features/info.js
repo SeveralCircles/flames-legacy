@@ -13,7 +13,7 @@ module.exports = {
     },
     userDataCorrupt: function(member, client, error) {
         let embed = new Discord.MessageEmbed()
-        .setAuthor("User Data Error", member.displayAvatarURL())
+        .setAuthor("User Data Error", member.user.displayAvatarURL())
         .setColor("RED")
         .setTitle(member.displayName + ", your User Data is corrupt or very outdated.")
         .setDescription("For more information, click the link above.")
