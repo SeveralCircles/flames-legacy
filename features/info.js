@@ -29,7 +29,7 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
         .setAuthor("Not Enough GP", member.user.displayAvatarURL())
         .setColor("RED")
-        .setTitle(member.displayName + ", you do not have enough GP to complete the '" + operation + ' operation.')
+        .setTitle(member.displayName + ", you do not have enough GP to complete the '" + operation + "' operation.")
         .setDescription("To learn more about GP, run \\mygp")
         .addField("Amount Required", requiredGP + " GP", true)
         .addField("Current Balence", get_userdata.byId(member.id).gamerpoints, true)
