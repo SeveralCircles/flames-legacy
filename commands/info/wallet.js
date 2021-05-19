@@ -36,6 +36,7 @@ module.exports = class WalletCommand extends commando.Command {
                     .setTimestamp()
                     .setFooter("Flames", this.client.user.displayAvatarURL());
                     message.edit(embed);
+                    return;
                 } else {
                     let fp = Number(args[2]);
                     if (fp > data.score) {
