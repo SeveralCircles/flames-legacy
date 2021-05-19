@@ -37,7 +37,8 @@ module.exports = {
         if (userdata == get_userdata.defaults) userdata.firstSeen = msg.guild.id;
         // let hybriddata = get_hybriddata.byId(msg.guild.id, msg.member.id);
         // if (hybriddata.member == null) hybriddata.member = msg.member;
-        userdata.score = Math.round(userdata.score + anal);
+        if (!userdata.upgrades.multiplier) userdata.upgrades.multiplier = 1.0;
+        userdata.score = Math.round(userdata.score + ((anal * userdata.upgrades.multiplier)));
         globaldata.score = globaldata.score + anal;
         let date = new Date()
         let day = await date.getDay();
