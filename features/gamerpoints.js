@@ -18,7 +18,7 @@ module.exports = {
         else return true;
     },
     purchaseDialog(member, message, amount, item, client) {
-        let data = get_userdata.byId(msg.member.id);
+        let data = get_userdata.byId(message.member.id);
         if (data.gamerpoints < amount) {
             message.edit(info.notEnoughGP(member, client, "Purchase " + item, amount))
         } else {
