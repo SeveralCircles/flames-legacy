@@ -18,7 +18,7 @@ module.exports = {
         else return true;
     },
     purchaseDialog: async function(member, message, amount, item, client) {
-        let data = get_userdata.byId(message.member.id);
+        let data = get_userdata.byId(member.id);
         if (data.gamerpoints < amount) {
             message.edit(info.notEnoughGP(member, client, "Purchase " + item, amount))
         } else {
@@ -41,7 +41,7 @@ module.exports = {
                         if (collected.first().emoji.name == '✅') {
                             message2.edit(info.wait(member, client, "Purchase using GP"));
                             data.gamerpoints -= amount;
-                            get_userdata.writeById(msg.member.id, data);
+                            get_userdata.writeById(member.id, data);
                             let embed2 = new Discord.MessageEmbed()
                             .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
                             .setTitle("Transaction Complete")
