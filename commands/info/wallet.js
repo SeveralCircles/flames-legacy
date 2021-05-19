@@ -64,7 +64,7 @@ module.exports = class WalletCommand extends commando.Command {
                     message.react('✅').then(r => {
                         message.react('🔴');
                 });
-                message.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '👍' || reaction.emoji.name == '👎'),
+                message.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '✅' || reaction.emoji.name == '🔴'),
                         { max: 1, time: 30000 }).then(collected => {
                                 if (collected.first().emoji.name == '✅') {
                                     message.edit(info.wait(msg.member, this.client, "Exchange FP for GP"));
