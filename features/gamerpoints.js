@@ -32,14 +32,14 @@ module.exports = {
             .addField("Starting Balance", data.gamerpoints, true)
             .addField("Ending Balance", data.gamerpoints - amount, true)
             .setFooter("Flames | Flames will never charge real money for its services. | ✅ to confirm, 🔴 to reject.", client.user.displayAvatarURL());
-            message = channel.send(embed);
-            message.react('✅').then(r => {
-                message.react('🔴');
+            let message2 = channel.send(embed);
+            message2.react('✅').then(r => {
+                message2.react('🔴');
         });
-        message.awaitReactions((reaction, user) => user.id == member.id && (reaction.emoji.name == '✅' || reaction.emoji.name == '🔴'),
+        message2.awaitReactions((reaction, user) => user.id == member.id && (reaction.emoji.name == '✅' || reaction.emoji.name == '🔴'),
                 { max: 1, time: 30000 }).then(collected => {
                         if (collected.first().emoji.name == '✅') {
-                            message.edit(info.wait(member, this.client, "Purchase using GP"));
+                            message2.edit(info.wait(member, this.client, "Purchase using GP"));
                             data.gamerpoints -= amount;
                             get_userdata.writeById(msg.member.id, data);
                             let embed2 = new Discord.MessageEmbed()
@@ -50,15 +50,15 @@ module.exports = {
                             .setTimestamp()
                             .setColor("GREEN")
                             .setFooter("Flames", this.client.user.displayAvatarURL());
-                            message.edit(embed2);
+                            message2.edit(embed2);
                             return true;
                         }
                         else
-                                message.edit("The transaction was cancelled.");
+                                message2.edit("The transaction was cancelled.");
                                 return false;
                 }).catch(e => {
                         console.log(e);
-                        message.edit("The transaction has expired.");
+                        message2.edit("The transaction has expired.");
                         return false;
                 });
         }
