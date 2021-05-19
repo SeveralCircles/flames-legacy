@@ -49,7 +49,8 @@ module.exports = class ShopCommand extends commando.Command {
                     }
                     else
                             message.edit('Operation canceled.');
-            }).catch(() => {
+            }).catch(e => {
+                    console.log(e);
                     message.edit('Operation expired.');
             });
     }
