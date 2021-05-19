@@ -11,7 +11,7 @@ const analysis = require("../../features/analysis")
 const gamerpoints = require("../../features/gamerpoints");
 const { exchangeRate } = require('../../features/gamerpoints');
 const { userDataCorrupt } = require('../../features/info');
-success = async function(member, message, multiplierCost, client) {
+var success = async function(member, message, multiplierCost, client) {
     let success = await gamerpoints.purchaseDialog(member, message, multiplierCost, "Multiplier Increase", client)
                         if(success) {
                             data.multiplier += .1;
