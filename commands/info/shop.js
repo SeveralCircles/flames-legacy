@@ -11,6 +11,12 @@ const analysis = require("../../features/analysis")
 const gamerpoints = require("../../features/gamerpoints");
 const { exchangeRate } = require('../../features/gamerpoints');
 const { userDataCorrupt } = require('../../features/info');
+function sucess(member, message, multiplierCost, client) {
+    let success = await gamerpoints.purchaseDialog(member, message, multiplierCost, "Multiplier Increase", client)
+                        if(success) {
+                            data.multiplier += .1;
+                            get_userdata.writeById(msg.member.id, data);
+}
 module.exports = class ShopCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -42,8 +48,7 @@ module.exports = class ShopCommand extends commando.Command {
     message.awaitReactions(async (reaction, user) => user.id == msg.author.id && (reaction.emoji.name == '1️⃣' || reaction.emoji.name == '🔴'),
             { max: 1, time: 30000 }).then(collected => {
                     if (collected.first().emoji.name == '1️⃣') {
-                        let success = await gamerpoints.purchaseDialog(msg.member, message, multiplierCost, "Multiplier Increase", this.client)
-                        if(success) {
+                        if(this.success()) {
                             data.multiplier += .1;
                             get_userdata.writeById(msg.member.id, data);
                         } else return;
@@ -55,4 +60,4 @@ module.exports = class ShopCommand extends commando.Command {
                     message.edit('Operation expired.');
             });
     }
-}
+}}
