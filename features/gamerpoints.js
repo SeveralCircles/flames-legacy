@@ -22,6 +22,8 @@ module.exports = {
         if (data.gamerpoints < amount) {
             message.edit(info.notEnoughGP(member, client, "Purchase " + item, amount))
         } else {
+            let channel = message.channel;
+            message.delete();
             let embed = new Discord.MessageEmbed()
             .setAuthor("Purchase Confirmation", member.user.displayAvatarURL())
             .setTitle(member.displayName + ", please review the following details and confirm if you wish to proceed.")
@@ -30,7 +32,7 @@ module.exports = {
             .addField("Starting Balance", data.gamerpoints, true)
             .addField("Ending Balance", data.gamerpoints - amount, true)
             .setFooter("Flames | Flames will never charge real money for its services. | ✅ to confirm, 🔴 to reject.", client.user.displayAvatarURL());
-            message.edit(embed);
+            message = channel.send(embed);
             message.react('✅').then(r => {
                 message.react('🔴');
         });
@@ -54,7 +56,8 @@ module.exports = {
                         else
                                 message.edit("The transaction was cancelled.");
                                 return false;
-                }).catch(() => {
+                }).catch(e => {
+                        console.log(e);
                         message.edit("The transaction has expired.");
                         return false;
                 });
