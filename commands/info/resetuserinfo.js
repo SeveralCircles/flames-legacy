@@ -28,6 +28,7 @@ module.exports = class UserInfoCommand extends commando.Command {
             .setTitle(msg.member.displayName + ", are you sure?")
             .setDescription("**THIS CANNOT BE UNDONE!**")
             .addField("This will irreversably delete the following data:", "Your Flames Score, your first seen at server, your sentiment data, and any clearances you posses.")
+            .addField("Required GP", "100")
             .addField("If you still wish to reset your data, please type \\userdatareset burnitdown", "Once again, this cannot be undone!")
             .setTimestamp()
             .setFooter("Flames", this.client.user.displayAvatarURL());
@@ -35,6 +36,10 @@ module.exports = class UserInfoCommand extends commando.Command {
         } else {
             let defaults = get_userdata.defaults;
             defaults.firstSeen = msg.guild.id;
+            if (get_userdata.byId(msg.member.id).gamerpoints < 100) {
+                await message.edit(info.notEnoughGP(msg.member, this.client, "Reset User Data", 100));
+                return;
+            }
             get_userdata.writeById(msg.member.id, defaults);
             let embed = new Discord.MessageEmbed()
             .setColor("GREEN")
