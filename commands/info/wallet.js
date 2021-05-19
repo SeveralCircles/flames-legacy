@@ -32,13 +32,14 @@ module.exports = class WalletCommand extends commando.Command {
                     let embed = new Discord.MessageEmbed()
                     .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
                     .setTitle("Whoops, try that one again.")
-                    .setDescription(msg.member.displayName + ", you need to specify how many Flames Points you wish to exchange.")
+                    .setDescription(msg.member.displayName + ", you need to specify how many Gamer Points you wish to recieve.")
                     .setTimestamp()
                     .setFooter("Flames", this.client.user.displayAvatarURL());
                     message.edit(embed);
                     return;
                 } else {
                     let gp = Number(args[2]);
+                    let fp = Math.round(gp * gamerpoints.exchangeRate);
                     if (fp > data.score) {
                         let embed = new Discord.MessageEmbed()
                         .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
@@ -50,7 +51,6 @@ module.exports = class WalletCommand extends commando.Command {
                         return;
                     }
                     console.log("GPER:" + gamerpoints.exchangeRate)
-                    let fp = Math.round(gp * gamerpoints.exchangeRate);
                     let embed = new Discord.MessageEmbed()
                     .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
                     .setTitle("Exchange Flames Points for Gamer Points")
