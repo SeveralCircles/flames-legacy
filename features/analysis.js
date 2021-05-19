@@ -68,7 +68,7 @@ module.exports = {
     let highestValue;
     array.forEach(value => {
       if (values.includes(value)) {
-        counts[values.findIndex(values)]++;
+        counts[values.findIndex(values)] += 1;
       } else {
         values.push(value)
         counts.push(1);
