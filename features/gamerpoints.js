@@ -29,7 +29,7 @@ module.exports = {
             .addField("Cost", amount + " GP", true)
             .addField("Starting Balance", data.gamerpoints, true)
             .addField("Ending Balance", data.gamerpoints - amount, true)
-            .addFooter("Flames | Flames will never charge real money for its services. | ✅ to confirm, 🔴 to reject.", client.user.displayAvatarURL());
+            .setFooter("Flames | Flames will never charge real money for its services. | ✅ to confirm, 🔴 to reject.", client.user.displayAvatarURL());
             message.edit(embed);
             message.react('✅').then(r => {
                 message.react('🔴');
