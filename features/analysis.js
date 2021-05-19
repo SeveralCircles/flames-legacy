@@ -68,7 +68,7 @@ module.exports = {
     let highestValue;
     array.forEach(value => {
       if (values.includes(value.toString())) {
-        counts[values.findIndex(value)] += 1;
+        counts[values.findIndex(this.callbck)] += 1;
       } else {
         values.push(value)
         counts.push(1);
@@ -81,5 +81,8 @@ module.exports = {
       }
     });
     return highestValue;
+  },
+  callbck = function(element, index, array) {
+    return index;
   }
 }
