@@ -24,6 +24,7 @@ module.exports = class ShopCommand extends commando.Command {
     async run(msg) {
         let data = get_userdata.byId(msg.member);
         let multiplierCost = Math.round(100 * data.upgrades.multiplier);
+        if (!data.upgrades.multiplier) data.upgrades.multiplier = 1.0;
         let embed = new Discord.MessageEmbed()
         .setAuthor("Flames Shop", msg.member.user.displayAvatarURL())
         .setTitle(msg.member.displayName + ", here are the available upgrades right now.")
