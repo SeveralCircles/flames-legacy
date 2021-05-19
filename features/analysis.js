@@ -60,5 +60,26 @@ module.exports = {
       if(value == item) count++;
     })
     return count;
+  },
+  findMost: function(array) {
+    let counts = [];
+    let values = [];
+    let highest = 0;
+    let highestValue;
+    array.forEach(value => {
+      if (values.includes(value)) {
+        counts[values.findIndex(values)]++;
+      } else {
+        values.push(value)
+        counts.push(1);
+      }
+    });
+    counts.forEach(function(value, index) {
+      if (value > highest) {
+        highest = value;
+        highestValue = values[index];
+      }
+    });
+    return highestValue;
   }
 }

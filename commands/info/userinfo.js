@@ -33,22 +33,22 @@ module.exports = class UserInfoCommand extends commando.Command {
         let now = new Date();
         let sent = null;
         let args = msg.content.split(" ");
-        if (args[1] == "topics") {
-            let topics = []
-            let embed = new Discord.MessageEmbed()
-            .setAuthor("Flames User Data: Topics", member.user.displayAvatarURL())
-            .setTitle(member.displayName)
-            .setTimestamp()
-            .setFooter("Flames", this.client.user.displayAvatarURL());
-            data.entities.forEach( element => {
-                if(!topics.includes(element)){ 
-                    embed.addField(element, analysis.count(data.entities, element));
-                    topics.push(element);
-                }
-            });
-            message.edit(embed);
-            return;
-        }
+        // if (args[1] == "topics") {
+        //     let topics = []
+        //     let embed = new Discord.MessageEmbed()
+        //     .setAuthor("Flames User Data: Topics", member.user.displayAvatarURL())
+        //     .setTitle(member.displayName)
+        //     .setTimestamp()
+        //     .setFooter("Flames", this.client.user.displayAvatarURL());
+        //     data.entities.forEach( element => {
+        //         if(!topics.includes(element)){ 
+        //             embed.addField(element, analysis.count(data.entities, element));
+        //             topics.push(element);
+        //         }
+        //     });
+        //     message.edit(embed);
+        //     return;
+        // }
         let average = (data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length;
         let gdata = get_globaldata.getValues();
         console.log("Average:" + average);
@@ -64,6 +64,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         .addField("Rank", rank.getRank(data.score), true)
         .addField("To Next Rank", rank.toNext(data.score), true)
         .addField("Emotion", sent, true)
+        .addField("Favorite Topic", analysis.findMost(data.entities))
         .addField("Achievements Collected", data.achievements.length + "/" + achievements.allAchievementsCount + " (" + (data.achievements.length / achievements.allAchievementsCount) * 100 + "%)", true)
         .addField("Global Contribution", (data.score / gdata.score) * 100 + "%", true)
         .setTimestamp()
