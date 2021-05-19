@@ -32,7 +32,7 @@ module.exports = {
             .addField("Starting Balance", data.gamerpoints, true)
             .addField("Ending Balance", data.gamerpoints - amount, true)
             .setFooter("Flames | Flames will never charge real money for its services. | ✅ to confirm, 🔴 to reject.", client.user.displayAvatarURL());
-            let message2 = channel.send(embed);
+            var message2 = channel.send(embed);
             message2.react('✅').then(r => {
                 message2.react('🔴');
         });
