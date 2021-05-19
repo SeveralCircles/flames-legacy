@@ -33,7 +33,7 @@ module.exports = class ShopCommand extends commando.Command {
         .addField("1️⃣: Multiplier Upgrade (" + multiplierCost + "GP)", "Increases how much your Flames Score changes with each message, positive or negative, by +.1x. \nYour current multiplier: " + data.multiplier + "x")
         .setTimestamp()
         .setFooter("Flames | 🔴 to cancel.", this.client.user.displayAvatarURL());
-        let message = msg.channel.send(embed);
+        var message = msg.channel.send(embed);
         message.react('1️⃣').then(r => {
             message.react('🔴');
     });
