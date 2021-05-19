@@ -38,7 +38,7 @@ module.exports = class WalletCommand extends commando.Command {
                     message.edit(embed);
                     return;
                 } else {
-                    let fp = Number(args[2]);
+                    let gp = Number(args[2]);
                     if (fp > data.score) {
                         let embed = new Discord.MessageEmbed()
                         .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
@@ -50,7 +50,7 @@ module.exports = class WalletCommand extends commando.Command {
                         return;
                     }
                     console.log("GPER:" + gamerpoints.exchangeRate)
-                    let gp = Math.round(fp / gamerpoints.exchangeRate);
+                    let fp = Math.round(gp * gamerpoints.exchangeRate);
                     let embed = new Discord.MessageEmbed()
                     .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
                     .setTitle("Exchange Flames Points for Gamer Points")
@@ -100,7 +100,7 @@ module.exports = class WalletCommand extends commando.Command {
                 .setTitle(msg.member.displayName + "'s wallet")
                 .addField("Balance", data.gamerpoints + " GP", true)
                 .addField("Exchange Rate", "1 GP costs " + gamerpoints.exchangeRate + " FP.", true)
-                .addField("Available Options (run as command starting with \\mygp or \\wallet)", "To exchange Flames Points for Gamer Points: exchange <FP to exchange>")
+                .addField("Available Options (run as command starting with \\mygp or \\wallet)", "To exchange Flames Points for Gamer Points: exchange <desired GP>")
                 .setTimestamp()
                 .setFooter("Flames", this.client.user.displayAvatarURL());
                 message.edit(embed);
