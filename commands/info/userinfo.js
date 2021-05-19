@@ -52,7 +52,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         let average = (data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length;
         let gdata = get_globaldata.getValues();
         console.log("Average:" + average);
-        if (average > 150) sent = "Positive";
+        if (average > 94) sent = "Positive";
         else if (average < 0) sent = "Negative";
         else sent = "Neutral";
         let embed = new Discord.MessageEmbed()
@@ -66,7 +66,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         .addField("Emotion", sent, true)
         .addField("Favorite Topic", analysis.findMost(data.entities))
         .addField("Achievements Collected", data.achievements.length + "/" + achievements.allAchievementsCount + " (" + (data.achievements.length / achievements.allAchievementsCount) * 100 + "%)", true)
-        .addField("Global Contribution", (data.score / gdata.score) * 100 + "%", true)
+        .addField("Global Contribution", (Math.round((data.score / gdata.score) * 10000)) / 100 + "%", true)
         .setTimestamp()
         .setFooter("Flames", this.client.user.displayAvatarURL());
         if(member.hasPermission('ADMINISTRATOR')) embed.setColor(0xa103fc);
