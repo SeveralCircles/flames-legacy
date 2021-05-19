@@ -11,7 +11,7 @@ const analysis = require("../../features/analysis")
 const gamerpoints = require("../../features/gamerpoints");
 const { exchangeRate } = require('../../features/gamerpoints');
 const { userDataCorrupt } = require('../../features/info');
-function sucess(member, message, multiplierCost, client) {
+success = async function(member, message, multiplierCost, client) {
     let success = await gamerpoints.purchaseDialog(member, message, multiplierCost, "Multiplier Increase", client)
                         if(success) {
                             data.multiplier += .1;
@@ -29,8 +29,8 @@ module.exports = class ShopCommand extends commando.Command {
             });  
 }
     async run(msg) {
-        let data = get_userdata.byId(msg.member);
-        let multiplierCost = Math.round(100 * data.multiplier);
+        var data = get_userdata.byId(msg.member);
+        var multiplierCost = Math.round(100 * data.multiplier);
         if (data.multiplier == undefined) data.multiplier = 1.0;
         let embed = new Discord.MessageEmbed()
         .setAuthor("Flames Shop", msg.member.user.displayAvatarURL())
@@ -48,7 +48,7 @@ module.exports = class ShopCommand extends commando.Command {
     message.awaitReactions(async (reaction, user) => user.id == msg.author.id && (reaction.emoji.name == '1️⃣' || reaction.emoji.name == '🔴'),
             { max: 1, time: 30000 }).then(collected => {
                     if (collected.first().emoji.name == '1️⃣') {
-                        if(this.success()) {
+                        if(success(msg.member, message, multiplierCost, this.client)) {
                             data.multiplier += .1;
                             get_userdata.writeById(msg.member.id, data);
                         } else return;
