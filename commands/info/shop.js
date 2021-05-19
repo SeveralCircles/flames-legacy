@@ -10,6 +10,7 @@ const get_globaldata = require ("../../data/get_globaldata")
 const analysis = require("../../features/analysis")
 const gamerpoints = require("../../features/gamerpoints");
 const { exchangeRate } = require('../../features/gamerpoints');
+const { userDataCorrupt } = require('../../features/info');
 module.exports = class ShopCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -23,13 +24,13 @@ module.exports = class ShopCommand extends commando.Command {
 }
     async run(msg) {
         let data = get_userdata.byId(msg.member);
-        let multiplierCost = Math.round(100 * data.upgrades.multiplier);
-        if (data.upgrades.multiplier == undefined) data.upgrades = {"multiplier": 1.0};
+        let multiplierCost = Math.round(100 * data.multiplier);
+        if (data.multiplier == undefined) data.multiplier = 1.0;
         let embed = new Discord.MessageEmbed()
         .setAuthor("Flames Shop", msg.member.user.displayAvatarURL())
         .setTitle(msg.member.displayName + ", here are the available upgrades right now.")
         .setDescription("React with the one you wish to purchase.")
-        .addField("1️⃣: Multiplier Upgrade (" + multiplierCost + "GP)", "Increases how much your Flames Score changes with each message, positive or negative, by +.1x. \nYour current multiplier: " + data.upgrades.multiplier + "x")
+        .addField("1️⃣: Multiplier Upgrade (" + multiplierCost + "GP)", "Increases how much your Flames Score changes with each message, positive or negative, by +.1x. \nYour current multiplier: " + data.multiplier + "x")
         .setTimestamp()
         .setFooter("Flames | 🔴 to cancel.", this.client.user.displayAvatarURL());
         let message = msg.channel.send(embed);
@@ -42,7 +43,7 @@ module.exports = class ShopCommand extends commando.Command {
             { max: 1, time: 30000 }).then(collected => {
                     if (collected.first().emoji.name == '✅') {
                         if(gamerpoints.purchaseDialog(msg.member, message, multiplierCost, "Multiplier Increase", this.client)) {
-                            data.upgrades.multiplier += .1;
+                            data.multiplier += .1;
                             get_userdata.writeById(msg.member.id, data);
                         } else return;
                     }

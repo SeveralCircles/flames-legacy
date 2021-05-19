@@ -6,9 +6,6 @@
     "achievements": [],
     "records": [],
     "scoreRecordCooldown": null,
-    "gamerpoints": 0,
-    "upgrades": {
-        "multiplier": 1.0
-    },
+    "multiplier": 1.0,
     "version": 2
 }
