@@ -39,7 +39,7 @@ module.exports = {
         message2.awaitReactions((reaction, user) => user.id == member.id && (reaction.emoji.name == '✅' || reaction.emoji.name == '🔴'),
                 { max: 1, time: 30000 }).then(collected => {
                         if (collected.first().emoji.name == '✅') {
-                            message2.edit(info.wait(member, this.client, "Purchase using GP"));
+                            message2.edit(info.wait(member, client, "Purchase using GP"));
                             data.gamerpoints -= amount;
                             get_userdata.writeById(msg.member.id, data);
                             let embed2 = new Discord.MessageEmbed()
