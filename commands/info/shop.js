@@ -50,7 +50,7 @@ module.exports = class ShopCommand extends commando.Command {
                         if(success(msg.member, message, multiplierCost, this.client)) {
                             data.multiplier += .1;
                             get_userdata.writeById(msg.member.id, data);
-                        } else return;
+                        } else break;
                     }
                     else
                             message.edit('Operation canceled.');
