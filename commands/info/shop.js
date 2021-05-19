@@ -39,7 +39,7 @@ module.exports = class ShopCommand extends commando.Command {
     });
 
     // First argument is a filter function
-    message.awaitReactions((reaction, user) => user.id == msg.author.id && (reaction.emoji.name == '1️⃣' || reaction.emoji.name == '🔴'),
+    message.awaitReactions(async (reaction, user) => user.id == msg.author.id && (reaction.emoji.name == '1️⃣' || reaction.emoji.name == '🔴'),
             { max: 1, time: 30000 }).then(collected => {
                     if (collected.first().emoji.name == '1️⃣') {
                         let success = await gamerpoints.purchaseDialog(msg.member, message, multiplierCost, "Multiplier Increase", this.client)
