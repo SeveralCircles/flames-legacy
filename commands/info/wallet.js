@@ -38,13 +38,14 @@ module.exports = class WalletCommand extends commando.Command {
                     message.edit(embed);
                     return;
                 } else {
-                    let gp = Number(args[2]);
-                    let fp = Math.round(gp * gamerpoints.exchangeRate);
+                    var gp = Number(args[2]);
+                    var fp = Math.round(gp * gamerpoints.exchangeRate);
                     if (fp > data.score) {
                         let embed = new Discord.MessageEmbed()
                         .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
                         .setTitle("Transaction Declined")
-                        .setDescription(msg.member.displayName + ", you do not have that amount of FP to exchange.")
+                        .setDescription(msg.member.displayName + ", you do not have the required amount of FP to exchange.")
+                        .addField("Required FP", fp)
                         .setTimestamp()
                         .setFooter("Flames", this.client.user.displayAvatarURL());
                         message.edit(embed);
