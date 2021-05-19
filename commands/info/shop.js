@@ -42,7 +42,7 @@ module.exports = class ShopCommand extends commando.Command {
     message.awaitReactions((reaction, user) => user.id == msg.author.id && (reaction.emoji.name == '1️⃣' || reaction.emoji.name == '🔴'),
             { max: 1, time: 30000 }).then(collected => {
                     if (collected.first().emoji.name == '1️⃣') {
-                        if(gamerpoints.purchaseDialog(msg.member, message, multiplierCost, "Multiplier Increase", this.client)) {
+                        if(await gamerpoints.purchaseDialog(msg.member, message, multiplierCost, "Multiplier Increase", this.client)) {
                             data.multiplier += .1;
                             get_userdata.writeById(msg.member.id, data);
                         } else return;

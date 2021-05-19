@@ -17,7 +17,7 @@ module.exports = {
         if (Math.round(fp/rate) < 1) return false;
         else return true;
     },
-    purchaseDialog(member, message, amount, item, client) {
+    purchaseDialog: async function(member, message, amount, item, client) {
         let data = get_userdata.byId(message.member.id);
         if (data.gamerpoints < amount) {
             message.edit(info.notEnoughGP(member, client, "Purchase " + item, amount))
