@@ -27,9 +27,10 @@ module.exports = {
             .setTitle(member.displayName + ", please review the following details and confirm if you wish to proceed.")
             .addField("Item", item, true)
             .addField("Cost", amount + " GP", true)
-            .addField("Starting Balance", data.gamerpoints)
-            .addField("Ending Balance", data.gamerpoints - amount)
+            .addField("Starting Balance", data.gamerpoints, true)
+            .addField("Ending Balance", data.gamerpoints - amount, true)
             .addFooter("Flames | Flames will never charge real money for its services. | ✅ to confirm, 🔴 to reject.", client.user.displayAvatarURL());
+            message.edit(embed);
             message.react('✅').then(r => {
                 message.react('🔴');
         });
