@@ -82,7 +82,7 @@ module.exports = {
     });
     return highestValue;
   },
-  callbck = function(element, index, array) {
+  callbck: function(element, index, array) {
     return index;
   }
 }
