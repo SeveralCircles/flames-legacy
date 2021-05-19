@@ -82,7 +82,7 @@ module.exports = class WalletCommand extends commando.Command {
                                     .setTimestamp()
                                     .setColor("GREEN")
                                     .setFooter("Flames", this.client.user.displayAvatarURL());
-                                    message.edit(embed);
+                                    message.edit(embed2);
 
                                 }
                                 else
