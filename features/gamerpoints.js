@@ -3,7 +3,7 @@ var gdata = get_globaldata.getValues()
 const ulist = require("../data/ulist.json");
 module.exports = {
     exchangeRate: function() {
-        this.sync();
+        // this.sync();
         return Math.round((gdata.score / ulist.ulist.length) / 10)
     },
     sync: function() {
