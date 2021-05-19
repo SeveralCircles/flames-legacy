@@ -11,11 +11,12 @@ const analysis = require("../../features/analysis")
 const gamerpoints = require("../../features/gamerpoints");
 const { exchangeRate } = require('../../features/gamerpoints');
 const { userDataCorrupt } = require('../../features/info');
-var success = async function(member, message, multiplierCost, client) {
+const success = async function(member, message, multiplierCost, client) {
     let success = await gamerpoints.purchaseDialog(member, message, multiplierCost, "Multiplier Increase", client)
                         if(success) {
                             data.multiplier += .1;
                             get_userdata.writeById(msg.member.id, data);
+}
 }
 module.exports = class ShopCommand extends commando.Command {
 	constructor(client) {
@@ -28,6 +29,7 @@ module.exports = class ShopCommand extends commando.Command {
             guildOnly: true
             });  
 }
+    
     async run(msg) {
         var data = get_userdata.byId(msg.member);
         var multiplierCost = Math.round(100 * data.multiplier);
@@ -60,4 +62,4 @@ module.exports = class ShopCommand extends commando.Command {
                     message.edit('Operation expired.');
             });
     }
-}}
+}
