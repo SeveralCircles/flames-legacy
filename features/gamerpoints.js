@@ -46,11 +46,11 @@ module.exports = {
                             let embed2 = new Discord.MessageEmbed()
                             .setAuthor("Flames Wallet", member.user.displayAvatarURL())
                             .setTitle("Transaction Complete")
-                            .setDescription(msg.member.displayName + ", your balance has been updated.")
+                            .setDescription(member.displayName + ", your balance has been updated.")
                             .addField("New Balance", data.gamerpoints)
                             .setTimestamp()
                             .setColor("GREEN")
-                            .setFooter("Flames", this.client.user.displayAvatarURL());
+                            .setFooter("Flames", client.user.displayAvatarURL());
                             message2.edit(embed2);
                             return true;
                         }
