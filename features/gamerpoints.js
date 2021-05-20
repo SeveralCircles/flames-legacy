@@ -17,7 +17,7 @@ module.exports = {
         if (Math.round(fp/rate) < 1) return false;
         else return true;
     },
-    purchaseDialog: async function(member, message, amount, item, client) {
+    purchaseDialog: async function(member, message, amount, item, client, succid) {
         let data = get_userdata.byId(member.id);
         if (data.gamerpoints < amount) {
             message.edit(info.notEnoughGP(member, client, "Purchase " + item, amount))
@@ -41,6 +41,7 @@ module.exports = {
                         if (collected.first().emoji.name == '✅') {
                             message2.edit(info.wait(member, client, "Purchase using GP"));
                             data.gamerpoints -= amount;
+                            data.succid = succid;
                             get_userdata.writeById(member.id, data);
                             let embed2 = new Discord.MessageEmbed()
                             .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())

@@ -28,6 +28,7 @@ module.exports = class ShopCommand extends commando.Command {
 }
     
     async run(msg) {
+        var succid = Math.random();
         var data = get_userdata.byId(msg.member);
         var multiplierCost = Math.round(100 * data.multiplier);
         if (data.multiplier == undefined) data.multiplier = 1.0;
@@ -48,6 +49,7 @@ module.exports = class ShopCommand extends commando.Command {
             { max: 1, time: 30000 }).then(collected => {
                     if (collected.first().emoji.name == '1️⃣') {
                         if(success(msg.member, message, multiplierCost, this.client)) {
+                            if (get_userdata.byId(msg.member.id).succid != succid) return;
                             data.multiplier += .1;
                             get_userdata.writeById(msg.member.id, data);
                         } else return;
