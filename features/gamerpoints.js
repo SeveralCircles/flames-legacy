@@ -44,7 +44,7 @@ module.exports = {
                             data.succid = succid;
                             get_userdata.writeById(member.id, data);
                             let embed2 = new Discord.MessageEmbed()
-                            .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
+                            .setAuthor("Flames Wallet", member.user.displayAvatarURL())
                             .setTitle("Transaction Complete")
                             .setDescription(msg.member.displayName + ", your balance has been updated.")
                             .addField("New Balance", data.gamerpoints)
