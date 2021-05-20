@@ -42,6 +42,7 @@ module.exports = {
                             message2.edit(info.wait(member, client, "Purchase using GP"));
                             data.gamerpoints -= amount;
                             data.succid = succid;
+                            get_userdata.writeById(member.id, data);
                             let embed2 = new Discord.MessageEmbed()
                             .setAuthor("Flames Wallet", member.user.displayAvatarURL())
                             .setTitle("Transaction Complete")
@@ -61,7 +62,7 @@ module.exports = {
                         message2.edit("The transaction has expired.");
                         return false;
                 });
-                await get_userdata.writeById(member.id, data);
+                
             }
     }
 }

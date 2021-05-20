@@ -12,7 +12,8 @@ const gamerpoints = require("../../features/gamerpoints");
 const { exchangeRate } = require('../../features/gamerpoints');
 const { userDataCorrupt } = require('../../features/info');
 const success = async function(member, message, multiplierCost, client) {
-    return await gamerpoints.purchaseDialog(member, message, multiplierCost, "Multiplier Increase", client);
+    console.log(await gamerpoints.purchaseDialog(member, message, multiplierCost, "Multiplier Increase", client));
+    return false;
                     
 }
 module.exports = class ShopCommand extends commando.Command {
