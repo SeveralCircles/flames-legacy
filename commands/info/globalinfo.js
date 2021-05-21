@@ -7,6 +7,7 @@ const info = require ("../../features/info")
 const get_globaldata = require("../../data/get_globaldata")
 const ulist = require("../../data/ulist.json")
 const flamesdata = require("../../data/flamesdata.json");
+const gamerpoints = require ("../../features/gamerpoints")
 module.exports = class GlobalInfoCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -51,6 +52,7 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         embed.addField("Average Flames Score", gdata.score/ulist.ulist.length, true);
         embed.addField("Number of Participants", ulist.ulist.length, true);
         embed.addField("Progress towards Global Goal", gdata.score + "/1000000 (" + (Math.round((gdata.score/1000000)*100))/100 + "%)", true)
+        embed.addField("GP Cost", gamerpoints.exchangeRate + " FP");
         message.edit(embed);
     }
     }

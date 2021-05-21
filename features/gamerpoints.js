@@ -17,13 +17,7 @@ module.exports = {
         if (Math.round(fp/rate) < 1) return false;
         else return true;
     },
-    purchaseDialog: async function(member, message, amount, item, client, succid) {
-        let data = get_userdata.byId(member.id);
-        if (data.gamerpoints < amount) {
-            message.edit(info.notEnoughGP(member, client, "Purchase " + item, amount))
-        } else {
-            let channel = message.channel;
-            message.delete();
+    purchaseDialog: function(member, amount, item, client, data) {
             let embed = new Discord.MessageEmbed()
             .setAuthor("Purchase Confirmation", member.user.displayAvatarURL())
             .setTitle(member.displayName + ", please review the following details and confirm if you wish to proceed.")
@@ -32,37 +26,15 @@ module.exports = {
             .addField("Starting Balance", data.gamerpoints, true)
             .addField("Ending Balance", data.gamerpoints - amount, true)
             .setFooter("Flames | Flames will never charge real money for its services. | ✅ to confirm, 🔴 to reject.", client.user.displayAvatarURL());
-            var message2 = await channel.send(embed);
-            message2.react('✅').then(r => {
-                message2.react('🔴');
-        });
-        message2.awaitReactions((reaction, user) => user.id == member.id && (reaction.emoji.name == '✅' || reaction.emoji.name == '🔴'),
-                { max: 1, time: 30000 }).then(collected => {
-                        if (collected.first().emoji.name == '✅') {
-                            message2.edit(info.wait(member, client, "Purchase using GP"));
-                            data.gamerpoints -= amount;
-                            data.succid = succid;
-                            get_userdata.writeById(member.id, data);
-                            let embed2 = new Discord.MessageEmbed()
-                            .setAuthor("Flames Wallet", member.user.displayAvatarURL())
-                            .setTitle("Transaction Complete")
-                            .setDescription(member.displayName + ", your balance has been updated.")
-                            .addField("New Balance", data.gamerpoints)
-                            .setTimestamp()
-                            .setColor("GREEN")
-                            .setFooter("Flames", client.user.displayAvatarURL());
-                            message2.edit(embed2);
-                            return true;
-                        }
-                        else
-                                message2.edit("The transaction was cancelled.");
-                                return false;
-                }).catch(e => {
-                        console.log(e);
-                        message2.edit("The transaction has expired.");
-                        return false;
-                });
-                
-            }
+            return embed;
+    },
+    purchaseConfirm: function(member, item, client, newBalance) {
+        let embed = new Discord.MessageEmbed()
+            .setAuthor("Purchase Completed", member.user.displayAvatarURL())
+            .setTitle(member.displayName + ", your purchase has been processed successfully.")
+            .addField("Item", item, true)
+            .addField("Your Balance", newBalance + " GP", true)
+            .setFooter("Flames | GP exchanges are final.", client.user.displayAvatarURL());
+            return embed;
     }
 }
