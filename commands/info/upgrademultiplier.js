@@ -24,7 +24,7 @@ module.exports = class MultiplierCommand extends commando.Command {
 }
     
     async run(msg) {
-        var data = get_userdata.byId(msg.member);
+        var data = await get_userdata.byId(msg.member);
         var multiplierCost = Math.round(100 * data.multiplier);
         if (data.multiplier == undefined) data.multiplier = 1.0;
         let embed = new Discord.MessageEmbed()
