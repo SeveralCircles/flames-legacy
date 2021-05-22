@@ -55,7 +55,7 @@ module.exports = class MultiplierCommand extends commando.Command {
                 message.awaitReactions((reaction, user) => user.id == msg.author.id && (reaction.emoji.name == '✅' || reaction.emoji.name == '🔴'),
                         { max: 1, time: 30000 }).then(collected => {
                                 if (collected.first().emoji.name == '✅') {
-                                    data.gp -= multiplierCost;
+                                    data.gamerpoints -= multiplierCost;
                                     data.multiplier += 0.1;
                                     get_userdata.writeById(msg.member.id, data);
                                     message.reactions.removeAll();
