@@ -44,7 +44,7 @@ module.exports = class MultiplierCommand extends commando.Command {
         { max: 1, time: 30000 }).then(collected => {
                 if (collected.first().emoji.name == '🔼') {
                     message.reactions.removeAll();
-                    if (!data.gp >= multiplierCost) {
+                    if (!data.gamerpoints >= multiplierCost) {
                         message.edit(info.notEnoughGP(msg.member, this.client, "Purchase Multiplier Increase", multiplierCost));
                         return;
                     }
@@ -59,7 +59,7 @@ module.exports = class MultiplierCommand extends commando.Command {
                                     data.multiplier += 0.1;
                                     get_userdata.writeById(msg.member.id, data);
                                     message.reactions.removeAll();
-                                    message.edit(gamerpoints.purchaseConfirm(msg.member, "Multiplier Increase", this.client, data.gp));
+                                    message.edit(gamerpoints.purchaseConfirm(msg.member, "Multiplier Increase", this.client, data.gamerpoints));
                                 }
                                 else
                                         message.edit("The transaction was cancelled.");
