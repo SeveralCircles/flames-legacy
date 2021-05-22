@@ -44,7 +44,7 @@ module.exports = class MultiplierCommand extends commando.Command {
         { max: 1, time: 30000 }).then(collected => {
                 if (collected.first().emoji.name == '🔼') {
                     message.reactions.removeAll();
-                    if (!data.gamerpoints >= multiplierCost) {
+                    if ((data.gamerpoints - multiplierCost) < 0) {
                         message.edit(info.notEnoughGP(msg.member, this.client, "Purchase Multiplier Increase", multiplierCost));
                         return;
                     }
