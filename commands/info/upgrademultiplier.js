@@ -42,7 +42,7 @@ module.exports = class MultiplierCommand extends commando.Command {
         });
         message.awaitReactions((reaction, user) => user.id == msg.author.id && (reaction.emoji.name == '🔼' || reaction.emoji.name == '🔴'),
         { max: 1, time: 30000 }).then(collected => {
-                if (collected.first().emoji.name == '1️⃣') {
+                if (collected.first().emoji.name == '🔼') {
                     message.reactions.removeAll();
                     if (!data.gp >= multiplierCost) {
                         message.edit(info.notEnoughGP(msg.member, this.client, "Purchase Multiplier Increase", multiplierCost));
