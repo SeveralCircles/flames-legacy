@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const { client } = require("../../bot");
 const flamesdata = require('../../data/flamesdata.json')
 const index = require("../../index")
+const commando = require("discord.js-commando")
 module.exports = class GlobalInfoCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
