@@ -16,5 +16,5 @@ bot.login();
 console.log("Logged in.");
 module.exports = {
   updateJob: updateJob,
-  newDay: newDay
+  newDay: newDay,
 }
