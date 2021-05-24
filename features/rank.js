@@ -13,13 +13,13 @@ module.exports = {
     },
     syncThresholds: function() {
         let length = scores.length
-        thresholds[0] = scores[Math.round(0.4 * (length-1))]
-        thresholds[1] = scores[Math.round(0.5 * (length - 1))]
-        thresholds[2] = scores[Math.round(0.6 * (length - 1))]
-        thresholds[3] = scores[Math.round(0.7 * (length - 1))]
-        thresholds[4] = scores[Math.round(0.8 * (length - 1))]
-        thresholds[5] = scores[Math.round(0.9 * (length - 1))]
-        thresholds[6] = scores[Math.round(0.95 * (length - 1))]
+        thresholds[0] = scores[Math.round(0.3 * (length - 1))]
+        thresholds[1] = scores[Math.round(0.4 * (length - 1))]
+        thresholds[2] = scores[Math.round(0.5 * (length - 1))]
+        thresholds[3] = scores[Math.round(0.6 * (length - 1))]
+        thresholds[4] = scores[Math.round(0.7 * (length - 1))]
+        thresholds[5] = scores[Math.round(0.8 * (length - 1))]
+        thresholds[6] = scores[Math.round(0.9 * (length - 1))]
         // console.log(thresholds);
     },
     sync: function() {
