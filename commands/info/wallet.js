@@ -1,15 +1,9 @@
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 const get_userdata = require("../../data/get_userdata")
-const get_guilddata = require("../../data/get_guilddata")
-const rank = require("../../features/rank")
 const info = require ("../../features/info");
-const message = require('../../events/message');
-const achievements = require("../../features/achievements")
 const get_globaldata = require ("../../data/get_globaldata")
-const analysis = require("../../features/analysis")
 const gamerpoints = require("../../features/gamerpoints");
-const { exchangeRate } = require('../../features/gamerpoints');
 module.exports = class WalletCommand extends commando.Command {
 	constructor(client) {
 		super(client, {

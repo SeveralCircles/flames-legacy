@@ -1,7 +1,7 @@
 const fs = require('fs')
 const defaults = require("./globaldefault.json")
 const recorddefaults = require("./recordsdefault.json")
-var ulist = null;
+// var ulist = null;
 module.exports = {
     getValues: function() {
         try {

@@ -1,16 +1,10 @@
 const Discord = require('discord.js');
 const get_userdata = require('../data/get_userdata');
-const get_hybriddata = require('../data/get_hybriddata');
-const { json } = require('body-parser');
 const analysis = require("../features/analysis")
 const get_globaldata = require("../data/get_globaldata")
 const achievements = require("../features/achievements")
-const severalcircles = require ("../features/severalcircles")
 const records = require("../features/records");
 const util = require("../features/util")
-const successjson = {
-    "success":  true
-}
 module.exports = {
     onMessage: async function(msg) {
         if (msg.member.id === "835977847599661067") return;
@@ -85,7 +79,7 @@ module.exports = {
             .setFooter("Have a great rest of your day! | Flames");
             msg.author.send(embed);
         }
-        get_userdata.writeById(msg.member.id, userdata);
+        await get_userdata.writeById(msg.member.id, userdata);
         console.log(globaldata);
         get_globaldata.writeValues(globaldata);
         } catch (e) {console.log(e)};

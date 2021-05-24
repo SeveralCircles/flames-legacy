@@ -1,11 +1,8 @@
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 const get_userdata = require("../../data/get_userdata")
-const get_guilddata = require("../../data/get_guilddata")
 var random = Math.random();
-const rank = require("../../features/rank")
 const info = require ("../../features/info");
-const message = require('../../events/message');
 module.exports = class UserInfoCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
