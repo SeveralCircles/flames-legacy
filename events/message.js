@@ -64,6 +64,7 @@ module.exports = {
         }
         userdata = await achievements.checkAchievements(msg, userdata);
         if (msg.content.toLowerCase().includes("sam")) userdata = await achievements.samAchievement(msg, userdata);
+        if (userdata.averageSentiment.length % 1000 == 0) userdata.multiplier += 0.01
         get_userdata.writeById(msg.member.id, userdata);
         console.log(globaldata);
         get_globaldata.writeValues(globaldata);
