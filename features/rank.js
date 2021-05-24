@@ -20,7 +20,6 @@ module.exports = {
         thresholds[4] = scores[Math.round(0.7 * (length - 1))]
         thresholds[5] = scores[Math.round(0.8 * (length - 1))]
         thresholds[6] = scores[Math.round(0.9 * (length - 1))]
-        // console.log(thresholds);
     },
     sync: function() {
         console.log("Updating ranking information...")
