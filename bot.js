@@ -1,7 +1,6 @@
 const Discord = require("discord.js-commando")
 const client = new Discord.Client()
 const msgEvent = require("./events/message");
-const get_hybriddata = require("./data/get_hybriddata");
 const guildCreate = require("./events/guildcreate")
 module.exports = {
     login: function() {
