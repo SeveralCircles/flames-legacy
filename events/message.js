@@ -38,8 +38,10 @@ module.exports = {
         if (userdata == get_userdata.defaults) userdata.firstSeen = msg.guild.id;
         // let hybriddata = get_hybriddata.byId(msg.guild.id, msg.member.id);
         // if (hybriddata.member == null) hybriddata.member = msg.member;
-        if (userdata.multiplier == undefined) userdata.multiplier = 1.0
-        userdata.score = Math.round(userdata.score + ((anal * userdata.multiplier)));
+        if (userdata.multiplier == undefined) userdata.multiplier = 1.0;
+        sc = Math.round((anal * userdata.multiplier));
+        if (date.getDay() == 5) sc = sc * 2
+        userdata.score += sc;
         globaldata.score = globaldata.score + anal;
         let date = new Date()
         let day = await date.getDay();
