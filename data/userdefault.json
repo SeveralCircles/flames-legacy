@@ -1,13 +1,11 @@
 {
     "score": 0,
     "firstSeen": "",
-    "verified": false,
     "averageSentiment": [],
     "achievements": [],
     "records": [],
     "scoreRecordCooldown": null,
     "multiplier": 1.0,
     "lastSeen": -2,
-    "streak": 0,
-    "version": 3
+    "streak": 0
 }
