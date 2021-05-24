@@ -9,8 +9,8 @@ console.log("Updating ranking information");
 rank.sync();
 
 console.log("Scheduling tasks...")
-const updateJob = schedule.scheduleJob('0 * * * *', rank.sync()); // Also schedule a job to update rank information every hour.
-const newDay = schedule.scheduleJob('0 * * *', console.log("It's a brand new day, let's make the most of it!")); // Just for fun
+const updateJob = schedule.scheduleJob('0 * * * *', function() {rank.sync()}); // Also schedule a job to update rank information every hour.
+const newDay = schedule.scheduleJob('0 * * *', function(){console.log("It's a brand new day, let's make the most of it!")}); // Just for fun
 console.log("Logging in...")
 bot.login();
 console.log("Logged in.");
