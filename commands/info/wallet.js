@@ -45,7 +45,6 @@ module.exports = class WalletCommand extends commando.Command {
                         message.edit(embed);
                         return;
                     }
-                    console.log("GPER:" + gamerpoints.exchangeRate)
                     let embed = new Discord.MessageEmbed()
                     .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
                     .setTitle("Exchange Flames Points for Gamer Points")
