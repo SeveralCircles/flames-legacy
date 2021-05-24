@@ -1,8 +1,6 @@
 const get_globaldata = require("../data/get_globaldata");
 var gdata = get_globaldata.getValues()
 const ulist = require("../data/ulist.json");
-const get_userdata = require("../data/get_userdata");
-const info = require("./info");
 const Discord = require("discord.js");
 module.exports = {
     exchangeRate: Math.round((gdata.score / ulist.ulist.length) / 10),

@@ -1,4 +1,3 @@
-const get_userdata = require("../data/get_userdata");
 const rank = require("./rank");
 const Discord = require("discord.js");
 function addDefaultInfo(embed, msg) {
