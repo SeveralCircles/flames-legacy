@@ -7,51 +7,52 @@ const records = require("../features/records");
 const util = require("../features/util")
 module.exports = {
     onMessage: async function(msg) {
+        // If message is from Flames or is a command, don't process it.
         if (msg.member.id === "835977847599661067") return;
         if (msg.content.startsWith("\\")) return;
-        // if (!severalcircles.getData("/test/test.json") == successjson) console.log("god fucking damnit");
-        // if (msg.content.toLowerCase().includes("sam")) achievements.samAchievement(msg, userdata);
+
+        // Load global data
         let globaldata = get_globaldata.getValues();
         let recordValues = get_globaldata.getRecordValues();
+        
+        //Date object used for various things in this script
         let date = new Date();
+
+        // This script is prone to errors, and since node doesn't like to print out errors unless you try/catch it, we just surround most of it in one big try/catch.
         try {
-        let userdata = null;
+        // Prepare userdata object
+        let userdata = get_userdata.byId(msg.member.id);
+
+        //Analyze message sentiment
         let anal = await analysis.analyzeSentiment(msg.content);
-        userdata = get_userdata.byId(msg.member.id);
-        records.checkRecords(userdata).forEach(value => {
-            switch (value) {
-                case "score":
-                    if (userdata.scoreRecordCooldown > date.getMilliseconds) return;
-                    msg.channel.send(records.newRecordEmbed("Highest Flames Score (All Time)", recordValues.score, userdata.score, msg.member));
-                    userdata.scoreRecordCooldown = date.getMilliseconds() + 86400000;
-                    recordValues.score = [userdata.score, msg.member.displayName, date.toDateString()];
-                    if(!userdata.records.includes("score")) userdata.records.push("score");
-                    break;
-            }
-        });
+
+        // If we've never seen this user before, we set their first seen guild to wherever the message was sent.
         if (userdata == get_userdata.defaults) userdata.firstSeen = msg.guild.id;
-        // let hybriddata = get_hybriddata.byId(msg.guild.id, msg.member.id);
-        // if (hybriddata.member == null) hybriddata.member = msg.member;
+
+        // If they haven't sent a message since Spark 2, then their userdata won't have a multiplier, so we set it to 1.0x in that case
         if (userdata.multiplier == undefined) userdata.multiplier = 1.0;
-        sc = Math.round((anal * userdata.multiplier));
-        if (date.getDay() == 5) sc = sc * 2
-        userdata.score += sc;
+        
+        // Calculate the message score using the user's multiplier, and also double it if it's Double Friday
+        mscore = Math.round((anal * userdata.multiplier));
+        if (date.getDay() == 5) mscore = mscore * 2
+        //...and then update the value in userdata
+        userdata.score += mscore;
+        //...and the global data.
         globaldata.score = globaldata.score + anal;
-        let date = new Date()
-        let day = await date.getDay();
+
         // Reset daily change if the last time the file was updated wasn't today.
-        if (globaldata.lastDate != day) globaldata.dailyChange = 0;
+        if (globaldata.lastDate != date.getDay()) globaldata.dailyChange = 0;
         globaldata.dailyChange = globaldata.dailyChange + anal;
-        globaldata.lastDate = day;
-        try {
+        globaldata.lastDate = date.getDay();
+
+        // This adds the message score (before multipliers) to your average array. If the user hasn't sent a message since pre-Spark 1 (somehow), they will need to reset their userdata.
         userdata.averageSentiment.push(anal);
-        } catch (e) {
-            userdata.averageSentiment = []
-        }
+
+        // Add any entities detected in the message to the 
         userdata.entities = await analysis.analyzeEntities(msg.content, userdata);
-        // get_hybriddata.writeById(msg.guild.id, msg.member.id, hybriddata);
-        // console.log("(userdata.averageSentiment.reduce((a, b) => a + b, 0)) / userdata.averageSentiment.length");
-        if ((userdata.averageSentiment.reduce((a, b) => a + b, 0)) / userdata.averageSentiment.length <= -500.0) {
+
+        // Vibe check! If a user is being too negative, Flames yells at them (lol)
+        if ((userdata.averageSentiment.reduce((a, b) => a + b, 0)) / userdata.averageSentiment.length <= -100.0) {
             let embed = new Discord.MessageEmbed()
             .setAuthor("Vibe Check", msg.member.user.displayAvatarURL())
             .setTitle(msg.member.displayName + ", you do not pass the vibe check.")
@@ -59,16 +60,24 @@ module.exports = {
             .setFooter("Flames");
             msg.channel.send(embed);
         }
+
+        // Checks achievements
         userdata = await achievements.checkAchievements(msg, userdata);
         if (msg.content.toLowerCase().includes("sam")) userdata = await achievements.samAchievement(msg, userdata);
+
+        // Every 1000 messages, a little bonus gets added to the user's multiplier.
         if (userdata.averageSentiment.length % 1000 == 0) userdata.multiplier += 0.01
-        if (userdata.lastSeen < 0) userdata.lastSeen = date.getDay();
-        if (userdata.lastSeen < date.getDay()) {
-            if (userdata.lastSeen == date.getDay() - 1 || (userdata.lastSeen == 6 && date.getDay() == 0)) {
-                userdata.streak++;
-            }
+
+        // Streak check!
+        if (userdata.lastSeen < 0 || userdata.lastSeen == undefined) userdata.lastSeen = date.getDay(); // If a user hasn't ever sent a message, or hasn't sent a message since Spark 3, this will add this value to their userdata.
+        if (userdata.lastSeen < date.getDay() || (userdata.lastSeen == 6 && date.getDay != 6)) { // Checks if daily greeting still needs to be sent
+            if (userdata.lastSeen == date.getDay() - 1 || (userdata.lastSeen == 6 && date.getDay() == 0)) { // Checks if the user is keeping or losing their streak
+                userdata.streak++; // Keep the streak
+            } else userdata.streak = 1; // Lose the streak
+            // Daily bonus starts at 1000 FP and goes up with each new day in the streak. There is no maximum.
             let dailyBonus = 1000 + (100 * userdata.streak);
             userdata.score += dailyBonus;
+            // Send daily greeting to user
             let embed = new Discord.MessageEmbed()
             .setAuthor("Hi, " + msg.member.user.username ,msg.member.user.displayAvatarURL())
             .setTitle("Welcome Back to Flames")
@@ -79,8 +88,9 @@ module.exports = {
             .setFooter("Have a great rest of your day! | Flames");
             msg.author.send(embed);
         }
+
+        // Write all of that data to the respective files.
         await get_userdata.writeById(msg.member.id, userdata);
-        console.log(globaldata);
         get_globaldata.writeValues(globaldata);
         } catch (e) {console.log(e)};
         
