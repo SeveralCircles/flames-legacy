@@ -67,8 +67,8 @@ module.exports = {
         if (userdata.averageSentiment.length % 1000 == 0) userdata.multiplier += 0.01
 
         // Streak check!
-        if (userdata.lastSeen < 0 || userdata.lastSeen == undefined) userdata.lastSeen = date.getDay(); // If a user hasn't ever sent a message, or hasn't sent a message since Spark 3, this will add this value to their userdata.
-        if (userdata.lastSeen < date.getDay() || (userdata.lastSeen == 6 && date.getDay != 6)) { // Checks if daily greeting still needs to be sent
+        // If a user hasn't ever sent a message, or hasn't sent a message since Spark 3, this will add this value to their userdata.
+        if (userdata.lastSeen < date.getDay() || (userdata.lastSeen == 6 && date.getDay != 6) || userdata.lastSeen < 0 || userdata.lastSeen == undefined) { // Checks if daily greeting still needs to be sent
             if (userdata.lastSeen == date.getDay() - 1 || (userdata.lastSeen == 6 && date.getDay() == 0)) { // Checks if the user is keeping or losing their streak
                 userdata.streak++; // Keep the streak
             } else userdata.streak = 1; // Lose the streak
@@ -85,6 +85,7 @@ module.exports = {
             .setTimestamp()
             .setFooter("Have a great rest of your day! | Flames");
             msg.author.send(embed);
+            userdata.lastSeen = date.getDay();
         }
 
         // Write all of that data to the respective files.
