@@ -6,7 +6,8 @@ const get_globaldata = require("../../data/get_globaldata")
 const ulist = require("../../data/ulist.json")
 const flamesdata = require("../../data/flamesdata.json");
 const gamerpoints = require ("../../features/gamerpoints")
-const index = require("../../index")
+const index = require("../../index");
+const message = require('../../events/message');
 module.exports = class GlobalInfoCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -20,7 +21,7 @@ module.exports = class GlobalInfoCommand extends commando.Command {
     }
     async run(msg) {
         let args = msg.content.split(" ");
-        await message.edit(info.wait(msg.member, this.client, "Retrieve Global Ranking Information"))
+        let message = await msg.channel.send(info.wait(msg.member, this.client, "Retrieve Global Ranking Information"))
         let gdata = get_globaldata.getValues();
         let up = gdata.dailyChange >= 0;
         let embed = new Discord.MessageEmbed()
