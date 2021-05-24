@@ -3,7 +3,6 @@ const get_userdata = require('../data/get_userdata');
 const analysis = require("../features/analysis")
 const get_globaldata = require("../data/get_globaldata")
 const achievements = require("../features/achievements")
-const records = require("../features/records");
 const util = require("../features/util")
 module.exports = {
     onMessage: async function(msg) {
@@ -13,7 +12,6 @@ module.exports = {
 
         // Load global data
         let globaldata = get_globaldata.getValues();
-        let recordValues = get_globaldata.getRecordValues();
         
         //Date object used for various things in this script
         let date = new Date();
