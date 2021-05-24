@@ -7,5 +7,7 @@
     "records": [],
     "scoreRecordCooldown": null,
     "multiplier": 1.0,
-    "version": 2
+    "lastSeen": -2,
+    "streak": 0,
+    "version": 3
 }

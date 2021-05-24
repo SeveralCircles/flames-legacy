@@ -7,6 +7,7 @@ const get_globaldata = require("../data/get_globaldata")
 const achievements = require("../features/achievements")
 const severalcircles = require ("../features/severalcircles")
 const records = require("../features/records");
+const util = require("../features/util")
 const successjson = {
     "success":  true
 }
@@ -65,6 +66,23 @@ module.exports = {
         userdata = await achievements.checkAchievements(msg, userdata);
         if (msg.content.toLowerCase().includes("sam")) userdata = await achievements.samAchievement(msg, userdata);
         if (userdata.averageSentiment.length % 1000 == 0) userdata.multiplier += 0.01
+        if (userdata.lastSeen < 0) userdata.lastSeen = date.getDay();
+        if (userdata.lastSeen < date.getDay()) {
+            if (userdata.lastSeen == date.getDay() - 1 || (userdata.lastSeen == 6 && date.getDay() == 0)) {
+                userdata.streak++;
+            }
+            let dailyBonus = 1000 + (100 * userdata.streak);
+            userdata.score += dailyBonus;
+            let embed = new Discord.MessageEmbed()
+            .setAuthor("Hi, " + msg.member.user.username ,msg.member.user.displayAvatarURL())
+            .setTitle("Welcome Back to Flames")
+            .setDescription(util.getDailyMessage(userdata, msg.author.username))
+            .addField("Daily Bonus", dailyBonus + " FP", true)
+            .addField("Your Flames Score", userdata.score + " FP",  true)
+            .setTimestamp()
+            .setFooter("Have a great rest of your day! | Flames");
+            msg.author.send(embed);
+        }
         get_userdata.writeById(msg.member.id, userdata);
         console.log(globaldata);
         get_globaldata.writeValues(globaldata);
