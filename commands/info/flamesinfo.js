@@ -19,7 +19,7 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         .setAuthor("Flames Technical Information", msg.author.displayAvatarURL())
         .setTitle("Flames")
         .setDescription("version " + flamesdata.version)
-        .addField("Next Ranking Information Update", index.updateJob.nextInvocation().toDateString(), true)
+        // .addField("Next Ranking Information Update", index.updateJob.nextInvocation().toDateString(), true)
         .setThumbnail(client.user.displayAvatarURL())
         .setFooter("Uptime")
         .setTimestamp(client.readyAt);
