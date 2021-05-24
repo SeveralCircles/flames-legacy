@@ -36,7 +36,7 @@ module.exports = {
             if (rank.getRank(data.score) != "X") msgs.push("Maybe today's the day you finally get to X rank!")
             if (data.streak > 1) msgs.push("¡Que siga la racha!");
             if (data.score < 0) msgs.push("Let's get that Flames Score up today!");
-            return msgs[Math.round(Math.random() * msgs.length)];
+            return msgs[Math.round(Math.random() * (msgs.length - 1))];
         }
     }
 }
