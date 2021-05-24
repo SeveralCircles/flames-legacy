@@ -6,6 +6,7 @@ const get_globaldata = require("../../data/get_globaldata")
 const ulist = require("../../data/ulist.json")
 const flamesdata = require("../../data/flamesdata.json");
 const gamerpoints = require ("../../features/gamerpoints")
+const index = require("../../index")
 module.exports = class GlobalInfoCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -19,15 +20,13 @@ module.exports = class GlobalInfoCommand extends commando.Command {
     }
     async run(msg) {
         let args = msg.content.split(" ");
-        let message = await msg.channel.send(info.wait(msg.member, this.client, "Synchronize Global Ranking Information"));
-        rank.sync();
         await message.edit(info.wait(msg.member, this.client, "Retrieve Global Ranking Information"))
         let gdata = get_globaldata.getValues();
         let up = gdata.dailyChange >= 0;
         let embed = new Discord.MessageEmbed()
         .setAuthor(msg.member.displayName + "'s request", msg.member.user.displayAvatarURL())
         .setTitle("Flames Global Ranking Information")
-        .setTimestamp()
+        .setTimestamp(index.updateJob.nextInvocation())
         .addField("X Rank Threshold", rank.thresholds[6], true)
         .addField("S Rank Threshold", rank.thresholds[5], true)
         .addField("A Rank Threshold", rank.thresholds[4], true)
@@ -37,7 +36,7 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         .addField("F Rank Threshold", rank.thresholds[0], true)
         // .addField("Top Score", rank.scores[rank.scores.length-1])
         .setColor("DARK_VIVID_PINK")
-        .setFooter("Flames ver. " + flamesdata.version, this.client.user.displayAvatarURL());
+        .setFooter("Flames ver. " + flamesdata.version + "| Next Ranking Data Update: ", this.client.user.displayAvatarURL());
         let percent = 0
         if (up){
             percent = (Math.round(10000 * ((gdata.score - (gdata.score - gdata.dailyChange))/Math.abs(gdata.score - gdata.dailyChange))))/100;

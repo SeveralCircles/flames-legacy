@@ -23,10 +23,12 @@ module.exports = {
         // console.log(thresholds);
     },
     sync: function() {
+        console.log("Updating ranking information...")
         this.syncScores();
         scores.sort(function(a, b){return a-b});
         // console.log(scores);
         this.syncThresholds();
+        console.log("Ranking information updated.")
     },
     toNext: function(score) {
         let rank = this.getRank(score);
@@ -40,7 +42,7 @@ module.exports = {
         else return thresholds[0]-score;
     },
     getRank: function(score) {
-        this.sync();
+        // this.sync();
         if (thresholds.includes(score)) score++;
         // console.log(score);
         // console.log(score > thresholds[6]);
