@@ -52,8 +52,10 @@ module.exports = class UserInfoCommand extends commando.Command {
         let average = (data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length;
         let gdata = get_globaldata.getValues();
         console.log("Average:" + average);
-        if (average > 94) sent = "Positive";
-        else if (average < 0) sent = "Negative";
+        if (average > 50 && average <= 80) sent = "Slighty Positive"
+        else if (average > 80 && average <= 100) sent = "Quite Positive"
+        else if (average >= 100) sent = "Overwhelmingly Positive"
+        else if (average < 0) sent = "Negative"
         else sent = "Neutral";
         let embed = new Discord.MessageEmbed()
         .setAuthor("Flames User Data", member.user.displayAvatarURL())
