@@ -32,8 +32,11 @@ module.exports = {
         else if (data.streak % 7 == 0) return "Congratulations on your " + (data.streak / 7) + "week streak.";
         else if (date.getDay() == 5) return "It's Double Friday, so all message scores are multiplied by 2 today!"
         else {
-            let msgs = ["What's up?", "Nice to see you again!", "Keep it 💯"]
-            if (rank.getRank(data.score) != "X") msgs.push("Maybe today's the day you finally get to X rank!")
+            let msgs = ["What's up?", "Nice to see you again!", "Keep it 💯", "Where there is a Flame, someone's bound to get hurt.", "Just because it burns doesn't mean you're gonna die."]
+            if (rank.getRank(data.score) != "X") {
+                msgs.push("Maybe today's the day you finally get to X rank!");
+                msgs.push("You gotta get up and try, try, try!");
+            } 
             if (data.streak > 1) msgs.push("¡Que siga la racha!");
             if (data.score < 0) msgs.push("Let's get that Flames Score up today!");
             return msgs[Math.round(Math.random() * (msgs.length - 1))];
