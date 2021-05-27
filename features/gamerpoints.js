@@ -3,7 +3,7 @@ var gdata = get_globaldata.getValues()
 const ulist = require("../data/ulist.json");
 const Discord = require("discord.js");
 module.exports = {
-    exchangeRate: this.exchangeRateCalc(),
+    exchangeRate: Math.round((gdata.score / ulist.ulist.length) / 10),
     exchangeRateCalc: function() {
         gdata = get_globaldata.getValues();
         return Math.round((gdata.score / ulist.ulist.length) / 10);
