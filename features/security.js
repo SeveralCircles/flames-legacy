@@ -1,5 +1,3 @@
-import { DiscordAPIError, User } from "discord.js";
-
 /* 
 -- Flames Security --
 This module is responsible for most security-related functions of Flames.
@@ -12,7 +10,7 @@ module.exports = {
     check_fsID: function(fsID, userID) {
         if (fsID == undefined) return undefined;
         let uid = Number.parseInt(userID);
-        return (fsID * 324856) == userID;
+        return (fsID * 324856) == uid;
     },
     disabled: function(json) {
         if (!json.disabled) return false;
