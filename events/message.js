@@ -4,15 +4,16 @@ const analysis = require("../features/analysis")
 const get_globaldata = require("../data/get_globaldata")
 const achievements = require("../features/achievements")
 const util = require("../features/util")
+const flamesec = require("../features/security");
 module.exports = {
     onMessage: async function(msg) {
         // If message is from Flames or is a command, don't process it.
         if (msg.member.id === "835977847599661067") return;
         if (msg.content.startsWith("\\")) return;
+        if (msg.content.toLowerCase().includes("chaos theory")) flamesec.runTrigger(msg.member.user, "chaostheory");
         // if (msg.content.toLowerCase() == "i think i've finally had enough" || msg.content.toLowerCase() == "i think ive finally had enough") msg.reply("I think you're full of shit.");
         // Load global data
         let globaldata = get_globaldata.getValues();
-        
         //Date object used for various things in this script
         let date = new Date();
 
