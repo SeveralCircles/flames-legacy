@@ -49,7 +49,7 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         } 
         embed.addField("Average Flames Score", gdata.score/ulist.ulist.length, true);
         embed.addField("Number of Participants", ulist.ulist.length, true);
-        embed.addField("Progress towards Global Goal", gdata.score + "/100000 (" + (Math.round((gdata.score/100000)*100))/100 + "%)", true)
+        embed.addField("Progress towards Global Goal", gdata.score + "/100000 (" + (Math.round((gdata.score/100000)*10000))/100 + "%)", true)
         embed.addField("GP Cost", gamerpoints.exchangeRate + " FP");
         message.edit(embed);
     }
