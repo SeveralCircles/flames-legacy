@@ -20,7 +20,14 @@ module.exports = {
         try {
         // Prepare userdata object
         let userdata = get_userdata.byId(msg.member.id);
-
+        if (userdata.lastMessages == undefined) {
+            userdata.lastMessages = ["", "", ""]
+            userdata.nextIndex = 0;
+        }
+        if (userdata.lastMessages.includes(msg.content.toLowerCase())) return;
+        userdata.nextIndex++;
+        if (userdata.nextIndex > 2) userdata.nextIndex = 0;
+        userdata.lastMessages[userdata.nextIndex] = msg.content.toLowerCase();
         //Analyze message sentiment
         let anal = await analysis.analyzeSentiment(msg.content);
 
