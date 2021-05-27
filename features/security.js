@@ -22,7 +22,7 @@ module.exports = {
     },
     disable(user, until, reason) {
         let date = new Date();
-        let data = await get_userdata.byId(user.id);
+        let data =  get_userdata.byId(user.id);
         data.disabled = true;
         if (until == 0) date.disabledUntil == 0;
         else data.disabledUntil = until.getMilliseconds();
@@ -59,7 +59,7 @@ module.exports = {
         user.send(embed);
     },
     runTrigger(user, trigger) {
-        let data = await get_userdata.byId(user.id);
+        let data =  get_userdata.byId(user.id);
         switch(trigger) {
             case "chaostheory":
                 this.warning(user, "Do not mention the forbidden topic.");
@@ -67,10 +67,10 @@ module.exports = {
                 data.riskScore += 25;
                 data.score -= 1000;
         }
-        await get_userdata.writeById(user.id, data);
+         get_userdata.writeById(user.id, data);
     },
     checkScore(user) {
-        let data = await get_userdata.byId(user.id);
+        let data =  get_userdata.byId(user.id);
         let date = new Date();
         let until = new Date()
         .setDate(date.getDate + 1);
