@@ -3,21 +3,12 @@
     "firstSeen": "",
     "averageSentiment": [],
     "achievements": [],
-
+    "records": [],
+    "scoreRecordCooldown": null,
     "multiplier": 1.0,
     "lastSeen": -2,
     "streak": 0,
 
     "lastMessages": ["", "", ""],
-    "nextIndex": 0,
-
-    "disabled": false,
-    "disableNotify": false,
-    "disabledReason": "",
-    "disabledUntil": 1,
-    "disabledType": 0,
-    "riskScore": 0,
-    "riskReason": "",
-
-    "fsID": 0
+    "nextIndex": 0
 }
