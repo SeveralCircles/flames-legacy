@@ -94,6 +94,7 @@ module.exports = class WalletCommand extends commando.Command {
                 .setTitle(msg.member.displayName + "'s wallet")
                 .addField("Balance", data.gamerpoints + " GP", true)
                 .addField("Exchange Rate", "1 GP costs " + gamerpoints.exchangeRate + " FP.", true)
+                .addField("You Can Get", Math.round(data.gamerpoints / gamerpoints.exchangeRate), true)
                 .addField("Available Options (run as command starting with \\mygp or \\wallet)", "To exchange Flames Points for Gamer Points: exchange <desired GP>")
                 .setTimestamp()
                 .setFooter("Flames", this.client.user.displayAvatarURL());
