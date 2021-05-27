@@ -3,7 +3,11 @@ var gdata = get_globaldata.getValues()
 const ulist = require("../data/ulist.json");
 const Discord = require("discord.js");
 module.exports = {
-    exchangeRate: Math.round((gdata.score / ulist.ulist.length) / 10),
+    exchangeRate: this.exchangeRateCalc(),
+    exchangeRateCalc: function() {
+        gdata = get_globaldata.getValues();
+        return Math.round((gdata.score / ulist.ulist.length) / 10);
+    },
     sync: function() {
         if (gdata.gamerpoints <= 100) {
             console.log("Gamer Bank running out of GP! Adding random amount");
