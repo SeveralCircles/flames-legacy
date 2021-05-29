@@ -71,8 +71,6 @@ module.exports = class WalletCommand extends commando.Command {
                                     .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
                                     .setTitle("Transaction Complete")
                                     .setDescription(msg.member.displayName + ", your balance has been updated.")
-                                    .addField("FP",  + "-" + fp, true)
-                                    .addField("GP", + "+" + gp, true)
                                     .setTimestamp()
                                     .setColor("GREEN")
                                     .setFooter("Flames", this.client.user.displayAvatarURL());
