@@ -71,8 +71,8 @@ module.exports = class WalletCommand extends commando.Command {
                                     .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
                                     .setTitle("Transaction Complete")
                                     .setDescription(msg.member.displayName + ", your balance has been updated.")
-                                    .addField("FP",  + "-" + (fp), true)
-                                    .addField("GP", + "+" + (gp), true)
+                                    .addField("FP",  + "-" + fp, true)
+                                    .addField("GP", + "+" + gp, true)
                                     .setTimestamp()
                                     .setColor("GREEN")
                                     .setFooter("Flames", this.client.user.displayAvatarURL());
@@ -94,7 +94,7 @@ module.exports = class WalletCommand extends commando.Command {
                 .setTitle(msg.member.displayName + "'s wallet")
                 .addField("Balance", data.gamerpoints + " GP", true)
                 .addField("Exchange Rate", "1 GP costs " + gamerpoints.exchangeRate + " FP.", true)
-                .addField("You Can Get", Math.round(data.gamerpoints / gamerpoints.exchangeRate), true)
+                .addField("You Can Get", Math.round(data.score / gamerpoints.exchangeRate), true)
                 .addField("Available Options (run as command starting with \\mygp or \\wallet)", "To exchange Flames Points for Gamer Points: exchange <desired GP>")
                 .setTimestamp()
                 .setFooter("Flames", this.client.user.displayAvatarURL());
