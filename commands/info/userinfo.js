@@ -8,6 +8,7 @@ const message = require('../../events/message');
 const achievements = require("../../features/achievements")
 const get_globaldata = require ("../../data/get_globaldata")
 const analysis = require("../../features/analysis")
+const bugsnag = require("../../features/bugsnag")
 module.exports = class UserInfoCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -83,6 +84,7 @@ module.exports = class UserInfoCommand extends commando.Command {
     } catch (e) {
         message.edit(info.userDataCorrupt(msg.member, this.client, e))
         console.log(e)
+        bugsnag.notify(e);
     }
     }
 }
