@@ -15,6 +15,11 @@ module.exports = class UserInfoCommand extends commando.Command {
             });  
 }
     async run(msg, args) {
+        let data = get_userdata.byId(msg.member.id);
+        if (!data.betaTester) {
+            msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
+            return;
+        } ;;
         let message = await msg.channel.send(info.wait(msg.member, this.client, "Reset User Data"))
         // console.log(args)
         if (args != "burnitdown") {
