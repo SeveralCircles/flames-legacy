@@ -21,6 +21,11 @@ module.exports = class UserInfoCommand extends commando.Command {
             });  
 }
     async run(msg) {
+        let data = get_userdata.byId(msg.member.id);
+        if (!data.betaTester) {
+            msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
+            return;
+        }  
         try {
         let member = msg.member
         // try {member = msg.mentions.users.first()} catch (e) {member = msg.member}
@@ -28,7 +33,6 @@ module.exports = class UserInfoCommand extends commando.Command {
         // if (member == null) member = msg.member;
         // msg.channel.startTyping();
         var message = await msg.channel.send(info.wait(msg.member, this.client, "Get User Data"))
-        let data = get_userdata.byId(member.id);
         let guild = data.firstSeen
         let gd = get_guilddata.byId(guild);
         let now = new Date();

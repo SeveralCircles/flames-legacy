@@ -20,6 +20,11 @@ module.exports = class GlobalInfoCommand extends commando.Command {
             });  
     }
     async run(msg) {
+        let data = get_userdata.byId(msg.member.id);
+        if (!data.betaTester) {
+            msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
+            return;
+        }
         let args = msg.content.split(" ");
         let message = await msg.channel.send(info.wait(msg.member, this.client, "Retrieve Global Ranking Information"))
         let gdata = get_globaldata.getValues();

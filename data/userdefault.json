@@ -10,5 +10,7 @@
     "streak": 0,
 
     "lastMessages": ["", "", ""],
-    "nextIndex": 0
+    "nextIndex": 0,
+
+    "betaTester": false
 }

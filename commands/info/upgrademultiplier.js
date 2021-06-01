@@ -17,6 +17,10 @@ module.exports = class MultiplierCommand extends commando.Command {
     
     async run(msg) {
         var data = await get_userdata.byId(msg.member.id);
+        if (!data.betaTester) {
+            msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
+            return;
+        }  
         var multiplierCost = Math.round(100 * data.multiplier);
         if (data.multiplier == undefined) data.multiplier = 1.0;
         let embed = new Discord.MessageEmbed()

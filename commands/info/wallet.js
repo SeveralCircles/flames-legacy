@@ -20,6 +20,10 @@ module.exports = class WalletCommand extends commando.Command {
         let data = await get_userdata.byId(msg.member.id);
         let gdata = await get_globaldata.getValues();
         let message = await msg.channel.send(info.wait(msg.member, this.client, "Retrieve Wallet Information"));
+        if (!data.betaTester) {
+            msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
+            return;
+        }  
         switch (args[1]) {
             case "exchange":
                 if (isNaN(args[2])) {
