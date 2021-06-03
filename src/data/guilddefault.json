@@ -2,5 +2,6 @@
     "name": "A Flames Server",
     "acronym": "AFS",
     "favorites": 0,
-    "welcomeMessage": "We're so happy you're here!"
+    "welcomeMessage": "We're so happy you're here!",
+    "isDefault": true
 }

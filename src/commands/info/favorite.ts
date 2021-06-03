@@ -4,6 +4,14 @@ import get_guilddata = require("../../data/get_guilddata");
 export async function run(msg: Discord.Message, client: Discord.Client) {
     let data = get_userdata.byId(msg.member.id);
     let gdata = get_guilddata.byId(msg.guild.id);
+    if (data.favoriteGuild == msg.guild.id) {
+        msg.reply("Favorite server reset.")
+        data.favoriteGuild = null;
+        gdata.favorites -= 1;
+        get_userdata.writeById(msg.member.id, data);
+        get_guilddata.writeById(msg.guild.id, gdata);
+        return;
+    }
     let embed = new Discord.MessageEmbed()
     .setAuthor("Flames User Data", msg.author.displayAvatarURL())
     .setTitle(msg.member.displayName + ", " + msg.guild.name + " is about to be set as your favorite server.")
@@ -21,11 +29,16 @@ export async function run(msg: Discord.Message, client: Discord.Client) {
     }).catch(() => {
         if (data.favoriteGuild != null) {
             let oldg = get_guilddata.byId(data.favoriteGuild);
+            console.log("Decreasing favorites of " + data.favoriteGuild + " by 1");
             oldg.favorites -= 1;
+            console.log(oldg.favorites);
             get_guilddata.writeById(data.favoriteGuild, oldg);
         }
         data.favoriteGuild = msg.guild.id;
-        gdata.favorites += 1;
+        console.log("Increasing favorites of " + msg.guild.id + " by 1.")
+        console.log(gdata.favorites)
+        gdata.favorites = gdata.favorites + 1;
+        console.log(gdata.favorites);
         message.edit("Favorite Server sucessfully updated.");
         get_userdata.writeById(msg.member.id, data);
         get_guilddata.writeById(msg.guild.id, gdata);

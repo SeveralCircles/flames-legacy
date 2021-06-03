@@ -17,8 +17,10 @@ export async function onMessage(msg: Discord.Message) {
             console.log(":/");
         }
         let guilddata = await get_guilddata.byId(msg.guild.id);
-        if (guilddata = get_guilddata.defaults) {
+        if (guilddata.isDefault == true) {
             guilddata.name = msg.guild.name;
+            console.log("Gaming for no reason");
+            guilddata.isDefault = false;
             get_guilddata.writeById(msg.guild.id, guilddata);
         }
         if (msg.content.startsWith("\\")) return;
