@@ -1,0 +1,20 @@
+{
+    "score": 0,
+    "firstSeen": "",
+    "averageSentiment": [],
+    "achievements": [],
+    "records": [],
+    "scoreRecordCooldown": null,
+    "multiplier": 1.0,
+    "lastSeen": -2,
+    "streak": 0,
+    "gamerpoints": 0,
+
+    "favoriteGuild": null,
+    "guilds": [],
+    
+    "lastMessages": ["", "", ""],
+    "nextIndex": 0,
+
+    "betaTester": false
+}
