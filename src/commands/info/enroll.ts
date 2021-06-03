@@ -1,8 +1,13 @@
 import Discord = require('discord.js');
+import { updateVariableStatement } from 'typescript';
 import get_userdata = require("../../data/get_userdata");
+const ulist = require("../../data/user/ulist.json");
 export async function run(msg, client: Discord.Client) {
         let data = get_userdata.byId(msg.member.id);
         let args = msg.content.split(" ");
+        if (ulist.ulist.length >= 50) {
+            msg.reply("the Beta Program is currently full. Thank you for your interest in Flames.")
+        }
         if (!data.betaTester) {
             if (args[1] == "lightitup") {
                 msg.delete;
