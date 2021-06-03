@@ -1,21 +1,11 @@
-const commando = require('discord.js-commando');
-const Discord = require('discord.js');
-const get_userdata = require("../../data/get_userdata")
-const info = require ("../../features/info");
-const get_globaldata = require ("../../data/get_globaldata")
-const gamerpoints = require("../../features/gamerpoints");
-module.exports = class WalletCommand extends commando.Command {
-	constructor(client) {
-		super(client, {
-            name: 'wallet',
-            aliases: ['mygp'],
-			group: 'info',
-			memberName: 'wallet',
-			description: 'Allows you to manage your Gamer Points.',
-            guildOnly: true
-            });  
-}
-    async run(msg) {
+import commando = require('discord.js-commando');
+import Discord = require('discord.js');
+import get_userdata = require("../../data/get_userdata")
+import info = require ("../../features/info");
+import get_globaldata = require ("../../data/get_globaldata")
+import gamerpoints = require("../../features/gamerpoints");
+
+export async function run(msg, client) {
         let args = msg.content.split(" ");
         let data = await get_userdata.byId(msg.member.id);
         let gdata = await get_globaldata.getValues();
@@ -32,7 +22,7 @@ module.exports = class WalletCommand extends commando.Command {
                     .setTitle("Whoops, try that one again.")
                     .setDescription(msg.member.displayName + ", you need to specify how many Gamer Points you wish to recieve.")
                     .setTimestamp()
-                    .setFooter("Flames", this.client.user.displayAvatarURL());
+                    .setFooter("Flames", client.user.displayAvatarURL());
                     message.edit(embed);
                     return;
                 } else {
@@ -45,7 +35,7 @@ module.exports = class WalletCommand extends commando.Command {
                         .setDescription(msg.member.displayName + ", you do not have the required amount of FP to exchange.")
                         .addField("Required FP", fp)
                         .setTimestamp()
-                        .setFooter("Flames", this.client.user.displayAvatarURL());
+                        .setFooter("Flames", client.user.displayAvatarURL());
                         message.edit(embed);
                         return;
                     }
@@ -99,9 +89,8 @@ module.exports = class WalletCommand extends commando.Command {
                 .addField("You Can Get", Math.round(data.score / gamerpoints.exchangeRate), true)
                 .addField("Available Options (run as command starting with \\mygp or \\wallet)", "To exchange Flames Points for Gamer Points: exchange <desired GP>")
                 .setTimestamp()
-                .setFooter("Flames", this.client.user.displayAvatarURL());
+                .setFooter("Flames", client.user.displayAvatarURL());
                 message.edit(embed);
                 break;
         }
     }
-}

@@ -1,26 +1,15 @@
-const commando = require('discord.js-commando');
-const Discord = require('discord.js');
-const get_userdata = require("../../data/get_userdata")
-const get_guilddata = require("../../data/get_guilddata")
-const rank = require("../../features/rank")
-const info = require ("../../features/info");
-const message = require('../../events/message');
-const achievements = require("../../features/achievements")
-const get_globaldata = require ("../../data/get_globaldata")
-const analysis = require("../../features/analysis")
-const bugsnag = require("../../features/bugsnag")
-module.exports = class UserInfoCommand extends commando.Command {
-	constructor(client) {
-		super(client, {
-            name: 'userdata',
-            aliases: ['mydata'],
-			group: 'info',
-			memberName: 'userdata',
-			description: 'Gets your user information.',
-            guildOnly: true
-            });  
-}
-    async run(msg) {
+import commando = require('discord.js-commando');
+import Discord = require('discord.js');
+import get_userdata = require("../../data/get_userdata")
+import get_guilddata = require("../../data/get_guilddata")
+import rank = require("../../features/rank")
+import info = require ("../../features/info");
+import message = require('../../events/message');
+import achievements = require("../../features/achievements")
+import get_globaldata = require ("../../data/get_globaldata")
+import analysis = require("../../features/analysis")
+import bugsnag = require("../../features/bugsnag")
+export async function run(msg, client) {
         let data = get_userdata.byId(msg.member.id);
         if (!data.betaTester) {
             msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
@@ -32,7 +21,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         // if (member == undefined) member = msg.member;
         // if (member == null) member = msg.member;
         // msg.channel.startTyping();
-        var message = await msg.channel.send(info.wait(msg.member, this.client, "Get User Data"))
+        var message = await msg.channel.send(info.wait(msg.member, client, "Get User Data"))
         let guild = data.firstSeen
         let gd = get_guilddata.byId(guild);
         let now = new Date();
@@ -44,7 +33,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         //     .setAuthor("Flames User Data: Topics", member.user.displayAvatarURL())
         //     .setTitle(member.displayName)
         //     .setTimestamp()
-        //     .setFooter("Flames", this.client.user.displayAvatarURL());
+        //     .setFooter("Flames", client.user.displayAvatarURL());
         //     data.entities.forEach( element => {
         //         if(!topics.includes(element)){ 
         //             embed.addField(element, analysis.count(data.entities, element));
@@ -75,7 +64,7 @@ module.exports = class UserInfoCommand extends commando.Command {
         .addField("Achievements Collected", data.achievements.length + "/" + achievements.allAchievementsCount + " (" + (data.achievements.length / achievements.allAchievementsCount) * 100 + "%)", true)
         .addField("Global Contribution", (Math.round((data.score / gdata.score) * 10000)) / 100 + "%", true)
         .setTimestamp()
-        .setFooter("Flames", this.client.user.displayAvatarURL());
+        .setFooter("Flames", client.user.displayAvatarURL());
         if(member.hasPermission('ADMINISTRATOR')) embed.setColor(0xa103fc);
         else if (member.hasPermission('MANAGE_MESSAGES')) embed.setColor(0x00e1ff);
         if (get_userdata.byId(member.id).verified) embed.setColor("GREEN");
@@ -86,9 +75,8 @@ module.exports = class UserInfoCommand extends commando.Command {
         // msg.channel.stopTyping();
         message.edit(embed);
     } catch (e) {
-        message.edit(info.userDataCorrupt(msg.member, this.client, e))
+        message.edit(info.userDataCorrupt(msg.member, client, e))
         console.log(e)
         bugsnag.notify(e);
     }
     }
-}

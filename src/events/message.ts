@@ -4,9 +4,11 @@ import analysis = require("../features/analysis")
 import get_globaldata = require("../data/get_globaldata")
 import achievements = require("../features/achievements")
 import util = require("../features/util")
-export async function onMessage(msg) {
+import bugsnag = require("../features/bugsnag")
+export async function onMessage(msg: Discord.Message) {
+        // bugsnag.notify(new Error("gaming"))
         // If message is from Flames or is a command, don't process it.
-        if (msg.member.id === "835977847599661067") return;
+        if (msg.member.id === "835977847599661067" || msg.member.id == "849320259152117882") return;
         if (msg.content.startsWith("\\")) return;
         // if (msg.content.toLowerCase() == "i think i've finally had enough" || msg.content.toLowerCase() == "i think ive finally had enough") msg.reply("I think you're full of shit.");
         // Load global data

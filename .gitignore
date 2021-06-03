@@ -1,4 +1,8 @@
-global.json
+src/data/user/?.json
+src/data/guild/?.json
 ulist.json
+global.json
 !default?.json
 # node_modules
+src/data/user/202098742013198336.json
+src/data/user/849320259152117882.json

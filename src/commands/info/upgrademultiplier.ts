@@ -1,21 +1,9 @@
-const commando = require('discord.js-commando');
-const Discord = require('discord.js');
-const get_userdata = require("../../data/get_userdata")
-const info = require ("../../features/info");
-const gamerpoints = require("../../features/gamerpoints");
-module.exports = class MultiplierCommand extends commando.Command {
-	constructor(client) {
-		super(client, {
-            name: 'upgrademuliplier',
-            aliases: ['mupgrade', "xupgrade"],
-			group: 'info',
-			memberName: 'upgrademultiplier',
-			description: 'Allows you to spend your Gamer Points to increase your FP multiplier.',
-            guildOnly: true
-            });  
-}
-    
-    async run(msg) {
+import commando = require('discord.js-commando');
+import Discord = require('discord.js');
+import get_userdata = require("../../data/get_userdata")
+import info = require ("../../features/info");
+import gamerpoints = require("../../features/gamerpoints");
+export async function run(msg, client) {
         var data = await get_userdata.byId(msg.member.id);
         if (!data.betaTester) {
             msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
@@ -31,7 +19,7 @@ module.exports = class MultiplierCommand extends commando.Command {
         .addField("Cost to Upgrade", multiplierCost)
         .addField("Multipier after Upgrade", (data.multiplier + 0.1) + "x", true)
         .setTimestamp()
-        .setFooter("Flames |🔼 to upgrade, 🔴 to cancel.", this.client.user.displayAvatarURL());
+        .setFooter("Flames |🔼 to upgrade, 🔴 to cancel.", client.user.displayAvatarURL());
         var message = await msg.channel.send(embed)
         message.react('🔼').then(r => {
             message.react('🔴');
@@ -41,7 +29,7 @@ module.exports = class MultiplierCommand extends commando.Command {
                 if (collected.first().emoji.name == '🔼') {
                     message.reactions.removeAll();
                     if ((data.gamerpoints - multiplierCost) < 0) {
-                        message.edit(info.notEnoughGP(msg.member, this.client, "Purchase Multiplier Increase", multiplierCost));
+                        message.edit(info.notEnoughGP(msg.member, client, "Purchase Multiplier Increase", multiplierCost));
                         return;
                     }
                     message.edit(gamerpoints.purchaseDialog(msg.member, multiplierCost, "Multiplier Increase", this.client, data));
@@ -55,7 +43,7 @@ module.exports = class MultiplierCommand extends commando.Command {
                                     data.multiplier += 0.1;
                                     get_userdata.writeById(msg.member.id, data);
                                     message.reactions.removeAll();
-                                    message.edit(gamerpoints.purchaseConfirm(msg.member, "Multiplier Increase", this.client, data.gamerpoints));
+                                    message.edit(gamerpoints.purchaseConfirm(msg.member, "Multiplier Increase", client, data.gamerpoints));
                                 }
                                 else
                                         message.edit("The transaction was cancelled.");
@@ -69,4 +57,4 @@ module.exports = class MultiplierCommand extends commando.Command {
         }).catch(() => {
                 message.edit("The transaction has expired.");
         });
-    }}
+    }

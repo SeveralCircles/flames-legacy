@@ -1,32 +1,22 @@
-const commando = require('discord.js-commando');
-const Discord = require('discord.js');
-const rank = require("../../features/rank")
-const info = require ("../../features/info")
-const get_globaldata = require("../../data/get_globaldata")
-const ulist = require("../../data/ulist.json")
-const flamesdata = require("../../data/flamesdata.json");
-const gamerpoints = require ("../../features/gamerpoints")
-const index = require("../../index");
-const message = require('../../events/message');
-module.exports = class GlobalInfoCommand extends commando.Command {
-	constructor(client) {
-		super(client, {
-            name: 'globalinfo',
-            aliases: ['ginfo'],
-			group: 'info',
-			memberName: 'globalinfo',
-			description: 'Returns Global Ranking Information',
-            guildOnly: true
-            });  
-    }
-    async run(msg) {
+import commando = require('discord.js-commando');
+import Discord = require('discord.js');
+import rank = require("../../features/rank")
+import info = require ("../../features/info")
+import get_globaldata = require("../../data/get_globaldata")
+const ulist = require("../../data/user/ulist.json")
+const flamesdata = require("../../data/global/flamesdata.json");
+import gamerpoints = require ("../../features/gamerpoints")
+import index = require("../../index");
+import message = require('../../events/message');
+import get_userdata = require("../../data/get_userdata")
+export async function run(msg: Discord.Message, client: Discord.Client) {
         let data = get_userdata.byId(msg.member.id);
         if (!data.betaTester) {
             msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
             return;
         }
         let args = msg.content.split(" ");
-        let message = await msg.channel.send(info.wait(msg.member, this.client, "Retrieve Global Ranking Information"))
+        let message = await msg.channel.send(info.wait(msg.member, client, "Retrieve Global Ranking Information"))
         let gdata = get_globaldata.getValues();
         let up = gdata.dailyChange >= 0;
         let embed = new Discord.MessageEmbed()
@@ -42,7 +32,7 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         .addField("F Rank Threshold", rank.thresholds[0], true)
         // .addField("Top Score", rank.scores[rank.scores.length-1])
         .setColor("DARK_VIVID_PINK")
-        .setFooter("Flames ver. " + flamesdata.version, this.client.user.displayAvatarURL());
+        .setFooter("Flames ver. " + flamesdata.version, client.user.displayAvatarURL());
         let percent = 0
         if (up){
             percent = (Math.round(10000 * ((gdata.score - (gdata.score - gdata.dailyChange))/Math.abs(gdata.score - gdata.dailyChange))))/100;
@@ -57,5 +47,4 @@ module.exports = class GlobalInfoCommand extends commando.Command {
         embed.addField("Progress towards Global Goal", gdata.score + "/100000 (" + (Math.round((gdata.score/100000)*10000))/100 + "%)", true)
         embed.addField("GP Cost", gamerpoints.exchangeRate + " FP");
         message.edit(embed);
-    }
     }

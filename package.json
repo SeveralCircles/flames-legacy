@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@bugsnag/js": "^7.10.1",
     "@google-cloud/language": "^4.2.3",
     "@sapphire/async-queue": "^1.1.2",
     "bugsnag": "^2.4.3",

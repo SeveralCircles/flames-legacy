@@ -1,6 +1,6 @@
 export var scores = [];
 export var thresholds = [0, 1, 2, 4, 5, 6]
-const ulist = require("../data/ulist.json")
+const ulist = require("../data/user/ulist.json")
 import get_userdata = require("../data/get_userdata")
 export async function syncScores() {
         scores = [];

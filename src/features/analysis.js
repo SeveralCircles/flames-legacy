@@ -1,10 +1,11 @@
-import language = require('@google-cloud/language');
+const language = require('@google-cloud/language');
 const client = new language.LanguageServiceClient();
 const ty = "PLAIN_TEXT"
 const isArray = function(a) {
   return (!!a) && (a.constructor === Array);
 };
- export async function analyzeSentiment(text: string) {
+module.exports = {
+  analyzeSentiment: async function (text) {
     // Imports the Google Cloud client library
     
   
@@ -13,7 +14,7 @@ const isArray = function(a) {
     // The text to analyze
     const document = {
       content: text,
-      // type: 'PLAIN_TEXT': language.Type,
+      type: 'PLAIN_TEXT'
     };
   
     // Detects the sentiment of the text
@@ -25,11 +26,11 @@ const isArray = function(a) {
     console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
     console.log("Returning: " + Math.round(sentiment.score * (sentiment.magnitude * 1000)))
     return (Math.round(sentiment.score * (sentiment.magnitude * 1000)));
-  }
-  export async function analyzeEntities(text, json) {
+  },
+  analyzeEntities: async function (text, json) {
   const document = {
     content: text,
-    // type: 'PLAIN_TEXT',
+    type: 'PLAIN_TEXT',
   };
   const [result] = await client.analyzeEntities({document});
 
@@ -52,15 +53,15 @@ const isArray = function(a) {
   });
   // ent.sort((a, b) => a[1] - b[1]);
   return ent;
-  }
-  export function count(array, item) {
+  },
+  count: function (array, item) {
     let count = 0;
     array.forEach(value => {
       if(value == item) count++;
     })
     return count;
-  }
-  export function findMost(array) {
+  },
+  findMost: function(array) {
     let counts = [];
     let values = [];
     let highest = 0;
@@ -80,7 +81,7 @@ const isArray = function(a) {
       }
     });
     return highestValue;
-  }
-  export function callback(element, index, array) {
+  },
+  callbck: function(element, index, array) {
     return index;
-  }
+  }}

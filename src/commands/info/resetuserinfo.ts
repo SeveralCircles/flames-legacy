@@ -1,20 +1,9 @@
-const commando = require('discord.js-commando');
-const Discord = require('discord.js');
-const get_userdata = require("../../data/get_userdata")
+import commando = require('discord.js-commando');
+import Discord = require('discord.js');
+import get_userdata = require("../../data/get_userdata")
 var random = Math.random();
-const info = require ("../../features/info");
-module.exports = class UserInfoCommand extends commando.Command {
-	constructor(client) {
-		super(client, {
-            name: 'userdatareset',
-            aliases: ['resetmydata'],
-			group: 'info',
-			memberName: 'userdatareset',
-			description: 'Completetly and irreversably deletes all your userdata.',
-            guildOnly: true
-            });  
-}
-    async run(msg, args) {
+import info = require ("../../features/info");
+export async function run(msg, args, client) {
         let data = get_userdata.byId(msg.member.id);
         if (!data.betaTester) {
             msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
@@ -33,7 +22,7 @@ module.exports = class UserInfoCommand extends commando.Command {
             .addField("Required GP", "100")
             .addField("If you still wish to reset your data, please type \\userdatareset burnitdown", "Once again, this cannot be undone!")
             .setTimestamp()
-            .setFooter("Flames", this.client.user.displayAvatarURL());
+            .setFooter("Flames", client.user.displayAvatarURL());
             message.edit(embed);
         } else {
             let defaults = get_userdata.defaults;
@@ -52,4 +41,4 @@ module.exports = class UserInfoCommand extends commando.Command {
             .setFooter("Flames", this.client.user.displayAvatarURL());
             message.edit(embed);
         }
-    }}
+    }
