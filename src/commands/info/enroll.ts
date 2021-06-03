@@ -15,7 +15,7 @@ export async function run(msg, client: Discord.Client) {
             .setDescription(msg.member.displayName + ", to enroll in the Flames beta, click the link above to view the applicable terms (please actually read them, they are important!), and then follow the instructions on that page to continue the enrollment.")
             .setTimestamp()
             .setURL("https://severalcircles.com/index.php/8-flames/2-flames-beta-program-enrollment")
-            .setFooter("Flames");
+            .setFooter("Flames @ " + msg.guild.nameAcronym);
             msg.channel.send(embed);
             }
         } else msg.reply("You are already a member of the Beta Program!");

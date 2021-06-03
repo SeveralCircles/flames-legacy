@@ -16,7 +16,7 @@ export async function run(msg, client) {
             return;
         }  
         try {
-        let member = msg.member
+        let member = msg.member;
         // try {member = msg.mentions.users.first()} catch (e) {member = msg.member}
         // if (member == undefined) member = msg.member;
         // if (member == null) member = msg.member;
@@ -24,6 +24,12 @@ export async function run(msg, client) {
         var message = await msg.channel.send(info.wait(msg.member, client, "Get User Data"))
         let guild = data.firstSeen
         let gd = get_guilddata.byId(guild);
+        if (gd == get_guilddata.defaults) {
+            if (msg.guild.id != data.firstSeen) {
+                message.edit(info.resetFirstSeen(msg.member, client));
+                setTimeout(function() {}, 5000);
+            }
+        }
         let now = new Date();
         let sent = null;
         let args = msg.content.split(" ");
@@ -53,7 +59,7 @@ export async function run(msg, client) {
         else sent = "Neutral";
         let embed = new Discord.MessageEmbed()
         .setAuthor("Flames User Data", member.user.displayAvatarURL())
-        .setTitle(member.displayName)
+        .setTitle(member.displayName + " from " + await get_guilddata.byId(data.favoriteGuild).name)
         .setDescription("Member of " + msg.guild.name + " since " + member.joinedAt.toDateString() + " (" + Math.abs(Math.round((member.joinedAt.getTime()-now.getTime()) / (1000 * 3600 * 24))) + " days ago)")
         .addField("Flames Score", data.score, true)
         .addField("First Seen at", gd.name + " ", true)
@@ -64,7 +70,8 @@ export async function run(msg, client) {
         .addField("Achievements Collected", data.achievements.length + "/" + achievements.allAchievementsCount + " (" + (data.achievements.length / achievements.allAchievementsCount) * 100 + "%)", true)
         .addField("Global Contribution", (Math.round((data.score / gdata.score) * 10000)) / 100 + "%", true)
         .setTimestamp()
-        .setFooter("Flames", client.user.displayAvatarURL());
+        .setThumbnail(member.user.displayAvatarURL())
+        .setFooter("Flames @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
         if(member.hasPermission('ADMINISTRATOR')) embed.setColor(0xa103fc);
         else if (member.hasPermission('MANAGE_MESSAGES')) embed.setColor(0x00e1ff);
         if (get_userdata.byId(member.id).verified) embed.setColor("GREEN");

@@ -11,7 +11,7 @@ module.exports = class ResetUserInfoCommand extends commando.Command {
             guildOnly: true
             });  
 }
-async run(msg) {
-    real.run(msg, client);
+async run(msg, args) {
+    real.run(msg, this.client);
 }
 }

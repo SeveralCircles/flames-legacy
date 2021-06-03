@@ -32,7 +32,7 @@ export async function run(msg: Discord.Message, client: Discord.Client) {
         .addField("F Rank Threshold", rank.thresholds[0], true)
         // .addField("Top Score", rank.scores[rank.scores.length-1])
         .setColor("DARK_VIVID_PINK")
-        .setFooter("Flames ver. " + flamesdata.version, client.user.displayAvatarURL());
+        .setFooter("Flames ver. " + flamesdata.version + " @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
         let percent = 0
         if (up){
             percent = (Math.round(10000 * ((gdata.score - (gdata.score - gdata.dailyChange))/Math.abs(gdata.score - gdata.dailyChange))))/100;

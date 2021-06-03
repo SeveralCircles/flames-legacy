@@ -9,7 +9,7 @@ export async function run(msg, client) {
         let args = msg.content.split(" ");
         let data = await get_userdata.byId(msg.member.id);
         let gdata = await get_globaldata.getValues();
-        let message = await msg.channel.send(info.wait(msg.member, this.client, "Retrieve Wallet Information"));
+        let message = await msg.channel.send(info.wait(msg.member, client, "Retrieve Wallet Information"));
         if (!data.betaTester) {
             msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
             return;
@@ -47,7 +47,7 @@ export async function run(msg, client) {
                     .addField("->", "->", true)
                     .addField("GP", gp, true)
                     .setTimestamp()
-                    .setFooter("Flames | ✅ to confirm, 🔴 to reject.", this.client.user.displayAvatarURL());
+                    .setFooter("Flames | ✅ to confirm, 🔴 to reject.", client.user.displayAvatarURL());
                     message.edit(embed);
                     message.react('✅').then(r => {
                         message.react('🔴');
@@ -55,7 +55,7 @@ export async function run(msg, client) {
                 message.awaitReactions((reaction, user) => user.id == msg.author.id && (reaction.emoji.name == '✅' || reaction.emoji.name == '🔴'),
                         { max: 1, time: 30000 }).then(collected => {
                                 if (collected.first().emoji.name == '✅') {
-                                    message.edit(info.wait(msg.member, this.client, "Exchange FP for GP"));
+                                    message.edit(info.wait(msg.member, client, "Exchange FP for GP"));
                                     data.score -= fp;
                                     data.gamerpoints += gp;
                                     gdata.score -= fp;
@@ -67,7 +67,7 @@ export async function run(msg, client) {
                                     .setDescription(msg.member.displayName + ", your balance has been updated.")
                                     .setTimestamp()
                                     .setColor("GREEN")
-                                    .setFooter("Flames", this.client.user.displayAvatarURL());
+                                    .setFooter("Flames", client.user.displayAvatarURL());
                                     message.edit(embed2);
 
                                 }

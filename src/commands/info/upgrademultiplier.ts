@@ -19,7 +19,7 @@ export async function run(msg, client) {
         .addField("Cost to Upgrade", multiplierCost)
         .addField("Multipier after Upgrade", (data.multiplier + 0.1) + "x", true)
         .setTimestamp()
-        .setFooter("Flames |🔼 to upgrade, 🔴 to cancel.", client.user.displayAvatarURL());
+        .setFooter("Flames @ " + msg.guild.nameAcronym + "|🔼 to upgrade, 🔴 to cancel.", client.user.displayAvatarURL());
         var message = await msg.channel.send(embed)
         message.react('🔼').then(r => {
             message.react('🔴');
@@ -32,7 +32,7 @@ export async function run(msg, client) {
                         message.edit(info.notEnoughGP(msg.member, client, "Purchase Multiplier Increase", multiplierCost));
                         return;
                     }
-                    message.edit(gamerpoints.purchaseDialog(msg.member, multiplierCost, "Multiplier Increase", this.client, data));
+                    message.edit(gamerpoints.purchaseDialog(msg.member, multiplierCost, "Multiplier Increase", client, data));
                     message.react('✅').then(r => {
                         message.react('🔴');
                 });

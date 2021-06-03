@@ -36,3 +36,31 @@ import get_userdata = require("../data/get_userdata");
         .setTimestamp();
         return embed;
     }
+    export function resetFirstSeen(member, client) {
+        let embed = new Discord.MessageEmbed()
+        .setTitle(member.displayName + ", Flames couldn't figure out where it first saw you, so your First Seen At has been reset to this server.")
+        .setTimestamp()
+        .setFooter("FL-01-01 | This message will dismiss automatically after 5 seconds.",client.user.displayAvatarURL());
+        return embed;
+    }
+    export function resetGuildData(guild: Discord.Guild) {
+        let embed = new Discord.MessageEmbed()
+        .setAuthor(guild.nameAcronym + " x Flames")
+        .setColor("GREEN")
+        .setTitle(guild.name + ", welcome to Flames!")
+        .setDescription("Flames is now set up to run on " + guild.nameAcronym + "! No further action is required.")
+        .setTimestamp()
+        .setFooter("Flames  | Flames will now wait 10 seconds before continuing to prevent spam.");
+        return embed;
+    }
+    export function welcomeToGuild(guild: Discord.Guild, member: Discord.GuildMember, gdata) {
+        let embed = new Discord.MessageEmbed()
+        .setAuthor(guild.nameAcronym, member.user.displayAvatarURL())
+        .setTitle("Welcome to " + guild.name)
+        .setThumbnail(guild.iconURL())
+        .setDescription(gdata.welcomeMessage)
+        .addField("Population", guild.memberCount, true)
+        .setTimestamp()
+        .setFooter("Flames @ " + guild.nameAcronym);
+        return embed;
+    }

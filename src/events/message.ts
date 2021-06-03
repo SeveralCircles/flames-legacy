@@ -3,12 +3,24 @@ import get_userdata = require('../data/get_userdata');
 import analysis = require("../features/analysis")
 import get_globaldata = require("../data/get_globaldata")
 import achievements = require("../features/achievements")
+import get_guilddata = require("../data/get_guilddata");
 import util = require("../features/util")
 import bugsnag = require("../features/bugsnag")
+import info = require("../features/info")
 export async function onMessage(msg: Discord.Message) {
         // bugsnag.notify(new Error("gaming"))
         // If message is from Flames or is a command, don't process it.
         if (msg.member.id === "835977847599661067" || msg.member.id == "849320259152117882") return;
+        try {
+            console.log(msg.member.id);
+        } catch (e) {
+            console.log(":/");
+        }
+        let guilddata = await get_guilddata.byId(msg.guild.id);
+        if (guilddata = get_guilddata.defaults) {
+            guilddata.name = msg.guild.name;
+            get_guilddata.writeById(msg.guild.id, guilddata);
+        }
         if (msg.content.startsWith("\\")) return;
         // if (msg.content.toLowerCase() == "i think i've finally had enough" || msg.content.toLowerCase() == "i think ive finally had enough") msg.reply("I think you're full of shit.");
         // Load global data
@@ -21,6 +33,11 @@ export async function onMessage(msg: Discord.Message) {
         try {
         // Prepare userdata object
         let userdata = get_userdata.byId(msg.member.id);
+        if (userdata.guilds == undefined) userdata.guilds = [];
+        if (!userdata.guilds.includes(msg.guild.id)) {
+            await msg.author.send(info.welcomeToGuild(msg.guild, msg.member, guilddata));
+            userdata.guilds.push(msg.guild.id)
+        }
         if (userdata.lastMessages == undefined) {
             userdata.lastMessages = ["", "", ""]
             userdata.nextIndex = 0;
@@ -33,7 +50,7 @@ export async function onMessage(msg: Discord.Message) {
         let anal = await analysis.analyzeSentiment(msg.content);
 
         // If we've never seen this user before, we set their first seen guild to wherever the message was sent.
-        if (userdata == get_userdata.defaults) userdata.firstSeen = msg.guild.id;
+        if (userdata.firstSeen == "") userdata.firstSeen = msg.guild.id;
 
         // If they haven't sent a message since Spark 2, then their userdata won't have a multiplier, so we set it to 1.0x in that case
         if (userdata.multiplier == undefined) userdata.multiplier = 1.0;

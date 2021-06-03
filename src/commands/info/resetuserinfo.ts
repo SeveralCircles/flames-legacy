@@ -3,15 +3,15 @@ import Discord = require('discord.js');
 import get_userdata = require("../../data/get_userdata")
 var random = Math.random();
 import info = require ("../../features/info");
-export async function run(msg, args, client) {
+export async function run(msg: Discord.Message, client: Discord.Client) {
         let data = get_userdata.byId(msg.member.id);
         if (!data.betaTester) {
             msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
             return;
         } ;;
-        let message = await msg.channel.send(info.wait(msg.member, this.client, "Reset User Data"))
+        let message = await msg.channel.send(info.wait(msg.member, client, "Reset User Data"))
         // console.log(args)
-        if (args != "burnitdown") {
+        if (!msg.content.includes("burnitdown")) {
             random = Math.random();
             let embed = new Discord.MessageEmbed()
             .setColor("RED")
@@ -22,13 +22,13 @@ export async function run(msg, args, client) {
             .addField("Required GP", "100")
             .addField("If you still wish to reset your data, please type \\userdatareset burnitdown", "Once again, this cannot be undone!")
             .setTimestamp()
-            .setFooter("Flames", client.user.displayAvatarURL());
+            .setFooter("Flames @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
             message.edit(embed);
         } else {
             let defaults = get_userdata.defaults;
             defaults.firstSeen = msg.guild.id;
             if (get_userdata.byId(msg.member.id).gamerpoints < 100) {
-                await message.edit(info.notEnoughGP(msg.member, this.client, "Reset User Data", 100));
+                await message.edit(info.notEnoughGP(msg.member, client, "Reset User Data", 100));
                 return;
             }
             get_userdata.writeById(msg.member.id, defaults);
@@ -38,7 +38,7 @@ export async function run(msg, args, client) {
             .setTitle(msg.member.displayName + ", your data has been reset successfully.")
             .setDescription("Thank you for using Flames.")
             .setTimestamp()
-            .setFooter("Flames", this.client.user.displayAvatarURL());
+            .setFooter("Flames @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
             message.edit(embed);
         }
     }
