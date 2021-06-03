@@ -1,5 +1,5 @@
 import fs = require('fs')
-export const defaults = require(".\\userdefault.json")
+export const defaults = require("./userdefault.json")
 export var ulist = null;
 export function byId(id) {
         try {
