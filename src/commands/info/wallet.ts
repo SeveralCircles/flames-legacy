@@ -14,6 +14,7 @@ export async function run(msg, client) {
             msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")
             return;
         }  
+        if (data.gamerpoints == null) data.gamerpoints = 0;
         switch (args[1]) {
             case "exchange":
                 if (isNaN(args[2])) {
