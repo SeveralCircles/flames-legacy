@@ -61,7 +61,7 @@ export async function checkAchievements(msg, data) {
                 data.score = data.score + 1000;
             }
         }
-        console.log(data);
+        // console.log(data);
         // await get_userdata.writeById(msg.member.id, data);
         return data;
         // console.log(data == get_userdata.byId(msg.member.id));
