@@ -13,7 +13,7 @@ import userinfo = require("./commands/info/userinfo")
 import wallet = require("./commands/info/wallet")
 
 export function login() {
-        client.login('ODQ5MzIwMjU5MTUyMTE3ODgy.YLZdIQ.keIWGep6_IjSQvbD4NMXQXwKYl4');
+        client.login('ODM1OTc3ODQ3NTk5NjYxMDY3.YIXTCg.RfykVPKr6RY56LFQTSzaoJRnsUo');
     }
     // getMember: function(guildID, memberID) {
         // return client.users.resolveID(memberID).
