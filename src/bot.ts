@@ -11,14 +11,12 @@ import resetuserinfo = require("./commands/info/resetuserinfo")
 import upgrademuliplier = require("./commands/info/upgrademultiplier")
 import userinfo = require("./commands/info/userinfo")
 import wallet = require("./commands/info/wallet")
-
 export function login() {
         client.login('ODM1OTc3ODQ3NTk5NjYxMDY3.YIXTCg.RfykVPKr6RY56LFQTSzaoJRnsUo');
-    }
     // getMember: function(guildID, memberID) {
         // return client.users.resolveID(memberID).
     // }
-
+}
 client.registry
 
     // Registers all built-in groups, commands, and argument types

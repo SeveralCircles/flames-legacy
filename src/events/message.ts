@@ -110,6 +110,7 @@ export async function onMessage(msg: Discord.Message) {
             .addField("Daily Bonus", dailyBonus + " FP", true)
             .addField("Your Flames Score", userdata.score + " FP",  true)
             .setTimestamp()
+            .setImage("https://severalcircles.com/flames/assets/welcomeback.png")
             .setFooter("Have a great rest of your day! | Flames");
             msg.author.send(embed);
             userdata.lastSeen = date.getDay();
