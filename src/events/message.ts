@@ -87,15 +87,15 @@ export async function onMessage(msg: Discord.Message) {
         }
 
         // Checks achievements
-        userdata = await achievements.checkAchievements(msg, userdata);
-        if (msg.content.toLowerCase().includes("sam")) userdata = await achievements.samAchievement(msg, userdata);
+        if (userdata.notify) userdata = await achievements.checkAchievements(msg, userdata);
+        if (msg.content.toLowerCase().includes("sam") && userdata.notify) userdata = await achievements.samAchievement(msg, userdata);
 
         // Every 1000 messages, a little bonus gets added to the user's multiplier.
         if (userdata.averageSentiment.length % 1000 == 0) userdata.multiplier += 0.01
 
         // Streak check!
         // If a user hasn't ever sent a message, or hasn't sent a message since Spark 3, this will add this value to their userdata.
-        if (userdata.lastSeen < date.getDay() || userdata.lastSeen == 6 && date.getDay() == 0 || userdata.lastSeen < 0 || userdata.lastSeen == undefined) { // Checks if daily greeting still needs to be sent
+        if ((userdata.lastSeen < date.getDay() || userdata.lastSeen == 6 && date.getDay() == 0 || userdata.lastSeen < 0 || userdata.lastSeen == undefined) && userdata.notify) { // Checks if daily greeting still needs to be sent
             if (userdata.lastSeen == date.getDay() - 1 || (userdata.lastSeen == 6 && date.getDay() == 0)) { // Checks if the user is keeping or losing their streak
                 userdata.streak++; // Keep the streak
             } else userdata.streak = 1; // Lose the streak

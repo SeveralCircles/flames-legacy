@@ -49,6 +49,11 @@ export async function run(msg, client) {
         //     message.edit(embed);
         //     return;
         // }
+        if (args[1] == "nonotify") {
+            if (data.notify != true) {
+                msg.reply("you will now recieve notifications again.")
+            } else msg.reply("you will no longer recieve achievements or daily bonuses from Flames.")
+        }
         let average = (data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length;
         let gdata = get_globaldata.getValues();
         console.log("Average:" + average);
@@ -71,7 +76,7 @@ export async function run(msg, client) {
         .addField("Global Contribution", (Math.round((data.score / gdata.score) * 10000)) / 100 + "%", true)
         .setTimestamp()
         .setThumbnail(member.user.displayAvatarURL())
-        .setFooter("Flames @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
+        .setFooter("\\mydata nonotify to disable notifications. | Flames @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
         if(member.hasPermission('ADMINISTRATOR')) embed.setColor(0xa103fc);
         else if (member.hasPermission('MANAGE_MESSAGES')) embed.setColor(0x00e1ff);
         if (get_userdata.byId(member.id).verified) embed.setColor("GREEN");
