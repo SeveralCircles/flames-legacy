@@ -3,13 +3,14 @@ import Discord = require('discord.js');
 import rank = require("../../features/rank")
 import info = require ("../../features/info")
 import get_globaldata = require("../../data/get_globaldata")
-const ulist = require("../../data/user/ulist.json")
+// const ulist = require("../../data/user/ulist.json")
 const flamesdata = require("../../data/global/flamesdata.json");
 import gamerpoints = require ("../../features/gamerpoints")
 import index = require("../../index");
 import message = require('../../events/message');
 import get_userdata = require("../../data/get_userdata")
 export async function run(msg: Discord.Message, client: Discord.Client) {
+        let ulist = get_userdata.getUlist();
         let data = get_userdata.byId(msg.member.id);
         if (!data.betaTester) {
             msg.reply("you must become a member of the Flames Beta Program before you can use Flames. For more information, run the \\enroll command.")

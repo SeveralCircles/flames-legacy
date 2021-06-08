@@ -5,8 +5,9 @@ const ulist = require("../../data/user/ulist.json");
 export async function run(msg, client: Discord.Client) {
         let data = get_userdata.byId(msg.member.id);
         let args = msg.content.split(" ");
-        if (ulist.ulist.length >= 50) {
+        if (ulist.ulist.length >= 500) {
             msg.reply("the Beta Program is currently full. Thank you for your interest in Flames.")
+            return;
         }
         if (!data.betaTester) {
             if (args[1] == "lightitup") {

@@ -4,13 +4,13 @@ import msgEvent = require("./events/message");
 import guildCreate = require("./events/guildcreate")
 import path = require('path');
 import docs = require("./commands/info/docsw")
-import enroll = require("./commands/info/enroll")
+import enroll = require("./commands/beta/enroll")
 import globalinfo = require("./commands/info/globalinfo")
-import report = require("./commands/info/report")
-import resetuserinfo = require("./commands/info/resetuserinfo")
-import upgrademuliplier = require("./commands/info/upgrademultiplier")
-import userinfo = require("./commands/info/userinfo")
-import wallet = require("./commands/info/wallet")
+import report = require("./commands/beta/report")
+import resetuserinfo = require("./commands/data/resetuserinfo")
+import upgrademuliplier = require("./commands/gp/upgrademultiplier")
+import userinfo = require("./commands/data/userinfo")
+import wallet = require("./commands/gp/wallet")
 export function login() {
         client.login('ODM1OTc3ODQ3NTk5NjYxMDY3.YIXTCg.RfykVPKr6RY56LFQTSzaoJRnsUo');
     // getMember: function(guildID, memberID) {
@@ -25,6 +25,9 @@ client.registry
     // Registers all of your commands in the ./commands/ directory
     .registerGroups([
         ['info', "Information"],
+        ['gp', "Wallet"],
+        ['data', "Data"],
+        ['beta', "Beta Program"]
     ])
     .registerCommandsIn(path.join(__dirname, "commands"))
     // .registerCommands([new docs.Docs(this), new enroll.EnrollCommand(this), new globalinfo.GlobalInfoCommand(this), new report.ReportCommand(this), new resetuserinfo.ResetUserInfoCommand(this), new upgrademuliplier.MultiplierCommand(this), new userinfo.UserInfoCommand(this), new wallet.WalletCommand(this)]);

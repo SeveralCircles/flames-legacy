@@ -21,3 +21,6 @@ export function byId(id) {
 export async function writeById(id, json) {
         fs.writeFileSync(__dirname + "/user/" + id + ".json", JSON.stringify(json));
 }
+export function getUlist() {
+    return JSON.parse(fs.readFileSync(__dirname + "/user/ulist.json").toString());
+}
