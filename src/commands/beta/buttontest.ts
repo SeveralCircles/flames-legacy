@@ -10,7 +10,7 @@ export async function run(msg: Discord.Message, client: Discord.Client) {
     .addComponent(button1);
     let m = await msg.channel.send("Hi", { components: [ row ] });
     const filter = (button) => button.clicker.user.id === msg.author.id;
-    const collector = m.createButtonCollector(filter, { time: 5000 }); //collector for 5 seconds
+    const collector = m.createButtonCollector(filter, { time: 10000 }); //collector for 5 seconds
 
     collector.on('collect', b => {msg.reply("Button go brrr")});
     collector.on('end', collected => console.log(`Collected ${collected.size} items`));
