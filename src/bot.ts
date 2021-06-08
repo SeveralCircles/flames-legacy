@@ -12,12 +12,14 @@ import upgrademuliplier = require("./commands/gp/upgrademultiplier")
 import userinfo = require("./commands/data/userinfo")
 import wallet = require("./commands/gp/wallet")
 import gmr = require("./events/guildmemberremove");
+import disbut = require('discord-buttons')
 export function login() {
         client.login('ODM1OTc3ODQ3NTk5NjYxMDY3.YIXTCg.RfykVPKr6RY56LFQTSzaoJRnsUo');
     // getMember: function(guildID, memberID) {
         // return client.users.resolveID(memberID).
     // }
 }
+require('discord-buttons')(client);
 client.registry
 
     // Registers all built-in groups, commands, and argument types
