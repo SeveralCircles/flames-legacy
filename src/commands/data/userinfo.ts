@@ -71,7 +71,7 @@ export async function run(msg, client) {
         .addField("Rank", rank.getRank(data.score), true)
         .addField("To Next Rank", rank.toNext(data.score), true)
         .addField("Emotion", sent, true)
-        .addField("Favorite Topic", analysis.findMost(data.entities), true)
+        .addField("Favorite Topic", analysis.findMost(analysis.count(data.entities)), true)
         .addField("Achievements Collected", data.achievements.length + "/" + achievements.allAchievementsCount + " (" + (data.achievements.length / achievements.allAchievementsCount) * 100 + "%)", true)
         .addField("Global Contribution", (Math.round((data.score / gdata.score) * 10000)) / 100 + "%", true)
         .setTimestamp()

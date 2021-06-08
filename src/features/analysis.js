@@ -54,34 +54,32 @@ module.exports = {
   // ent.sort((a, b) => a[1] - b[1]);
   return ent;
   },
-  count: function (array, item) {
-    let count = 0;
-    array.forEach(value => {
-      if(value == item) count++;
-    })
-    return count;
-  },
-  findMost: function(array) {
-    let counts = [];
-    let values = [];
-    let highest = 0;
-    let highestValue;
-    array.forEach(value => {
-      if (values.includes(value.toString())) {
-        counts[values.findIndex(this.callbck)] += 1;
+  count: function(arr) {
+    var a = [],
+      b = [],
+      prev;
+  
+    arr.sort();
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] !== prev) {
+        a.push(arr[i]);
+        b.push(1);
       } else {
-        values.push(value)
-        counts.push(1);
+        b[b.length - 1]++;
       }
-    });
-    counts.forEach(function(value, index) {
-      if (value > highest) {
-        highest = value;
-        highestValue = values[index];
-      }
-    });
-    return highestValue;
+      prev = arr[i];
+    }
+  
+    return [a,b];
   },
+  findMost: function(countedarr) {
+    let mostIndex = 0;
+    countedarr[1].forEach(function(element, index) {
+      if (element > countedarr[1]) mostIndex = index;
+    })
+    return countedarr[0][mostIndex];
+  },
+  
   callbck: function(element, index, array) {
     return index;
   }}
