@@ -64,3 +64,11 @@ import get_userdata = require("../data/get_userdata");
         .setFooter("Flames @ " + guild.nameAcronym);
         return embed;
     }
+    export function wrongArgs(msg: Discord.Message, example: string) {
+        let embed = new Discord.MessageEmbed()
+        .setTitle(msg.member.displayName + ", that is not the correct way to use that command.")
+        .setDescription("Example Usage: " + example)
+        .setTimestamp()
+        .setFooter("Flames @ " + msg.guild.nameAcronym);
+        return embed;
+    }

@@ -11,6 +11,7 @@ import resetuserinfo = require("./commands/data/resetuserinfo")
 import upgrademuliplier = require("./commands/gp/upgrademultiplier")
 import userinfo = require("./commands/data/userinfo")
 import wallet = require("./commands/gp/wallet")
+import gmr = require("./events/guildmemberremove");
 export function login() {
         client.login('ODM1OTc3ODQ3NTk5NjYxMDY3.YIXTCg.RfykVPKr6RY56LFQTSzaoJRnsUo');
     // getMember: function(guildID, memberID) {
@@ -35,3 +36,4 @@ console.log(path.join(__dirname, 'commands'));
 client.commandPrefix = "\\";
 client.on("message", msg => {msgEvent.onMessage(msg)});
 client.on('guildCreate', guild => {guildCreate.onGuildCreate(guild)});
+client.on("guildMemberRemove", member => {gmr.on(member)});
