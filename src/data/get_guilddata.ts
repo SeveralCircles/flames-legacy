@@ -1,6 +1,7 @@
 import fs = require('fs')
 export const defaults = require("./guilddefault.json")
 export function byId(id) {
+    console.log("Reading data for " + id);
     try {
         var raw = fs.readFileSync(__dirname + "/guild/" + id + ".json")
     } catch (e) {
@@ -9,7 +10,7 @@ export function byId(id) {
         return defaults;    
     }
     let json = JSON.parse(raw.toString());
-    console.log("Reading data for " + id);
+    console.log("Done reading data");
     return json;
 }
 export function writeById(id, json) {
