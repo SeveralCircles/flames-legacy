@@ -24,12 +24,12 @@ export async function run(msg, client) {
         var message = await msg.channel.send(info.wait(msg.member, client, "Get User Data"))
         let guild = data.firstSeen
         let gd = get_guilddata.byId(guild);
-        if (gd == get_guilddata.defaults) {
-            if (msg.guild.id != data.firstSeen) {
-                message.edit(info.resetFirstSeen(msg.member, client));
-                setTimeout(function() {}, 5000);
-            }
-        }
+        // if (gd == get_guilddata.defaults) {
+        //     if (msg.guild.id != data.firstSeen) {
+        //         message.edit(info.resetFirstSeen(msg.member, client));
+        //         setTimeout(function() {}, 5000);
+        //     }
+        // }
         let now = new Date();
         let sent = null;
         let args = msg.content.split(" ");
@@ -49,11 +49,11 @@ export async function run(msg, client) {
         //     message.edit(embed);
         //     return;
         // }
-        if (args[1] == "nonotify") {
-            if (data.notify != true) {
-                msg.reply("you will now recieve notifications again.")
-            } else msg.reply("you will no longer recieve achievements or daily bonuses from Flames.")
-        }
+        // if (args[1] == "nonotify") {
+        //     if (data.notify != true) {
+        //         msg.reply("you will now recieve notifications again.")
+        //     } else msg.reply("you will no longer recieve achievements or daily bonuses from Flames.")
+        // }
         let average = (data.averageSentiment.reduce((a, b) => a + b, 0)) / data.averageSentiment.length;
         let gdata = get_globaldata.getValues();
         console.log("Average:" + average);
