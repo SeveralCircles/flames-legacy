@@ -3,7 +3,7 @@ console.log("Preparing...")
 import bot = require("./bot");
 import rank = require("./features/rank");
 import schedule = require("node-schedule");
-
+require('source-map-support').install()
 console.log("Updating ranking information");
 rank.sync();
 
