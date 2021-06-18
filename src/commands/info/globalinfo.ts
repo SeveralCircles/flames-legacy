@@ -47,5 +47,5 @@ export async function run(msg: Discord.Message, client: Discord.Client) {
         embed.addField("Number of Participants", ulist.ulist.length, true);
         embed.addField("Progress towards Global Goal", gdata.score + "/100000 (" + (Math.round((gdata.score/100000)*10000))/100 + "%)", true)
         embed.addField("GP Cost", gamerpoints.exchangeRate + " FP");
-        message.edit(embed);
+        message.edit({embed});
     }

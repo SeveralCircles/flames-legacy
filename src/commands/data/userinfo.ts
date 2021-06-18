@@ -86,7 +86,7 @@ export async function run(msg, client) {
             embed.setColor(0xfc038c);
         }
         // msg.channel.stopTyping();
-        message.edit(embed);
+        message.edit({embed});
     } catch (e) {
         message.edit(info.userDataCorrupt(msg.member, client, e))
         console.log(e)
