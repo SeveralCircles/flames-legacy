@@ -46,7 +46,7 @@ export async function run(msg, client) {
         //             topics.push(element);
         //         }
         //     });
-        //     message.edit(embed);
+        //     message.edit({embed});
         //     return;
         // }
         // if (args[1] == "nonotify") {

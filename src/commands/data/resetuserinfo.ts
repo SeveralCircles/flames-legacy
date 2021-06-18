@@ -23,7 +23,7 @@ export async function run(msg: Discord.Message, client: Discord.Client) {
             .addField("If you still wish to reset your data, please type \\userdatareset burnitdown", "Once again, this cannot be undone!")
             .setTimestamp()
             .setFooter("Flames @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
-            message.edit(embed);
+            message.edit({embed});
         } else {
             let defaults = get_userdata.defaults;
             defaults.firstSeen = msg.guild.id;
@@ -39,6 +39,6 @@ export async function run(msg: Discord.Message, client: Discord.Client) {
             .setDescription("Thank you for using Flames.")
             .setTimestamp()
             .setFooter("Flames @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
-            message.edit(embed);
+            message.edit({embed});
         }
     }

@@ -24,7 +24,7 @@ export async function run(msg, client) {
                     .setDescription(msg.member.displayName + ", you need to specify how many Gamer Points you wish to recieve.")
                     .setTimestamp()
                     .setFooter("Flames", client.user.displayAvatarURL());
-                    message.edit(embed);
+                    message.edit({embed});
                     return;
                 } else {
                     var gp = Number(args[2]);
@@ -37,7 +37,7 @@ export async function run(msg, client) {
                         .addField("Required FP", fp)
                         .setTimestamp()
                         .setFooter("Flames", client.user.displayAvatarURL());
-                        message.edit(embed);
+                        message.edit({embed});
                         return;
                     }
                     let embed = new Discord.MessageEmbed()
@@ -49,7 +49,7 @@ export async function run(msg, client) {
                     .addField("GP", gp, true)
                     .setTimestamp()
                     .setFooter("Flames | ✅ to confirm, 🔴 to reject.", client.user.displayAvatarURL());
-                    message.edit(embed);
+                    message.edit({embed});
                     message.react('✅').then(r => {
                         message.react('🔴');
                 });
@@ -91,7 +91,7 @@ export async function run(msg, client) {
                 .addField("Available Options (run as command starting with \\mygp or \\wallet)", "To exchange Flames Points for Gamer Points: exchange <desired GP>")
                 .setTimestamp()
                 .setFooter("Flames", client.user.displayAvatarURL());
-                message.edit(embed);
+                message.edit({embed});
                 break;
         }
     }
