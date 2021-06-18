@@ -75,7 +75,7 @@ export async function run(msg, client) {
         .addField("Achievements Collected", data.achievements.length + "/" + achievements.allAchievementsCount + " (" + (data.achievements.length / achievements.allAchievementsCount) * 100 + "%)", true)
         .addField("Global Contribution", (Math.round((data.score / gdata.score) * 10000)) / 100 + "%", true)
         .setTimestamp()
-        .setThumbnail("https://severalcircles.com/flames/assets/userdata.png")
+        .setThumbnail("https://severalcircles.com/flames/assets/rank/" + rank.getRank(data.score) + ".png")
         // .setThumbnail(member.user.displayAvatarURL())
         .setFooter("Flames @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
         if(member.hasPermission('ADMINISTRATOR')) embed.setColor(0xa103fc);
