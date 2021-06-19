@@ -20,7 +20,7 @@ export async function run(msg, client) {
         .addField("Multipier after Upgrade", (data.multiplier + 0.1) + "x", true)
         .setTimestamp()
         .setFooter("Flames @ " + msg.guild.nameAcronym + "|🔼 to upgrade, 🔴 to cancel.", client.user.displayAvatarURL());
-        var message = await msg.channel.send(embed)
+        var message = await msg.channel.send({embed})
         message.react('🔼').then(r => {
             message.react('🔴');
         });

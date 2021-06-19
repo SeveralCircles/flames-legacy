@@ -21,7 +21,7 @@ export async function samAchievement(msg, data) {
     embed.addField("Progress", data.achievements.length + "/" + allAchievementsCount + " (" + (data.achievements.length / allAchievementsCount) * 100 + "%)");
     data.score = data.score + 300;
     data.achievements.push("sam");
-    msg.channel.send(embed);
+    msg.channel.send({embed});
     console.log("data out of sam:" + JSON.stringify(data))
     return data;
     }
@@ -42,7 +42,7 @@ export async function checkAchievements(msg, data) {
                 embed.addField("Description", "Achieve X Rank by being in the top 5% of users.", true)
                 embed.addField("Reward", "1000 Flames Points", true)
                 embed.addField("Progress", data.achievements.length + "/" + allAchievementsCount + " (" + (data.achievements.length / allAchievementsCount) * 100 + "%)")
-                msg.channel.send(embed)
+                msg.channel.send({embed})
                 data.score = data.score + 1000;
             }
         }
@@ -57,7 +57,7 @@ export async function checkAchievements(msg, data) {
                 embed.addField("Description", "Become the owner of a server.", true)
                 embed.addField("Reward", "1000 Flames Points", true)
                 embed.addField("Progress", data.achievements.length + "/" + allAchievementsCount + " (" + (data.achievements.length / allAchievementsCount) * 100 + "%)");
-                msg.channel.send(embed);
+                msg.channel.send({embed});
                 data.score = data.score + 1000;
             }
         }

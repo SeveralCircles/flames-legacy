@@ -9,5 +9,5 @@ export async function run(msg: Discord.Message, client: Discord.Client) {
     .addField("Favorites ", gdata.favorites, true)
     .setThumbnail(msg.guild.iconURL())
     .setFooter("Flames @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
-    msg.channel.send(embed);
+    msg.channel.send({embed});
 }

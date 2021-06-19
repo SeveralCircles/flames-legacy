@@ -83,7 +83,7 @@ export async function onMessage(msg: Discord.Message) {
             .setTitle(msg.member.displayName + ", you do not pass the vibe check.")
             .setDescription("You're average emotion is far too low. Would it kill you to be more positive?")
             .setFooter("Flames");
-            msg.channel.send(embed);
+            msg.channel.send({embed});
         }
 
         // Checks achievements
@@ -112,7 +112,7 @@ export async function onMessage(msg: Discord.Message) {
             .setTimestamp()
             .setImage("https://severalcircles.com/flames/assets/welcomeback.png")
             .setFooter("Have a great rest of your day! | Flames");
-            msg.author.send(embed);
+            msg.author.send({embed});
             userdata.lastSeen = date.getDay();
         }
 

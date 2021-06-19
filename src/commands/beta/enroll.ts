@@ -22,7 +22,7 @@ export async function run(msg, client: Discord.Client) {
             .setTimestamp()
             .setURL("https://severalcircles.com/index.php/8-flames/2-flames-beta-program-enrollment")
             .setFooter("Flames @ " + msg.guild.nameAcronym);
-            msg.channel.send(embed);
+            msg.channel.send({embed});
             }
         } else msg.reply("You are already a member of the Beta Program!");
         get_userdata.writeById(msg.member.id, data);

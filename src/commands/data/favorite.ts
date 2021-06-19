@@ -19,7 +19,7 @@ export async function run(msg: Discord.Message, client: Discord.Client) {
     .setTimestamp()
     .setColor("YELLOW")
     .setFooter("Flames @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
-    let message: Discord.Message = await msg.channel.send(embed);
+    let message: Discord.Message = await msg.channel.send({embed});
     message.react('🔴');
     message.awaitReactions((reaction, user) => user.id == msg.author.id && (reaction.emoji.name == '🔴'),
         { max: 1, time: 5000 }).then(collected => {

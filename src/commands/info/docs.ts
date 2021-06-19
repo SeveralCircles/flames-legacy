@@ -7,5 +7,5 @@ export async function run(msg: Discord.Message, client: Discord.Client) {
     .setDescription("Opens in your browser.")
     .setURL("https://docs.severalcircles.com")
     .setFooter("Flames @ " + msg.guild.nameAcronym, client.user.displayAvatarURL());
-    return await msg.channel.send(embed);
+    return await msg.channel.send({embed});
 }
