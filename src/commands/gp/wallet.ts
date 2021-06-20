@@ -28,7 +28,7 @@ export async function run(msg, client) {
                     return;
                 } else {
                     var gp = Number(args[2]);
-                    var fp = Math.round(gp * gamerpoints.exchangeRate);
+                    var fp = Math.round(gp * gamerpoints.exchangeRate());
                     if (fp > data.score) {
                         let embed = new Discord.MessageEmbed()
                         .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
@@ -87,8 +87,8 @@ export async function run(msg, client) {
                 .setAuthor("Flames Wallet", msg.member.user.displayAvatarURL())
                 .setTitle(msg.member.displayName + "'s wallet")
                 .addField("Balance", data.gamerpoints + " GP", true)
-                .addField("Exchange Rate", "1 GP costs " + gamerpoints.exchangeRate + " FP.", true)
-                .addField("You Can Get", Math.round(data.score / gamerpoints.exchangeRate), true)
+                .addField("Exchange Rate", "1 GP costs " + gamerpoints.exchangeRate() + " FP.", true)
+                .addField("You Can Get", Math.round(data.score / gamerpoints.exchangeRate()), true)
                 .addField("Available Options (run as command starting with \\mygp or \\wallet)", "To exchange Flames Points for Gamer Points: exchange <desired GP>")
                 .setTimestamp()
                 .setFooter("Flames", client.user.displayAvatarURL());

@@ -2,10 +2,13 @@ import get_globaldata = require("../data/get_globaldata");
 var gdata = get_globaldata.getValues()
 const ulist = require("../data/user/ulist.json");
 import Discord = require("discord.js");
-    export var exchangeRate = Math.round((gdata.score / ulist.ulist.length) / 10)
-    export function exchangeRateCalc() {
-        gdata = get_globaldata.getValues();
-        return Math.round((gdata.score / ulist.ulist.length) / 10);
+    
+    export function exchangeRate() {
+        let rate = Math.round((gdata.score / ulist.ulist.length) / 9);
+        while (rate < 1) {
+            rate += Math.round(Math.random() * 100);
+        }
+        return rate;
     }
     export function sync() {
         if (gdata.gamerpoints <= 100) {
