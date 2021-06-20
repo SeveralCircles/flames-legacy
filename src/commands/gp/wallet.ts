@@ -4,7 +4,7 @@ import get_userdata = require("../../data/get_userdata")
 import info = require ("../../features/info");
 import get_globaldata = require ("../../data/get_globaldata")
 import gamerpoints = require("../../features/gamerpoints");
-
+var e = null;
 export async function run(msg, client) {
         let args = msg.content.split(" ");
         let data = await get_userdata.byId(msg.member.id);
@@ -56,7 +56,8 @@ export async function run(msg, client) {
                 message.awaitReactions((reaction, user) => user.id == msg.author.id && (reaction.emoji.name == '✅' || reaction.emoji.name == '🔴'),
                         { max: 1, time: 30000 }).then(collected => {
                                 if (collected.first().emoji.name == '✅') {
-                                    message.edit(info.wait(msg.member, client, "Exchange FP for GP"));
+                                    e = info.wait(msg.member, client, "Exchange FP for GP");
+                                    message.edit(e);
                                     data.score -= fp;
                                     data.gamerpoints += gp;
                                     gdata.score -= fp;
@@ -69,7 +70,7 @@ export async function run(msg, client) {
                                     .setTimestamp()
                                     .setColor("GREEN")
                                     .setFooter("Flames", client.user.displayAvatarURL());
-                                    message.edit(embed2);
+                                    message.edit({embed2});
 
                                 }
                                 else

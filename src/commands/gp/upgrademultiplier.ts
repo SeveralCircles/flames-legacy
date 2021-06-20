@@ -29,7 +29,8 @@ export async function run(msg, client) {
                 if (collected.first().emoji.name == '🔼') {
                     message.reactions.removeAll();
                     if ((data.gamerpoints - multiplierCost) < 0) {
-                        message.edit(info.notEnoughGP(msg.member, client, "Purchase Multiplier Increase", multiplierCost));
+                        let e = info.notEnoughGP(msg.member, client, "Purchase Multiplier Increase", multiplierCost)
+                        message.edit({e});
                         return;
                     }
                     message.edit(gamerpoints.purchaseDialog(msg.member, multiplierCost, "Multiplier Increase", client, data));
@@ -43,7 +44,8 @@ export async function run(msg, client) {
                                     data.multiplier += 0.1;
                                     get_userdata.writeById(msg.member.id, data);
                                     message.reactions.removeAll();
-                                    message.edit(gamerpoints.purchaseConfirm(msg.member, "Multiplier Increase", client, data.gamerpoints));
+                                    let e = gamerpoints.purchaseConfirm(msg.member, "Multiplier Increase", client, data.gamerpoints);
+                                    message.edit({e});
                                 }
                                 else
                                         message.edit("The transaction was cancelled.");
