@@ -3,8 +3,8 @@ var gdata = get_globaldata.getValues()
 const ulist = require("../data/user/ulist.json");
 import Discord = require("discord.js");
     
-    export function exchangeRate() {
-        let rate = Math.round((gdata.score / ulist.ulist.length) / 9);
+    export function exchangeRate(): number {
+        let rate: number = Math.round((gdata.score / ulist.ulist.length) / 9);
         while (rate < 1) {
             rate += Math.round(Math.random() * 100);
         }
