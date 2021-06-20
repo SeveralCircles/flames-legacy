@@ -3,7 +3,7 @@ import Discord = require('discord.js');
 import get_userdata = require("../../data/get_userdata")
 import info = require ("../../features/info");
 import gamerpoints = require("../../features/gamerpoints");
-var e;
+var e = new Discord.MessageEmbed().setTitle("it doesn't fucking work");
 export async function run(msg, client) {
         var data = await get_userdata.byId(msg.member.id);
         if (!data.betaTester) {

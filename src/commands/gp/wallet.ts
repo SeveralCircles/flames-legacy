@@ -57,7 +57,7 @@ export async function run(msg, client) {
                         { max: 1, time: 30000 }).then(collected => {
                                 if (collected.first().emoji.name == '✅') {
                                     e = info.wait(msg.member, client, "Exchange FP for GP");
-                                    message.edit(e);
+                                    message.edit({e});
                                     data.score -= fp;
                                     data.gamerpoints += gp;
                                     gdata.score -= fp;
