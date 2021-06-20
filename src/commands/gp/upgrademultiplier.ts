@@ -3,6 +3,7 @@ import Discord = require('discord.js');
 import get_userdata = require("../../data/get_userdata")
 import info = require ("../../features/info");
 import gamerpoints = require("../../features/gamerpoints");
+var e;
 export async function run(msg, client) {
         var data = await get_userdata.byId(msg.member.id);
         if (!data.betaTester) {
@@ -29,11 +30,11 @@ export async function run(msg, client) {
                 if (collected.first().emoji.name == '🔼') {
                     message.reactions.removeAll();
                     if ((data.gamerpoints - multiplierCost) < 0) {
-                        let e = info.notEnoughGP(msg.member, client, "Purchase Multiplier Increase", multiplierCost)
+                        e = info.notEnoughGP(msg.member, client, "Purchase Multiplier Increase", multiplierCost)
                         message.edit({e});
                         return;
                     }
-                    let e = gamerpoints.purchaseDialog(msg.member, multiplierCost, "Multiplier Increase", client, data);
+                    e = gamerpoints.purchaseDialog(msg.member, multiplierCost, "Multiplier Increase", client, data);
                     message.edit({e});
                     message.react('✅').then(r => {
                         message.react('🔴');
@@ -45,7 +46,7 @@ export async function run(msg, client) {
                                     data.multiplier += 0.1;
                                     get_userdata.writeById(msg.member.id, data);
                                     message.reactions.removeAll();
-                                    let e = gamerpoints.purchaseConfirm(msg.member, "Multiplier Increase", client, data.gamerpoints);
+                                    e = gamerpoints.purchaseConfirm(msg.member, "Multiplier Increase", client, data.gamerpoints);
                                     message.edit({e});
                                 }
                                 else
