@@ -33,7 +33,8 @@ export async function run(msg, client) {
                         message.edit({e});
                         return;
                     }
-                    message.edit(gamerpoints.purchaseDialog(msg.member, multiplierCost, "Multiplier Increase", client, data));
+                    let e = gamerpoints.purchaseDialog(msg.member, multiplierCost, "Multiplier Increase", client, data);
+                    message.edit({e});
                     message.react('✅').then(r => {
                         message.react('🔴');
                 });
